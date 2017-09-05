@@ -19,8 +19,12 @@
         <ng-container mdColumnDef="activeStatus">
           <md-header-cell *mdHeaderCellDef> Active </md-header-cell>
           <md-cell *mdCellDef="let period"> 
-            <div *ngIf=period.activeStatus; else elseBlock>Truthy condition</div>
-            <ng-template #elseBlock>Falsy condition</ng-template>
+            <div *ngIf=period.activeStatus>
+                <md-checkbox checked="true" disabled></md-checkbox>
+              </div>
+            <div *ngIf=!period.activeStatus>
+              <md-checkbox disabled></md-checkbox>
+            </div>
           </md-cell>
         </ng-container>
 
