@@ -8,17 +8,22 @@ import { EnrollmentComponent } from './home/enrollment/enrollment.component'
 import { AchievementComponent } from './home/achievement/achievement.component'
 import { MaintenanceComponent } from "./home/maintenance/maintenance.component";
 
+import { AuthGuard } from './authguard.service';
 
 const routes: Routes = [
-    { path: '',            component: LoginComponent },
-    { path: 'home',        component: HomeComponent, children: [
-        {path: '',              component: DashboardComponent},
-        {path: 'period',        component: PeriodComponent},
-        {path: 'user',          component: UserComponent},
-        {path: 'enrollment',    component: EnrollmentComponent},
-        {path: 'achievement',   component: AchievementComponent},
-        {path: 'maintenance',   component: MaintenanceComponent}
+    { path: 'login',            component: LoginComponent },
+    { path: 'home',        component: HomeComponent, 
+        canActivate: [AuthGuard],children: [
+            {path: '',              component: DashboardComponent},
+            {path: 'period',        component: PeriodComponent},
+            {path: 'user',          component: UserComponent},
+            {path: 'enrollment',    component: EnrollmentComponent},
+            {path: 'achievement',   component: AchievementComponent},
+            {path: 'maintenance',   component: MaintenanceComponent}
     ]},
+
+    //if any path then redirect to home
+    {path: '**', redirectTo:'home'}
 ];
 
 export const routing = RouterModule.forRoot(routes);

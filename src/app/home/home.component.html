@@ -16,7 +16,7 @@
 <button md-button (click)=sidenav.close() routerLink="/home/achievement" color="accent">Achievement</button>
 <button md-button (click)=sidenav.close() routerLink="/home/maintenance" color="accent">Training Maintenance</button>
 <hr>
-<button md-button color="warn" routerLink="/">Logout</button>
+<button md-button color="warn" (click)=logout() routerLink="/login">Logout</button>
 </md-sidenav>
 
 <div class="app-content mat-typography">
