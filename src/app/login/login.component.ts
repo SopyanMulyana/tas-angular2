@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { AlertService } from '../alert.service';
+// import { AlertService } from '../alert.service';
 import { AuthenticationService } from '../authentication.service';
+import { MdSnackBar } from '@angular/material';
 
 @Component({
   templateUrl: './login.component.html',
@@ -13,12 +14,13 @@ export class LoginComponent implements OnInit {
     model: any = {};
     loading = false;
     returnUrl: string;
-
+    
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
-        private alertService: AlertService
+        // private alertService: AlertService,
+        public snackbar : MdSnackBar
       ) { }
 
     ngOnInit() {
@@ -37,7 +39,8 @@ export class LoginComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
-                    this.alertService.error(error);
+                    // this.alertService.error(error);
+                    this.snackbar.open(error,"Dismiss", { extraClasses:['error-warning'], duration: 1500 });
                     this.loading = false;
                 });
     }
