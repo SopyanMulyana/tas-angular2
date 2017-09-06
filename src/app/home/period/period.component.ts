@@ -18,6 +18,7 @@ import 'rxjs/add/observable/fromEvent';
   styleUrls: ['./period.component.css']
 })
 export class PeriodComponent {
+  userRole;
   displayedColumns = ['trainingName', 'activeStatus', 'coursesCount', 'startDate', 'endDate', 'createdBy', 'editedBy', 'action'];
   periodDatabase = new PeriodDatabase();
   dataSource: PeriodDataSource | null;
@@ -34,6 +35,8 @@ export class PeriodComponent {
           if (!this.dataSource) { return; }
           this.dataSource.filter = this.filter.nativeElement.value;
         });
+        var user = JSON.parse(localStorage.getItem('currentUser'));
+        this.userRole = user.role;
   }
   
   trainingName: string;
