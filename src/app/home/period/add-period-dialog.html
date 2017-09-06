@@ -10,7 +10,7 @@
         <md-form-field color="accent">
             <input mdInput placeholder="Start Date" [(ngModel)]='data.startDate' name="startDate" [mdDatepicker]="startDate" [max]=data.endDate>
             <md-datepicker-toggle mdSuffix [for]="startDate"></md-datepicker-toggle>
-            <md-datepicker #startDate></md-datepicker>
+            <md-datepicker touchUi="true" #startDate></md-datepicker>
             <md-error *ngIf="addPeriodFormControl.hasError('required')">
                     Start Date is <strong>required</strong>
             </md-error>
@@ -20,11 +20,14 @@
         <md-form-field color="accent">
             <input mdInput placeholder="End Date" [(ngModel)]='data.endDate' name="endDate" [mdDatepicker]="endDate" [min]='data.startDate'>
             <md-datepicker-toggle mdSuffix [for]="endDate"></md-datepicker-toggle>
-            <md-datepicker #endDate></md-datepicker>
+            <md-datepicker touchUi="true" #endDate></md-datepicker>
             <md-error *ngIf="addPeriodFormControl.hasError('required')">
                     End Date is <strong>required</strong>
             </md-error>
         </md-form-field>
+    </div>
+    <div class="checkbox-enrollment">
+        <md-checkbox>Is Enrollment Open?</md-checkbox>
     </div>
     <button md-raised-button color="accent" [md-dialog-close]="data">Add Period</button>
     <button md-raised-button color="warn" (click)="onNoClick()">Cancel</button>

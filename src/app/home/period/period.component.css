@@ -12,3 +12,6 @@ md-form-field{
 .inline {
     display: inline-block;
 }
+.checkbox-enrollment {
+    padding-bottom: 1.25em;
+}
