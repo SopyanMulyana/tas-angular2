@@ -1,6 +1,5 @@
 .add-period{
-    text-align: right;
-    padding-left: 38.6%;
+    float: right;
 }
 
 md-form-field{
@@ -14,4 +13,7 @@ md-form-field{
 }
 .checkbox-enrollment {
     padding-bottom: 1.25em;
+}
+.dialog-delete{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }

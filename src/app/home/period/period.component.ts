@@ -44,9 +44,9 @@ export class PeriodComponent {
   endDate: string;
   
 
-  constructor(public addPeriod: MdDialog) {}
+  constructor(public addPeriod: MdDialog, public deletePeriod: MdDialog) {}
 
-  openDialog(): void {
+  openDialogAdd(): void {
     let dialogRef = this.addPeriod.open(AddPeriodDialog, {
       width: '40%',
       data: { trainingName: "" }
@@ -58,7 +58,12 @@ export class PeriodComponent {
       this.endDate = result.endDate;
     });
   }
-
+  
+  openDialogDelete() {
+    this.deletePeriod.open(DeletePeriodDialog, {
+      
+    });
+  }
 }
 
 //Add Period dialog
@@ -79,6 +84,14 @@ export class AddPeriodDialog {
     this.dialogRef.close();
   }
 
+}
+
+@Component({
+  templateUrl: 'delete-period.component.html',
+  styleUrls: ['./period.component.css']
+})
+export class DeletePeriodDialog {
+  constructor(@Inject(MD_DIALOG_DATA) public data: any) {}
 }
 
 //table

@@ -7,7 +7,7 @@
           <input mdInput #filter placeholder="Search">
         </md-form-field>
       </div>
-      <div *ngIf="userRole == 1" class="add-period inline"><button md-raised-button color="accent" (click)="openDialog()"><md-icon>add</md-icon> Add Period</button></div>
+      <div *ngIf="userRole == 1" class="add-period inline"><button md-raised-button color="accent" (click)="openDialogAdd()"><md-icon>add</md-icon> Add Period</button></div>
       
       <md-table #table [dataSource]="dataSource">
         
@@ -63,7 +63,7 @@
                   <button md-icon-button class="md-small" color="accent" mdTooltip="Eligible Participant List"><md-icon>supervisor_account</md-icon></button>
                   <button md-icon-button class="md-small" color="accent" mdTooltip="Schedule List"><md-icon>date_range</md-icon></button>
                   <button md-icon-button class="md-small" color="accent" mdTooltip="Edit"><md-icon>border_color</md-icon></button>
-                  <button md-icon-button class="md-small" color="warn" mdTooltip="Delete"><md-icon>delete</md-icon></button>
+                  <button md-icon-button (click)="openDialogDelete()" class="md-small" color="warn" mdTooltip="Delete"><md-icon>delete</md-icon></button>
               </md-menu>
 
             </md-cell>
