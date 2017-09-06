@@ -1,13 +1,16 @@
 <!-- Dashboard UI -->
-<md-toolbar color="primary" class="mat-elevation-z4">
+<md-toolbar color="primary" class="mat-elevation-z4" (click)="sidenav.close()">
 <span>
-    <button class="menu" type="button" md-button (click)="sidenav.toggle()">
+    <button class="menu" type="button" md-button (mouseover)="sidenav.open()" (click)="sidenav.toggle()">
         <md-icon>menu</md-icon>
     </button>
 </span>
 <span><a class="title" routerLink="/home" (click)=sidenav.close()>Training Admin System</a></span>
 <span class="fill-remaining-space"></span>
-<span>{{username}}</span> 
+<span><button md-button [mdMenuTriggerFor]="menuLogout"><md-icon>person</md-icon> {{username}}</button></span> 
+<md-menu #menuLogout="mdMenu">
+        <button md-button  (click)=logout() routerLink="/login"><md-icon>exit_to_app</md-icon> Logout</button>
+ </md-menu>
 </md-toolbar>
 
 <md-sidenav-container>
@@ -22,8 +25,8 @@
         <button md-button (click)=sidenav.close() routerLink="/home/maintenance" color="accent">Training Maintenance</button>    
     </span> 
     
-    <hr>
-    <button md-button color="warn" (click)=logout() routerLink="/login">Logout</button>
+    
+    
 </md-sidenav>
 
 <div class="app-content mat-typography">
