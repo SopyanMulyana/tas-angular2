@@ -6,6 +6,7 @@ md-sidenav {
 md-sidenav button, a {
   height: 45px;
   width: 200px;
+  text-align: left;
 }
 button.menu{
   min-width: 0;

@@ -15,14 +15,14 @@
 
 <md-sidenav-container>
 <md-sidenav #sidenav>
-    <button md-button (click)=sidenav.close() routerLink="/home/period" color="accent">Period</button>
+    <button md-button (click)=sidenav.close() routerLink="/home/period" color="accent"><md-icon>date_range</md-icon> Period</button>
     <span *ngIf="userRole == 1">
-        <button md-button (click)=sidenav.close() routerLink="/home/user" color="accent">User</button>    
+        <button md-button (click)=sidenav.close() routerLink="/home/user" color="accent"><md-icon>people</md-icon> User</button>    
     </span>       
-    <button md-button (click)=sidenav.close() routerLink="/home/enrollment" color="accent">Enrollment</button>
-    <button md-button (click)=sidenav.close() routerLink="/home/achievement" color="accent">Achievement</button>
+    <button md-button (click)=sidenav.close() routerLink="/home/enrollment" color="accent"><md-icon>collections_bookmark</md-icon> Enrollment</button>
+    <button md-button (click)=sidenav.close() routerLink="/home/achievement" color="accent"><md-icon>school</md-icon> Achievement</button>
     <span *ngIf="userRole == 1 || userRole == 2">
-        <button md-button (click)=sidenav.close() routerLink="/home/maintenance" color="accent">Training Maintenance</button>    
+        <button md-button (click)=sidenav.close() routerLink="/home/maintenance" color="accent"><md-icon>assignment</md-icon> Training Maintenance</button>    
     </span> 
     
     
