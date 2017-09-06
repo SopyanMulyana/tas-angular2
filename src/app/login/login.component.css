@@ -1,13 +1,26 @@
 /* Login CSS */
 .login {
-    width: 90%;
-    height: 100%;
-    display: flex;
-    position: fixed;
-    align-items: center;
-    justify-content: center;
-    padding-left: 5%;
-    padding-right: 5%;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    right: 30%;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(6, 0, 0, 0.46);
     font-family : "Roboto","Helvetica Neue",sans-serif;
+  }
+  .login-content {
+    min-width: 150px;
+    width: 100%;
+  }
+  .login-width {
+    width:100%;
+  }
+  .login-checkbox {
+    padding-bottom: 1.25em;
+  }
+  ::ng-deep snack-bar-container.error-warning {
+    color: white;
+    background-color: #A12020;
   }
   
