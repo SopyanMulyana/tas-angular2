@@ -26,7 +26,7 @@ export let fakeBackendProvider = {
 
                     // find if any user matches login credentials
                     let filteredUsers = users.filter(user => {
-                        return user.username === params.username && user.password === params.password;
+                        return user.username.toLowerCase() === params.username.toLowerCase() && user.password === params.password;
                     });
 
                     if (filteredUsers.length) {

@@ -35,3 +35,6 @@ md-sidenav-container {
   position: relative;
   z-index: 2;
 }
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
