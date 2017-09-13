@@ -19,10 +19,10 @@ import { AchievementComponent } from './home/achievement/achievement.component';
 import { MaintenanceComponent } from './home/maintenance/maintenance.component';
 import { AlertComponent } from './alert.component';
 
-import { AuthGuard } from './authguard.service';
-import { AuthenticationService } from './authentication.service';
-import { UserService } from './user.service';
-import { AlertService } from './alert.service';
+import { AuthGuard } from './services/authguard.service';
+import { AuthenticationService } from './services/authentication.service';
+import { UserService } from './services/user.service';
+import { AlertService } from './services/alert.service';
 
 // used to create fake backend
 import { fakeBackendProvider } from './fakebackend';
