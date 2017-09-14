@@ -1,0 +1,9 @@
+md-form-field{
+    width: 100%;
+}
+.filter{
+    width: 50%;
+}
+.inline {
+    display: inline-block;
+}
