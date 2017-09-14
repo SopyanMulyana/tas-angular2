@@ -7,6 +7,8 @@
           <input mdInput #filter placeholder="Search">
         </md-form-field>
       </div>
+
+      <div class="add-user inline"><button md-raised-button color="accent" (click)="openDialogAdd()"><md-icon>add</md-icon> Add User</button></div>
       
       <md-table #table [dataSource]="dataSource">
         
