@@ -13,7 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { PeriodComponent, AddPeriodDialog, DeletePeriodDialog } from './home/period/period.component';
-import { UserComponent } from './home/user/user.component';
+import { UserComponent, AddUserDialog } from './home/user/user.component';
 import { EnrollmentComponent } from './home/enrollment/enrollment.component';
 import { AchievementComponent } from './home/achievement/achievement.component';
 import { MaintenanceComponent } from './home/maintenance/maintenance.component';
@@ -39,6 +39,7 @@ import { BaseRequestOptions } from '@angular/http';
     AddPeriodDialog,
     DeletePeriodDialog,
     UserComponent,
+    AddUserDialog,
     EnrollmentComponent,
     AchievementComponent,
     MaintenanceComponent,
@@ -64,7 +65,8 @@ import { BaseRequestOptions } from '@angular/http';
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    AddPeriodDialog, DeletePeriodDialog
+    AddPeriodDialog, DeletePeriodDialog,
+    AddUserDialog
   ]
 })
 export class AppModule { }
