@@ -45,42 +45,58 @@ export class UserComponent {
   // endDate: string;
   
 
-  // constructor(public addUser: MdDialog, public deleteUser: MdDialog) {}
+  constructor(public addUser: MdDialog) {}
 
-  // openDialogAdd(): void {
-  //   let dialogRef = this.addUser.open(AddUserDialog, {
-  //     width: '40%',
-  //     data: { trainingName: "" }
-  //   });
+  openDialogAdd(): void {
+    let dialogRef = this.addUser.open(AddUserDialog, {
+      width: '80%',
+      data: {  }
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     this.trainingName = result.trainingName;
-  //     this.startDate = result.startDate;
-  //     this.endDate = result.endDate;
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
 
 }
 
 //Add User dialog
-// @Component({
-//   templateUrl: 'add-User-dialog.html',
-//   styleUrls: ['./User.component.css']
-// })
-// export class AddUserDialog {
-//   addUserFormControl = new FormControl('', [
-//     Validators.required
-//   ]);
+@Component({
+  templateUrl: 'add-user-dialog.component.html',
+  styleUrls: ['./user.component.css']
+})
+export class AddUserDialog {
+  displayedColumns = ['employeeId','fullName','jobFamily', 'grade', 'email', 'accountName'];
+  userDatabase = new userDatabase();
+  dataSource: UserDataSource | null;
 
-//   constructor(
-//     public dialogRef: MdDialogRef<AddUserDialog>,
-//     @Inject(MD_DIALOG_DATA) public data: any) { }
+  @ViewChild(MdPaginator) paginator: MdPaginator;
+  @ViewChild('filter') filter: ElementRef;
 
-//   onNoClick(): void {
-//     this.dialogRef.close();
-//   }
+  addUserFormControl = new FormControl('', [
+    Validators.required
+  ]);
 
-// }
+  ngOnInit() {
+    this.dataSource = new UserDataSource(this.userDatabase, this.paginator);
+    //below is for filter
+    Observable.fromEvent(this.filter.nativeElement, 'keyup')
+        .debounceTime(150)
+        .distinctUntilChanged()
+        .subscribe(() => {
+          if (!this.dataSource) { return; }
+          this.dataSource.filter = this.filter.nativeElement.value;
+        });
+        var user = JSON.parse(localStorage.getItem('currentUser'));
+  }
+  constructor(
+    public dialogRef: MdDialogRef<AddUserDialog>,
+    @Inject(MD_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
 
 
 //table
