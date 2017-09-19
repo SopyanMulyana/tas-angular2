@@ -114,6 +114,20 @@ export class PeriodDatabase {
       {trainingName: 'ASP .NET', activeStatus: true , coursesCount: 3 , startDate:'10-11-2017', endDate:'20-10-2017', createdBy:"Yuliawan Rizka", editedBy: "Yuliawan Rizka"},
       {trainingName: 'ASP .NET', activeStatus: false , coursesCount: 3 , startDate:'10-11-2017', endDate:'20-10-2017', createdBy:"Yuliawan Rizka", editedBy: "Lynx"},
       {trainingName: 'Angular 2', activeStatus: false , coursesCount: 3 , startDate:'10-11-2017', endDate:'20-10-2017', createdBy:"Lynx", editedBy: "Lynx"},
+      {trainingName: 'ASP .NET', activeStatus: true , coursesCount: 3 , startDate:'10-11-2017', endDate:'20-10-2017', createdBy:"Yuliawan Rizka", editedBy: "Yuliawan Rizka"},
+      {trainingName: 'ASP .NET', activeStatus: true , coursesCount: 3 , startDate:'10-11-2017', endDate:'20-10-2017', createdBy:"Yuliawan Rizka", editedBy: "Yuliawan Rizka"},
+      {trainingName: 'ASP .NET', activeStatus: true , coursesCount: 3 , startDate:'10-11-2017', endDate:'20-10-2017', createdBy:"Yuliawan Rizka", editedBy: "Yuliawan Rizka"},
+      {trainingName: 'ASP .NET', activeStatus: true , coursesCount: 3 , startDate:'10-11-2017', endDate:'20-10-2017', createdBy:"Yuliawan Rizka", editedBy: "Yuliawan Rizka"},
+      {trainingName: 'ASP .NET', activeStatus: true , coursesCount: 3 , startDate:'10-11-2017', endDate:'20-10-2017', createdBy:"Yuliawan Rizka", editedBy: "Yuliawan Rizka"},
+      {trainingName: 'ASP .NET', activeStatus: true , coursesCount: 3 , startDate:'10-11-2017', endDate:'20-10-2017', createdBy:"Yuliawan Rizka", editedBy: "Yuliawan Rizka"},
+      {trainingName: 'ASP .NET', activeStatus: true , coursesCount: 3 , startDate:'10-11-2017', endDate:'20-10-2017', createdBy:"Yuliawan Rizka", editedBy: "Yuliawan Rizka"},
+      {trainingName: 'ASP .NET', activeStatus: true , coursesCount: 3 , startDate:'10-11-2017', endDate:'20-10-2017', createdBy:"Yuliawan Rizka", editedBy: "Yuliawan Rizka"},
+      {trainingName: 'ASP .NET', activeStatus: true , coursesCount: 3 , startDate:'10-11-2017', endDate:'20-10-2017', createdBy:"Yuliawan Rizka", editedBy: "Yuliawan Rizka"},
+      {trainingName: 'ASP .NET', activeStatus: true , coursesCount: 3 , startDate:'10-11-2017', endDate:'20-10-2017', createdBy:"Yuliawan Rizka", editedBy: "Yuliawan Rizka"},
+      {trainingName: 'ASP .NET', activeStatus: true , coursesCount: 3 , startDate:'10-11-2017', endDate:'20-10-2017', createdBy:"Yuliawan Rizka", editedBy: "Yuliawan Rizka"},
+      {trainingName: 'ASP .NET', activeStatus: true , coursesCount: 3 , startDate:'10-11-2017', endDate:'20-10-2017', createdBy:"Yuliawan Rizka", editedBy: "Yuliawan Rizka"},
+      {trainingName: 'ASP .NET', activeStatus: true , coursesCount: 3 , startDate:'10-11-2017', endDate:'20-10-2017', createdBy:"Yuliawan Rizka", editedBy: "Yuliawan Rizka"},
+      {trainingName: 'ASP .NET', activeStatus: true , coursesCount: 3 , startDate:'10-11-2017', endDate:'20-10-2017', createdBy:"Yuliawan Rizka", editedBy: "Yuliawan Rizka"},
       {trainingName: 'NodeJS', activeStatus: true , coursesCount: 8 , startDate:'10-11-2016', endDate:'20-10-2016', createdBy:"Yuliawan Rizka", editedBy: "Yuliawan Rizka"}
     ]);
   }

@@ -12,7 +12,6 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 import { ListUserService } from "../../services/list-user.service";
 import { ListUser } from "./list-user";
-import { TestService } from "../../services/test.service";
 
 
 
@@ -24,175 +23,132 @@ import { TestService } from "../../services/test.service";
 })
 export class UserComponent{
   userRole;
-  // users;
-  // constructor(private listUserService: TestService) { 
-  // this.users=listUserService.getUsers();
-  // } 
-  users;
   displayedColumns = ['employeeId', 'fullName', 'email', 'jobFamily', 'grade', 'accountName', 'active', 'role', 'action'];
-  userDatabase;
+  userDatabase = new UserDatabase();
   dataSource: UserDataSource | null;
 
-  // @ViewChild(MdPaginator) _paginator: MdPaginator;
+  @ViewChild(MdPaginator) paginator: MdPaginator;
   @ViewChild('filter') filter: ElementRef;
-  constructor(public addUser: MdDialog, private listUserService: TestService) {
-    // this.userDatabase = new UserDatabase();
-    // this.dataSource = new UserDataSource(this.userDatabase);
-
-    this.listUserService.getUsers().subscribe(((users) => {
-      this.users = users;
-      this.userDatabase = new UserDatabase(this.users); 
-      this.dataSource = new UserDataSource(this.userDatabase);
-    }));
-    
-    // console.log(listUserService.getUsers());
-    // console.log("ABD");
-    // this.users=listUserService.getUsers();
-    // this.users.forEach(element => {
-    //   console.log(element);
-    // });
-    // this.userDatabase = new UserDatabase(this.users);
-    // this.dataSource = new UserDataSource(this.userDatabase);
-  }
   
+  
+
   ngOnInit() {
-    //this.dataSource = new UserDataSource(this.userDatabase, this.paginator);
-    // //below is for filter
-    // Observable.fromEvent(this.filter.nativeElement, 'keyup')
-    //     .debounceTime(150)
-    //     .distinctUntilChanged()
-    //     .subscribe(() => {
-    //       if (!this.dataSource) { return; }
-    //       this.dataSource.filter = this.filter.nativeElement.value;
-    //     });
-    //     var user = JSON.parse(localStorage.getItem('currentUser'));
-    //     this.userRole = user.role;
+    this.dataSource = new UserDataSource(this.userDatabase, this.paginator);
+    //below is for filter
+    Observable.fromEvent(this.filter.nativeElement, 'keyup')
+        .debounceTime(150)
+        .distinctUntilChanged()
+        .subscribe(() => {
+          if (!this.dataSource) { return; }
+          this.dataSource.filter = this.filter.nativeElement.value;
+        });
+        var user = JSON.parse(localStorage.getItem('currentUser'));
+        this.userRole = user.role;
   }
   
   // trainingName: string;
   // startDate: string;
   // endDate: string;
   
-  // openDialogAdd(): void {
-  //   let dialogRef = this.addUser.open(AddUserDialog, {
-  //     width: '80%',
-  //     data: {  }
-  //   });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //   });
-  // }
+  constructor(public addUser: MdDialog) {}
+
+  openDialogAdd(): void {
+    let dialogRef = this.addUser.open(AddUserDialog, {
+      width: '80%',
+      data: {  }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
 
 }
 
 //Add User dialog
-// @Component({
-//   templateUrl: 'add-user-dialog.component.html',
-//   styleUrls: ['./user.component.css']
-// })
-// export class AddUserDialog {
-//   displayedColumns = ['employeeId','fullName','jobFamily', 'grade', 'email', 'accountName'];
-//   servis: ListUserService;
-//   users;
-//   userDatabase = new UserDatabase(this.users);
-//   dataSource: UserDataSource | null;
+@Component({
+  templateUrl: 'add-user-dialog.component.html',
+  styleUrls: ['./user.component.css']
+})
+export class AddUserDialog {
+  displayedColumns = ['employeeId','fullName','jobFamily', 'grade', 'email', 'accountName'];
+  servis: ListUserService;
+  userDatabase = new UserDatabase();
+  dataSource: UserDataSource | null;
 
-//   @ViewChild(MdPaginator) paginator: MdPaginator;
-//   @ViewChild('filter') filter: ElementRef;
+  @ViewChild(MdPaginator) paginator: MdPaginator;
+  @ViewChild('filter') filter: ElementRef;
 
-//   addUserFormControl = new FormControl('', [
-//     Validators.required
-//   ]);
+  addUserFormControl = new FormControl('', [
+    Validators.required
+  ]);
 
-//   ngOnInit() {
-//     this.dataSource = new UserDataSource(this.userDatabase, this.paginator);
-//     //below is for filter
-//     Observable.fromEvent(this.filter.nativeElement, 'keyup')
-//         .debounceTime(150)
-//         .distinctUntilChanged()
-//         .subscribe(() => {
-//           if (!this.dataSource) { return; }
-//           this.dataSource.filter = this.filter.nativeElement.value;
-//         });
-//         var user = JSON.parse(localStorage.getItem('currentUser'));
-//   }
-//   constructor(
-//     public dialogRef: MdDialogRef<AddUserDialog>,
-//     @Inject(MD_DIALOG_DATA) public data: any) { }
+  ngOnInit() {
+    this.dataSource = new UserDataSource(this.userDatabase, this.paginator);
+    //below is for filter
+    Observable.fromEvent(this.filter.nativeElement, 'keyup')
+        .debounceTime(150)
+        .distinctUntilChanged()
+        .subscribe(() => {
+          if (!this.dataSource) { return; }
+          this.dataSource.filter = this.filter.nativeElement.value;
+        });
+        var user = JSON.parse(localStorage.getItem('currentUser'));
+  }
+  constructor(
+    public dialogRef: MdDialogRef<AddUserDialog>,
+    @Inject(MD_DIALOG_DATA) public data: any) { }
 
-//   onNoClick(): void {
-//     this.dialogRef.close();
-//   }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
-// }
+}
 
 
-//table
-// export interface User {
-//   employeeId: number;
-//   fullName: string;
-//   email: string;
-//   jobFamily: string;
-//   grade: string;
-//   accountName: string;
-//   active: string;
-//   role: string;
-// }
 
 export class UserDatabase{
   
   dataChange: BehaviorSubject<ListUser[]> = new BehaviorSubject<ListUser[]>([]);
   get data(): ListUser[] { return this.dataChange.value; }
   
-  // constructor()
-  // {
-  //   this.dataChange.next([
-  //     {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
-  //     {employeeId: 1011, fullName: 'Yuliawan Rizka' , email: 'yulian@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\yuliwan', active: 'yes', role: 'User'}, 
-  //   ]);
-  // }
-  private listUserService: TestService;
-  // users = this.listUserService.getUsers();
-  datatest: Array<ListUser>;
-  constructor(private users: ListUser[]) {
-  
-    // for (var user in this.users) { 
-    //   this.datatest.push(user.data.);
-      // this.dataChange.next(users);
-    //  }
-    for (let i = 0; i < users.length; i++) { 
-      alert(this.users[i].employeeId);
-      const copiedData = this.data.slice();
-      copiedData.push({
-        employeeId: this.users[i].employeeId,
-        fullName: this.users[i].fullName,
-        email: "string",
-        jobFamily: "string",
-        grade: "string",
-        accountName: "string",
-        active: "string",
-        role: "string",
-      });
-      this.dataChange.next(copiedData);
-    }
-    // users.forEach(element => {
-    //   this.datatest.push(element);
-    // });
-    // this.dataChange.next(this.datatest);
+  private listUserService: ListUserService;
+  //users = this.listUserService.getUsers();
+  constructor() {
+      this.dataChange.next([
+        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
+        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
+        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
+        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
+        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
+        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
+        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},        
+        {employeeId: 1011, fullName: 'Yuliawan Rizka' , email: 'yulian@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\yuliwan', active: 'yes', role: 'User'},
+        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
+        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
+        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
+        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
+        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
+        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
+        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
+        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
+        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
+        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
+      ]);
   }
    
 }
-// export class GetComponent implements OnInit {
-//   users;
-//   constructor(private listUserService: TestService) {
-//     console.log(listUserService.getUsers());
-//     this.users = listUserService.getUsers();
-//   }
+export class GetComponent implements OnInit {
+  users;
+  constructor(private listUserService: ListUserService) {
+    console.log(listUserService.getUsers());
+    this.users = listUserService.getUsers();
+  }
 
-//   ngOnInit() {
+  ngOnInit() {
  
-//   }
-// }
+  }
+}
 
 export class UserDataSource extends DataSource<any> {
   _filterChange = new BehaviorSubject('');
@@ -202,14 +158,14 @@ export class UserDataSource extends DataSource<any> {
   }
   filteredData: ListUser[] = [];
   renderedData: ListUser[] = [];
-  constructor(private _userDatabase: UserDatabase) {
+  constructor(private _userDatabase: UserDatabase, private _paginator: MdPaginator) {
     super();
   }
   connect(): Observable<ListUser[]> {
     const displayDataChanges = [
       this._userDatabase.dataChange,
       this._filterChange,
-      // this._paginator.page,
+      this._paginator.page,
     ];
 
 
@@ -219,10 +175,11 @@ export class UserDataSource extends DataSource<any> {
         return searchStr.indexOf(this.filter.toLowerCase()) != -1;
       });
 
+
       // Grab the page's slice of data.
-      // const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
-      // this.renderedData = this.filteredData.splice(startIndex, this._paginator.pageSize);
-      return  this.filteredData;
+      const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
+      this.renderedData = this.filteredData.splice(startIndex, this._paginator.pageSize);
+      return this.renderedData;
     });
   }
 

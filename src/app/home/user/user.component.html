@@ -63,7 +63,12 @@
         <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
       </md-table>
 
-   
+      <md-paginator #paginator
+            [length]="userDatabase.data.length"
+            [pageIndex]="0"
+            [pageSize]="5"
+            [pageSizeOptions]="[5,10, 25, 50, 100]">
+      </md-paginator>
  
     </md-card-content>
   </md-card>

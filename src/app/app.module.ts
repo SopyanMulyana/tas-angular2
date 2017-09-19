@@ -26,7 +26,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
 import { AlertService } from './services/alert.service';
 import { ListUserService } from "./services/list-user.service";
-import { TestService } from "./services/test.service";
+import { UrlService } from './services/url.service';
 // used to create fake backend
 // import { fakeBackendProvider } from './fakebackend';
 // import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -63,7 +63,7 @@ import { TestService } from "./services/test.service";
     UserService,
     AlertService,
     ListUserService,
-    TestService
+    UrlService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
