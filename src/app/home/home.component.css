@@ -19,7 +19,6 @@ a.title{
 }
 .app-content {
   width: 90%;
-  position: fixed;
   align-items: center;
   justify-content: center;
   padding-left: 5%;

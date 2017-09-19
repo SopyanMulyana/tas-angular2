@@ -12,6 +12,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 import { ListUserService } from "../../services/list-user.service";
 import { ListUser } from "./list-user";
+import { AddUserDialog } from "./add-user-dialog.component";
 
 
 
@@ -23,17 +24,24 @@ import { ListUser } from "./list-user";
 })
 export class UserComponent{
   userRole;
+  users;
   displayedColumns = ['employeeId', 'fullName', 'email', 'jobFamily', 'grade', 'accountName', 'active', 'role', 'action'];
-  userDatabase = new UserDatabase();
+  userDatabase;
   dataSource: UserDataSource | null;
+  // private listUserService: ListUserService;
 
-  @ViewChild(MdPaginator) paginator: MdPaginator;
+  @ViewChild(MdPaginator) _paginator: MdPaginator;
   @ViewChild('filter') filter: ElementRef;
-  
+  constructor(public addUser: MdDialog, public listUserService: ListUserService) {
+       this.listUserService.getUsers().subscribe((users => {
+         this.users = users;
+         this.userDatabase = new UserDatabase(this.users); 
+         this.dataSource = new UserDataSource(this.userDatabase, this._paginator);
+       }));
+     }
   
 
   ngOnInit() {
-    this.dataSource = new UserDataSource(this.userDatabase, this.paginator);
     //below is for filter
     Observable.fromEvent(this.filter.nativeElement, 'keyup')
         .debounceTime(150)
@@ -46,12 +54,6 @@ export class UserComponent{
         this.userRole = user.role;
   }
   
-  // trainingName: string;
-  // startDate: string;
-  // endDate: string;
-  
-
-  constructor(public addUser: MdDialog) {}
 
   openDialogAdd(): void {
     let dialogRef = this.addUser.open(AddUserDialog, {
@@ -65,89 +67,14 @@ export class UserComponent{
 
 }
 
-//Add User dialog
-@Component({
-  templateUrl: 'add-user-dialog.component.html',
-  styleUrls: ['./user.component.css']
-})
-export class AddUserDialog {
-  displayedColumns = ['employeeId','fullName','jobFamily', 'grade', 'email', 'accountName'];
-  servis: ListUserService;
-  userDatabase = new UserDatabase();
-  dataSource: UserDataSource | null;
-
-  @ViewChild(MdPaginator) paginator: MdPaginator;
-  @ViewChild('filter') filter: ElementRef;
-
-  addUserFormControl = new FormControl('', [
-    Validators.required
-  ]);
-
-  ngOnInit() {
-    this.dataSource = new UserDataSource(this.userDatabase, this.paginator);
-    //below is for filter
-    Observable.fromEvent(this.filter.nativeElement, 'keyup')
-        .debounceTime(150)
-        .distinctUntilChanged()
-        .subscribe(() => {
-          if (!this.dataSource) { return; }
-          this.dataSource.filter = this.filter.nativeElement.value;
-        });
-        var user = JSON.parse(localStorage.getItem('currentUser'));
-  }
-  constructor(
-    public dialogRef: MdDialogRef<AddUserDialog>,
-    @Inject(MD_DIALOG_DATA) public data: any) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}
-
-
-
 export class UserDatabase{
   
   dataChange: BehaviorSubject<ListUser[]> = new BehaviorSubject<ListUser[]>([]);
   get data(): ListUser[] { return this.dataChange.value; }
   
-  private listUserService: ListUserService;
-  //users = this.listUserService.getUsers();
-  constructor() {
-      this.dataChange.next([
-        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
-        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
-        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
-        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
-        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
-        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
-        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},        
-        {employeeId: 1011, fullName: 'Yuliawan Rizka' , email: 'yulian@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\yuliwan', active: 'yes', role: 'User'},
-        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
-        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
-        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
-        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
-        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
-        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
-        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
-        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
-        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
-        {employeeId: 1010, fullName: 'Sopyan Mulyana' , email: 'sopyan@mitrais.com' , jobFamily: 'SE SE-MWA', grade: 'AP', accountName: 'mitrais\\sopyan', active: 'yes', role: 'Trainer'},
-      ]);
-  }
-   
-}
-export class GetComponent implements OnInit {
-  users;
-  constructor(private listUserService: ListUserService) {
-    console.log(listUserService.getUsers());
-    this.users = listUserService.getUsers();
-  }
-
-  ngOnInit() {
- 
-  }
+  constructor(private users: ListUser[]) {
+      this.dataChange.next(users);
+  } 
 }
 
 export class UserDataSource extends DataSource<any> {

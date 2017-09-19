@@ -16,6 +16,7 @@ import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { PeriodComponent, AddPeriodDialog, DeletePeriodDialog } from './home/period/period.component';
 // import { UserComponent, AddUserDialog } from './home/user/user.component';
 import { UserComponent } from './home/user/user.component';
+import { AddUserDialog } from './home/user/add-user-dialog.component';
 import { EnrollmentComponent } from './home/enrollment/enrollment.component';
 import { AchievementComponent } from './home/achievement/achievement.component';
 import { MaintenanceComponent } from './home/maintenance/maintenance.component';
@@ -42,7 +43,7 @@ import { UrlService } from './services/url.service';
     AddPeriodDialog,
     DeletePeriodDialog,
     UserComponent,
-    // AddUserDialog,
+    AddUserDialog,
     EnrollmentComponent,
     AchievementComponent,
     MaintenanceComponent,
@@ -68,7 +69,7 @@ import { UrlService } from './services/url.service';
   bootstrap: [AppComponent],
   entryComponents: [
     AddPeriodDialog, DeletePeriodDialog,
-    // AddUserDialog
+    AddUserDialog
   ]
 })
 export class AppModule { }
