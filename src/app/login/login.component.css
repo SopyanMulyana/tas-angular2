@@ -23,6 +23,7 @@
   ::ng-deep snack-bar-container.error-warning {
     color: white;
     background-color: #A12020;
+    width: 100%;
   }
   .title {
     background-color: #7b1fa2;

@@ -18,7 +18,7 @@ import 'rxjs/add/observable/fromEvent';
   styleUrls: ['./enrollment.component.css']
 })
 export class EnrollmentComponent {
-  username;
+  fullName;
 
   displayedColumns = ['periodName', 'courseName', 'trainer', 'startAt', 'endAt', 'status'];
   enrollmentDatabase = new EnrollmentDatabase();
@@ -28,7 +28,7 @@ export class EnrollmentComponent {
 
   constructor (private authenticationService: AuthenticationService){ 
                   var user = JSON.parse(localStorage.getItem('currentUser'));
-                  this.username = user.username;
+                  this.fullName = user.fullName;
                 }
 
   ngOnInit() {
