@@ -1,3 +1,14 @@
 <p>
-  training maintenance works!
+  <!-- training maintenance works! -->
+  <md-tab-group>
+    <md-tab label="Tab 1">Content 1</md-tab>
+    <md-tab label="Tab 2"><button md-icon-button [mdMenuTriggerFor]="menu"><md-icon>more_horiz</md-icon></button>
+      <md-menu #menu="mdMenu">
+          <button md-icon-button class="md-small" color="accent" mdTooltip="Eligible Participant List"><md-icon>supervisor_account</md-icon></button>
+          <button md-icon-button class="md-small" color="accent" mdTooltip="Schedule List"><md-icon>date_range</md-icon></button>
+          <button md-icon-button class="md-small" color="accent" mdTooltip="Edit"><md-icon>border_color</md-icon></button>
+          <button md-icon-button (click)="openDialogDelete()" class="md-small" color="warn" mdTooltip="Delete"><md-icon>delete</md-icon></button>
+      </md-menu></md-tab>
+    <md-tab label="Tab 3">Content 3</md-tab>
+  </md-tab-group>
 </p>
