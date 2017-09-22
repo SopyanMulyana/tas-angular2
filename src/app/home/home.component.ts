@@ -7,13 +7,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  username;
+  fullName;
   userRole;
 
   constructor (private authenticationService: AuthenticationService,
                 private router: Router){ 
                   var user = JSON.parse(localStorage.getItem('currentUser'));
-                  this.username = user.username;
+                  this.fullName = user.fullName;
                   this.userRole = user.role;
                 }
   

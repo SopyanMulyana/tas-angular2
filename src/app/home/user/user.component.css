@@ -10,3 +10,10 @@ md-form-field{
 .inline {
     display: inline-block;
 }
+.action-button {
+    background-color: white;
+}
+.image-button {
+    width: 10px;
+    height: 10px;
+}

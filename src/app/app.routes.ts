@@ -2,7 +2,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component'
 import { LoginComponent } from './login/login.component'
 import { DashboardComponent } from './home/dashboard/dashboard.component'
-import { PeriodComponent } from './home/period/period.component'
+import { PeriodComponent } from './home/period/period.component';
+import { ListPeriodComponent } from "./home/period/list-period.component";
+import { EditPeriodComponent } from "./home/period/edit-period.component";
 import { UserComponent } from './home/user/user.component'
 import { EnrollmentComponent } from './home/enrollment/enrollment.component'
 import { AchievementComponent } from './home/achievement/achievement.component'
@@ -11,11 +13,15 @@ import { MaintenanceComponent } from "./home/maintenance/maintenance.component";
 import { AuthGuard } from './services/authguard.service';
 
 const routes: Routes = [
-    { path: 'login',            component: LoginComponent },
+    { path: 'login',       component: LoginComponent },
     { path: 'home',        component: HomeComponent, 
-        canActivate: [AuthGuard],children: [
+        canActivate: [AuthGuard],
+        children: [
             {path: '',              component: DashboardComponent},
-            {path: 'period',        component: PeriodComponent},
+            {path: 'period',        component: PeriodComponent, children:[
+                {path: '',          component: ListPeriodComponent},
+                {path: 'edit',      component: EditPeriodComponent}
+            ]},
             {path: 'user',          component: UserComponent},
             {path: 'enrollment',    component: EnrollmentComponent},
             {path: 'achievement',   component: AchievementComponent},

@@ -40,7 +40,8 @@ export class LoginComponent implements OnInit {
                 },
                 error => {
                     // this.alertService.error(error);
-                    this.snackbar.open(error,"Dismiss", { extraClasses:['error-warning'], duration: 1500 });
+                   
+                    this.snackbar.open(error._body,"Dismiss", { extraClasses:['error-warning'], duration: 1500 });
                     this.loading = false;
                 });
     }
