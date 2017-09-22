@@ -9,7 +9,8 @@
 <span class="fill-remaining-space"></span>
 <span><button md-button [mdMenuTriggerFor]="menuLogout"><md-icon>person</md-icon> {{fullName}}</button></span> 
 <md-menu #menuLogout="mdMenu">
-        <button md-button class="logout" color="warn" (click)=logout() routerLink="/login"><md-icon>exit_to_app</md-icon> Logout</button>
+        <button md-button class="user-menu-button" color="accent" ><md-icon>cached</md-icon> Change Role</button><br>
+        <button md-button class="user-menu-button" color="warn" (click)=logout() routerLink="/login"><md-icon>exit_to_app</md-icon> Logout</button>
  </md-menu>
 </md-toolbar>
 

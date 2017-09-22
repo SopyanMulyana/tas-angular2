@@ -25,25 +25,10 @@ declare var $:any;
 export class UserComponent{
   userRole;
   users;
-  // displayedColumns = ['employeeId', 'fullName', 'email', 'jobFamily', 'grade', 'accountName', 'active', 'role', 'action'];
-  // userDatabase;
-  // dataSource: UserDataSource | null;
-  // // private listUserService: ListUserService;
-
-  // @ViewChild(MdPaginator) _paginator: MdPaginator;
-  // @ViewChild('filter') filter: ElementRef;
   constructor(public addUser: MdDialog, public listUserService: ListUserService) { }
   
 
   ngOnInit(listUserService: ListUserService) {
-    //below is for filter
-    // Observable.fromEvent(this.filter.nativeElement, 'keyup')
-    //     .debounceTime(150)
-    //     .distinctUntilChanged()
-    //     .subscribe(() => {
-    //       if (!this.dataSource) { return; }
-    //       this.dataSource.filter = this.filter.nativeElement.value;
-    //     });
         var user = JSON.parse(localStorage.getItem('currentUser'));
         this.userRole = user.role;
         var dataSet = [];
@@ -61,12 +46,7 @@ export class UserComponent{
         } );
 
         $('#example').DataTable( {
-          // columnDefs: [
-          //     {
-          //         targets: [ 0, 1, 2 ],
-          //         className: 'mdl-data-table__cell--non-numeric'
-          //     }
-          // ],
+         
           data: dataSet,
           columns: [
               { title: "Employee Id" },
@@ -79,7 +59,7 @@ export class UserComponent{
               { title: "Role" },
               {
                 title: "action",
-                defaultContent: '<a href="" class="editor_edit">Edit</a> / <a href="" class="editor_remove">Delete</a>'
+                defaultContent: '<a href="" class="editor_edit"><button class="action-button" style="background-color: transparent; border: white;"><img class="image-button" src="../../assets/image/edit.svg" style="width: 15px;height: 15px; color:#009688"></button></a> <a href="" ><button class="action-button" style="background-color: transparent; border: white;"><img class="image-button" src="../../assets/image/garbage.svg" style="width: 15px;height: 15px;"></button></a>'
               }
           ]
       } );

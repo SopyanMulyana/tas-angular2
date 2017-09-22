@@ -13,7 +13,12 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
-import { PeriodComponent, AddPeriodDialog, DeletePeriodDialog } from './home/period/period.component';
+//import { PeriodComponent } from './home/period/period.component';
+import { PeriodComponent } from './home/period/period.component';
+import { AddPeriodDialog } from "./home/period/add-period-dialog";
+import { DeletePeriodDialog } from "./home/period/delete-period-dialog";
+import { ListPeriodComponent } from "./home/period/list-period.component";
+import { EditPeriodComponent } from "./home/period/edit-period.component";
 // import { UserComponent, AddUserDialog } from './home/user/user.component';
 import { UserComponent } from './home/user/user.component';
 import { AddUserDialog } from './home/user/add-user-dialog.component';
@@ -27,6 +32,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
 import { AlertService } from './services/alert.service';
 import { ListUserService } from "./services/list-user.service";
+import { PeriodService } from "./services/period.service";
 import { UrlService } from './services/url.service';
 // used to create fake backend
 // import { fakeBackendProvider } from './fakebackend';
@@ -40,8 +46,10 @@ import { UrlService } from './services/url.service';
     HomeComponent,
     DashboardComponent,
     PeriodComponent,
+    ListPeriodComponent,
     AddPeriodDialog,
     DeletePeriodDialog,
+    EditPeriodComponent,
     UserComponent,
     AddUserDialog,
     EnrollmentComponent,
@@ -64,6 +72,7 @@ import { UrlService } from './services/url.service';
     UserService,
     AlertService,
     ListUserService,
+    PeriodService,
     UrlService
   ],
   bootstrap: [AppComponent],

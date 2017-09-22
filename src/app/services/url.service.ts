@@ -19,7 +19,8 @@ export class UrlService {
    }
 
    getUrlPeriod(): string {
-       return null;
+       return "http://mtpc583:8080/api/secure/period";
+    //    return "http://mtpc583:8080/api/period/";
    }
 
    getUrlActiveTraining(): string {
