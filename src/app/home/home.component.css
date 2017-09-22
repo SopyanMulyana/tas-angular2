@@ -19,7 +19,6 @@ a.title{
 }
 .app-content {
   width: 90%;
-  position: fixed;
   align-items: center;
   justify-content: center;
   padding-left: 5%;
@@ -39,6 +38,7 @@ md-sidenav-container {
 .fill-remaining-space {
   flex: 1 1 auto;
 }
-.logout {
-  width: 115px;
+.user-menu-button {
+  width: 150px;
+  text-align: left;
 }

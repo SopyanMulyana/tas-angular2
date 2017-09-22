@@ -9,8 +9,41 @@
       </div>
 
       <div class="add-user inline"><button md-raised-button color="accent" (click)="openDialogAdd()"><md-icon>add</md-icon> Add User</button></div>
-      
-      <md-table #table [dataSource]="dataSource">
+      <table id="example" class="mdl-data-table" cellspacing="0" width="100%">
+        <!-- <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Job Family</th>
+                <th>Grade</th>
+                <th>Account Name</th>
+                <th>Active</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let user of users">
+          <tr >
+              <td>{{user.employeeId}}</td>
+              <td>{{user.fullName}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.jobFamily}}</td>
+              <td>{{user.grade}}</td>
+              <td>{{user.accountName}}</td>
+              <td>{{user.active}}</td>
+              <td>{{user.role}}</td>
+              <td><button md-icon-button [mdMenuTriggerFor]="menu"><md-icon>more_horiz</md-icon></button>
+                <md-menu #menu="mdMenu">
+                    <button md-icon-button class="md-small" color="accent" mdTooltip="Eligible Participant List"><md-icon>supervisor_account</md-icon></button>
+                    <button md-icon-button class="md-small" color="accent" mdTooltip="Schedule List"><md-icon>date_range</md-icon></button>
+                    <button md-icon-button class="md-small" color="accent" mdTooltip="Edit"><md-icon>border_color</md-icon></button>
+                    <button md-icon-button (click)="openDialogDelete()" class="md-small" color="warn" mdTooltip="Delete"><md-icon>delete</md-icon></button>
+                </md-menu></td>
+          </tr>
+      </tbody> -->
+    </table>
+      <!-- <md-table #table [dataSource]="dataSource">
         
         <ng-container mdColumnDef="employeeId">
           <md-header-cell *mdHeaderCellDef> Employee ID </md-header-cell>
@@ -68,7 +101,7 @@
             [pageIndex]="0"
             [pageSize]="10"
             [pageSizeOptions]="[10, 25, 50, 100]">
-      </md-paginator>
+      </md-paginator> -->
  
     </md-card-content>
   </md-card>
