@@ -19,11 +19,12 @@ declare var $:any;
 })
 export class ListPeriodComponent {
     userRole;
+    activeRole;
     periods;
     //for adding period
-    trainingName;
-    startDate;
-    endDate;
+    // trainingName;
+    // startDate;
+    // endDate;
     show;
     constructor(public addPeriod: MdDialog, public deletePeriod: MdDialog, public periodSerice: PeriodService, private router: Router) { }
   
@@ -36,6 +37,7 @@ export class ListPeriodComponent {
 
           var user = JSON.parse(localStorage.getItem('currentUser'));
           this.userRole = user.role;
+          this.activeRole = localStorage.getItem('activeRole');
           var dataSet = [];
           this.periodSerice.getPeriods().subscribe((periods => {
             $.each(periods, (i, item) => {
@@ -72,14 +74,14 @@ export class ListPeriodComponent {
     openDialogAdd(): void {
       let dialogRef = this.addPeriod.open(AddPeriodDialog, {
         width: '40%',
-        data: { trainingName: "" }
+        // data: { trainingName: "" }
       });
   
-      dialogRef.afterClosed().subscribe(result => {
-        this.trainingName = result.trainingName;
-        this.startDate = result.startDate;
-        this.endDate = result.endDate;
-      });
+      // dialogRef.afterClosed().subscribe(result => {
+      //   this.trainingName = result.trainingName;
+      //   this.startDate = result.startDate;
+      //   this.endDate = result.endDate;
+      // });
     }
     
     openDialogDelete() {

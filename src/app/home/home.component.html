@@ -7,9 +7,14 @@
 </span>
 <span><a class="title" routerLink="/home" (click)=sidenav.close()>Training Admin System</a></span>
 <span class="fill-remaining-space"></span>
+<span><md-select  [(ngModel)]="activeRole">
+        <md-option *ngFor="let role of roles" [value]="role.idRole" (click)="changeRole(role.idRole)">
+          {{ role.value }}
+        </md-option>
+      </md-select></span>
 <span><button md-button [mdMenuTriggerFor]="menuLogout"><md-icon>person</md-icon> {{fullName}}</button></span> 
 <md-menu #menuLogout="mdMenu">
-        <button md-button class="user-menu-button" color="accent" ><md-icon>cached</md-icon> Change Role</button><br>
+        <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
         <button md-button class="user-menu-button" color="warn" (click)=logout() routerLink="/login"><md-icon>exit_to_app</md-icon> Logout</button>
  </md-menu>
 </md-toolbar>
@@ -17,12 +22,12 @@
 <md-sidenav-container>
 <md-sidenav #sidenav>
     <button md-button (click)=sidenav.close() routerLink="/home/period" color="accent"><md-icon>date_range</md-icon> Period</button>
-    <span *ngIf="userRole == 1">
+    <span *ngIf="activeRole == 1">
         <button md-button (click)=sidenav.close() routerLink="/home/user" color="accent"><md-icon>people</md-icon> User</button>    
     </span>       
     <button md-button (click)=sidenav.close() routerLink="/home/enrollment" color="accent"><md-icon>collections_bookmark</md-icon> Enrollment</button>
     <button md-button (click)=sidenav.close() routerLink="/home/achievement" color="accent"><md-icon>school</md-icon> Achievement</button>
-    <span *ngIf="userRole == 1 || userRole == 2">
+    <span *ngIf="activeRole == 1 || activeRole == 2">
         <button md-button (click)=sidenav.close() routerLink="/home/maintenance" color="accent"><md-icon>assignment</md-icon> Training Maintenance</button>    
     </span> 
     

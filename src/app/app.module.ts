@@ -11,7 +11,7 @@ import 'hammerjs';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent, ChangeRoleDialog } from './home/home.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
 //import { PeriodComponent } from './home/period/period.component';
 import { PeriodComponent } from './home/period/period.component';
@@ -44,6 +44,7 @@ import { UrlService } from './services/url.service';
     AppComponent,
     LoginComponent,
     HomeComponent,
+    ChangeRoleDialog,
     DashboardComponent,
     PeriodComponent,
     ListPeriodComponent,
@@ -78,7 +79,7 @@ import { UrlService } from './services/url.service';
   bootstrap: [AppComponent],
   entryComponents: [
     AddPeriodDialog, DeletePeriodDialog,
-    AddUserDialog
+    AddUserDialog, ChangeRoleDialog
   ]
 })
 export class AppModule { }

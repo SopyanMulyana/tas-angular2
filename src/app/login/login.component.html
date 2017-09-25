@@ -17,7 +17,7 @@
           <input mdInput type="password" placeholder="Password" name = "password" [(ngModel)] = "model.password" required [disabled]="loading">
         </md-form-field>
         <div class="login-checkbox">
-          <md-checkbox  name="remember_me" [disabled]="loading">Remember Me</md-checkbox>
+          <md-checkbox  name="remember_me" [(ngModel)] = "model.remember_me" [disabled]="loading">Remember Me</md-checkbox>
         </div>
         <button md-raised-button color="accent" type = submit  [disabled]="loading">Login</button>
     </form>
