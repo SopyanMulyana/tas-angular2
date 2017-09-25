@@ -20,7 +20,10 @@ export class UrlService {
 
    getUrlPeriod(): string {
        return "http://mtpc583:8080/api/secure/period";
-    //    return "http://mtpc583:8080/api/period/";
+   }
+
+   postPeriodData(): string {
+       return "http://mtpc659:8080/period/create"; //wimba
    }
 
    getUrlActiveTraining(): string {
