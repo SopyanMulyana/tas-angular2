@@ -4,10 +4,7 @@ export class AddPeriods {
         public startDate: string,
         public endDate: string,
         public openEnrollment: boolean,
-        public bccTraining: boolean,
-        public createdBy: string,
-        public updatedBy: string,
-        public active: boolean,
+        public activeStatus: boolean
         ){}
     }
 

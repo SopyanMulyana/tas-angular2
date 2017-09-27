@@ -1,11 +1,10 @@
-export class Periods {
-    constructor(
-        public trainingName: string,
-        public activeStatus: boolean,
-        public coursesCount: number,
-        public startDate: string,
-        public endDate: string,
-        public createdBy: string,
-        public editedBy: string
-        ){}
-    }
+export interface Periods{
+        trainingName: string;
+        activeStatus: boolean;
+        coursesCount: number;
+        startDate: string;
+        endDate: string;
+        createdBy: string;
+        editedBy: string;
+        openEnrollment: boolean;
+}

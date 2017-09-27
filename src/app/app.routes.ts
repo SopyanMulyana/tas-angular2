@@ -20,7 +20,7 @@ const routes: Routes = [
             {path: '',              component: DashboardComponent},
             {path: 'period',        component: PeriodComponent, children:[
                 {path: '',          component: ListPeriodComponent},
-                {path: 'edit',      component: EditPeriodComponent}
+                {path: 'edit/:trainingId',      component: EditPeriodComponent}
             ]},
             {path: 'user',          component: UserComponent},
             {path: 'enrollment',    component: EnrollmentComponent},

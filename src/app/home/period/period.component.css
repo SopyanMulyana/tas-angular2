@@ -17,3 +17,6 @@ md-form-field{
 .dialog-delete{
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+.form-edit {
+    margin-top: 30px;
+}

@@ -13,5 +13,20 @@ import { PeriodService } from "../../services/period.service";
     styleUrls: ['./period.component.css']
   })
   export class DeletePeriodDialog {
-    constructor(@Inject(MD_DIALOG_DATA) public data: any) {}
+    result;
+    constructor(@Inject(MD_DIALOG_DATA) public data: any, private periodService: PeriodService) {}
+
+    deletePeriod(trainingId){
+      this.periodService.deleteDataPeriod(trainingId).subscribe(((res) => {
+        this.result = res;
+        if(this.result == true){
+          console.log(this.result);
+          window.location.reload();
+        //this.notificationService.setNotificationInfo('Period success to created');
+        }else{
+        //this.notificationService.setNotificationError('Period failed to created !');
+        console.log(this.result);
+        }
+        })); 
+    }
   }
