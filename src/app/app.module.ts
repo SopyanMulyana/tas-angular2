@@ -19,6 +19,11 @@ import { AddPeriodDialog } from "./home/period/add-period-dialog";
 import { DeletePeriodDialog } from "./home/period/delete-period-dialog";
 import { ListPeriodComponent } from "./home/period/list-period.component";
 import { EditPeriodComponent } from "./home/period/edit-period.component";
+import { EditPeriodListComponent } from "./home/period/editperiod/edit-period-list.component";
+import { EligibleParticipantsComponent } from "./home/period/eligibleparticipants/eligible-participants.component";
+import { AddEligibleDialog } from "./home/period/eligibleparticipants/add-eligible-participants";
+import { DeleteEligibleDialog } from "./home/period/eligibleparticipants/delete-eligible-participants";
+import { ScheduleListComponent } from "./home/period/schedulelist/schedule-list.component";
 // import { UserComponent, AddUserDialog } from './home/user/user.component';
 import { UserComponent } from './home/user/user.component';
 import { AddUserDialog } from './home/user/add-user-dialog.component';
@@ -51,6 +56,11 @@ import { UrlService } from './services/url.service';
     AddPeriodDialog,
     DeletePeriodDialog,
     EditPeriodComponent,
+    EditPeriodListComponent,
+    EligibleParticipantsComponent,
+    AddEligibleDialog,
+    DeleteEligibleDialog,
+    ScheduleListComponent,
     UserComponent,
     AddUserDialog,
     EnrollmentComponent,
@@ -79,7 +89,8 @@ import { UrlService } from './services/url.service';
   bootstrap: [AppComponent],
   entryComponents: [
     AddPeriodDialog, DeletePeriodDialog,
-    AddUserDialog, ChangeRoleDialog
+    AddUserDialog, ChangeRoleDialog, AddEligibleDialog,
+    DeleteEligibleDialog
   ]
 })
 export class AppModule { }

@@ -41,12 +41,20 @@ export class UrlService {
 
    }
 
-   getUrlListUserForElligibleParticipants(): string {
-       return "http://mtpc583:8080/api/secure/user/eligible/";
+   getUrlListUserForElligibleParticipants(id:number): string {
+       return "http://mtpc583:8080/api/secure/user/eligible/"+id;
    }
 
    postElligibleParticipant(id:number): string {
        return "http://mtpc583:8080/api/secure/period/"+id+"/eligible/add/";
+   }
+
+   deleteUrlElligibleParticipant(id:number, participantsId): string {
+        return "http://mtpc583:8080/api/secure/period/"+id+"/eligible/"+participantsId+"/delete/";
+    }
+
+   getUrlCourseList(id:number): string {
+       return "";
    }
 
    getUrlActiveTraining(): string {

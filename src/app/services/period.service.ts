@@ -3,7 +3,8 @@ import { Http, Headers, Response, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Periods } from "../home/period/period";
 import { AddPeriods } from "../home/period/add-period";
-import { ListForEligibleParticipants } from "../home/period/user-for-eligible";
+import { ListForEligibleParticipants } from "../home/period/eligibleparticipants/user-for-eligible";
+import { AddUserForEligible } from "../home/period/eligibleparticipants/add-user-for-eligible";
 import { UrlService } from './url.service';
 @Injectable()
 export class PeriodService {
@@ -62,16 +63,28 @@ export class PeriodService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 
-   getListForElligibleParticipants(): Observable<Periods[]> {
-      return this.http.get(this.urlService.getUrlListUserForElligibleParticipants(), this.opts)
+   getListForElligibleParticipants(id:number): Observable<ListForEligibleParticipants[]> {
+      return this.http.get(this.urlService.getUrlListUserForElligibleParticipants(id), this.opts)
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 
-   public addElligibleParticipants(idTraining:number, idUser:number): Observable<boolean>{
+   public addElligibleParticipants(idTraining:number, idUser:AddUserForEligible[]): Observable<boolean>{
       return this.http.post(this.urlService.postElligibleParticipant(idTraining), idUser, this.opts)
       .map(this.extractData)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   public deleteElligibleParticipants(id: number, participantsId:number): Observable<boolean>{
+      return this.http.delete(this.urlService.deleteUrlElligibleParticipant(id, participantsId) ,this.opts)
+      .map(this.extractData)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   getCourseList(id:number): Observable<ListForEligibleParticipants[]> {
+      return this.http.get(this.urlService.getUrlCourseList(id), this.opts)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 
    private extractData(res:Response) {

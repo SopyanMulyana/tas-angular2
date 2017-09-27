@@ -1,0 +1,40 @@
+<form class="form-edit">
+    
+           <md-form-field color="accent">
+               <input mdInput placeholder="Training Name" [(ngModel)]='currentData.trainingName' name="trainingName">
+           </md-form-field>
+           <md-form-field color="accent">
+               <input mdInput placeholder="Start Date" [(ngModel)]='currentData.startDate'  name="startDate" [mdDatepicker]="startDate" [max]='currentData.endDate'>
+               <md-datepicker-toggle mdSuffix [for]="startDate"></md-datepicker-toggle>
+               <md-datepicker touchUi="true" #startDate></md-datepicker>
+               <md-error *ngIf="addPeriodFormControl.hasError('required')">
+                       Start Date is <strong>required</strong>
+               </md-error>
+           </md-form-field>
+           <md-form-field color="accent">
+               <input mdInput placeholder="End Date" [(ngModel)]='currentData.endDate' name="endDate" [mdDatepicker]="endDate" [min]='currentData.startDate'>
+               <md-datepicker-toggle mdSuffix [for]="endDate"></md-datepicker-toggle>
+               <md-datepicker touchUi="true" #endDate></md-datepicker>
+               <md-error *ngIf="addPeriodFormControl.hasError('required')">
+                       End Date is <strong>required</strong>
+               </md-error>
+           </md-form-field>
+       <div class="checkbox-enrollment">
+           <div *ngIf="currentData.openEnrollment">
+               <md-checkbox name="openEnrollment" checked="true" >Is Enrollment Open?</md-checkbox>
+           </div>
+           <div *ngIf="!currentData.openEnrollment">
+               <md-checkbox name="openEnrollment" >Is Enrollment Open?</md-checkbox>
+           </div>
+       </div>
+       <div class="checkbox-enrollment">
+               <div *ngIf="currentData.activeStatus">
+                   <md-checkbox name="activeStatus" checked="true" >Active Status</md-checkbox>
+               </div>
+               <div *ngIf="!currentData.activeStatus">
+                   <md-checkbox name="activeStatus" >Active Status</md-checkbox>
+               </div>
+           </div>
+       <button md-raised-button color="accent" (click)="savePeriod(trainingId)">Save</button>
+       <button md-raised-button color="warn" >Cancel</button>
+   </form>

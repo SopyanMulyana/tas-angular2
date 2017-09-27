@@ -5,6 +5,9 @@ import { DashboardComponent } from './home/dashboard/dashboard.component'
 import { PeriodComponent } from './home/period/period.component';
 import { ListPeriodComponent } from "./home/period/list-period.component";
 import { EditPeriodComponent } from "./home/period/edit-period.component";
+import { EditPeriodListComponent } from "./home/period/editperiod/edit-period-list.component";
+import { EligibleParticipantsComponent } from "./home/period/eligibleparticipants/eligible-participants.component";
+import { ScheduleListComponent } from "./home/period/schedulelist/schedule-list.component";
 import { UserComponent } from './home/user/user.component'
 import { EnrollmentComponent } from './home/enrollment/enrollment.component'
 import { AchievementComponent } from './home/achievement/achievement.component'
@@ -20,7 +23,11 @@ const routes: Routes = [
             {path: '',              component: DashboardComponent},
             {path: 'period',        component: PeriodComponent, children:[
                 {path: '',          component: ListPeriodComponent},
-                {path: 'edit/:trainingId',      component: EditPeriodComponent}
+                {path: 'edit',      component: EditPeriodComponent, children:[
+                    {path: ':trainingId',              component: EditPeriodListComponent},
+                    {path: ':trainingId/eligible',      component: EligibleParticipantsComponent},
+                    {path: ':trainingId/schedule',      component: ScheduleListComponent}
+                ]}
             ]},
             {path: 'user',          component: UserComponent},
             {path: 'enrollment',    component: EnrollmentComponent},
