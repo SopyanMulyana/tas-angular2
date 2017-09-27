@@ -3,6 +3,7 @@ import { Http, Headers, Response, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Periods } from "../home/period/period";
 import { AddPeriods } from "../home/period/add-period";
+import { ListForEligibleParticipants } from "../home/period/user-for-eligible";
 import { UrlService } from './url.service';
 @Injectable()
 export class PeriodService {
@@ -56,13 +57,21 @@ export class PeriodService {
    }
 
    getElligibleParticipants(id:number): Observable<Periods[]> {
-      this.headers2.append("Content-Type", "application/json");
-      this.headers2.append('Authorization', 'Basic '+btoa('bima' + ":" + 'bimateam'));
-      this.opts2 = { headers : this.headers2 };
-      return this.http.get(this.urlService.getUrlElligibleParticipants(id), this.opts2)
-      // return this.http.get(this.urlUsers.getUrlPeriod())
+      return this.http.get(this.urlService.getUrlElligibleParticipants(id), this.opts)
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   getListForElligibleParticipants(): Observable<Periods[]> {
+      return this.http.get(this.urlService.getUrlListUserForElligibleParticipants(), this.opts)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   public addElligibleParticipants(idTraining:number, idUser:number): Observable<boolean>{
+      return this.http.post(this.urlService.postElligibleParticipant(idTraining), idUser, this.opts)
+      .map(this.extractData)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 
    private extractData(res:Response) {

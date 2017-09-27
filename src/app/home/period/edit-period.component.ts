@@ -44,25 +44,27 @@ export class EditPeriodComponent implements OnInit{
         this.currentData.openEnrollment= res.openEnrollment;
         this.currentData.activeStatus= res.activeStatus;
         })); 
+
+        this.periodService.getElligibleParticipants(this.trainingId).subscribe((elligibleparticipants => {
+          $('#elligible-participants-table').DataTable( {
+            
+            data: elligibleparticipants,
+            columns: [
+                { title: "Employee Name", data : "fullName" },
+                {
+                  title: "action",
+                  render: function (data, type, full, meta) {
+                  return `<button class="action-button" id="delete-button" data-element-id="${full.id}" style="background-color: transparent; border: white;">
+                            <img class="image-button" src="../../assets/image/garbage.svg" style="width: 15px;height: 15px;">
+                          </button>`
+                  }
+                }
+            ]
+        }  ); console.log(elligibleparticipants);
+        }));
     });
     //elligible participants
-    this.periodService.getElligibleParticipants(this.trainingId).subscribe((elligibleparticipants => {
-      $('#elligible-participants-table').DataTable( {
-        
-        data: elligibleparticipants,
-        columns: [
-            { title: "Employee Name", data : "name" },
-            {
-              title: "action",
-              render: function (data, type, full, meta) {
-              return `<button class="action-button" id="delete-button" data-element-id="${full.idUser}" style="background-color: transparent; border: white;">
-                        <img class="image-button" src="../../assets/image/garbage.svg" style="width: 15px;height: 15px;">
-                      </button>`
-              }
-            }
-        ]
-    }  ); console.log(elligibleparticipants);
-    }));
+    
   }
   
   ngOnChanges(){

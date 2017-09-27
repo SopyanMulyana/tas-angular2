@@ -36,11 +36,17 @@ export class UrlService {
    }
 
    getUrlElligibleParticipants(id:number): string {
-       return "http://mtpc659:8080/eligibleparticipant/findByTraining/"+id; //wimba
+    //    return "http://mtpc659:8080/eligibleparticipant/findByTraining/"+id; //wimba
+        return "http://mtpc583:8080/api/secure/period/"+id+"/eligible/";
+
    }
 
-   postAddElligibleParticipants(): string {
-       return "http://mtpc659:8080/eligibleparticipant/add/"; //wimba
+   getUrlListUserForElligibleParticipants(): string {
+       return "http://mtpc583:8080/api/secure/user/eligible/";
+   }
+
+   postElligibleParticipant(id:number): string {
+       return "http://mtpc583:8080/api/secure/period/"+id+"/eligible/add/";
    }
 
    getUrlActiveTraining(): string {
