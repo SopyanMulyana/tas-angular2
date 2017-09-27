@@ -35,8 +35,8 @@ import { AddPeriods } from "./add-period";
     addAperiod(): void {
       this.addPeriod = new AddPeriods(this.temporaryData.trainingName,
         this.temporaryData.startDate, this.temporaryData.endDate, 
-        this.temporaryData.openEnrollment, true, localStorage.getItem('activeRole'), localStorage.getItem('activeRole'), true);
-      
+        this.temporaryData.openEnrollment, true);
+      console.log(this.addPeriod);
         this.periodService.createDataPeriod(this.addPeriod).subscribe(((res) => {
           this.result = res;
           if(this.result == true){

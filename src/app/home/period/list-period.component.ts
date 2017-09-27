@@ -29,45 +29,47 @@ export class ListPeriodComponent {
     constructor(public addPeriod: MdDialog, public deletePeriod: MdDialog, public periodSerice: PeriodService, private router: Router) { }
   
     ngOnInit(periodSerice: PeriodService) {
-      if(this.router.url === '/home/period/edit'){
-        this.show=false;
-      console.log(this.show)}
-        else {this.show=true;
-          console.log(this.show)}
 
           var user = JSON.parse(localStorage.getItem('currentUser'));
           this.userRole = user.role;
           this.activeRole = localStorage.getItem('activeRole');
           var dataSet = [];
           this.periodSerice.getPeriods().subscribe((periods => {
-            $.each(periods, (i, item) => {
-              dataSet[i] = $.map(item, function(el) { return el; })
-            });
-            $('#period-table').on('click', 'a.editor_edit', (e) => {
-              this.router.navigateByUrl('/home/period/edit');
-          } );
-       
-          // Delete a record
-          $('#period-table').on('click', 'a.editor_remove', function (e) {
-              e.preventDefault();
-          } );
   
           $('#period-table').DataTable( {
            
-            data: dataSet,
+            data: periods,
             columns: [
-                { title: "Training" },
-                { title: "Avtive" },
-                { title: "# of Course" },
-                { title: "Start Date" },
-                { title: "End Date" },
-                { title: "Created By" },
-                { title: "Edited By" },
+                { title: "Training", data : "trainingName" },
+                { title: "Active", data : "activeStatus" },
+                { title: "# of Course", data : "coursesCount" },
+                { title: "Start Date", data : "startDate" },
+                { title: "End Date", data : "endDate" },
+                { title: "Created By", data : "createdBy" },
+                { title: "Edited By", data : "editedBy" },
                 {
                   title: "action",
-                  defaultContent: '<a class="editor_edit"><button class="action-button" style="background-color: transparent; border: white;"><img class="image-button" src="../../assets/image/edit.svg" style="width: 15px;height: 15px;"></button></a> <a href="" ><button class="action-button" style="background-color: transparent; border: white;"><img class="image-button" src="../../assets/image/garbage.svg" style="width: 15px;height: 15px;"></button></a>'
+                  render: function (data, type, full, meta) {
+                  return `<button class="action-button" id="edit-button" data-element-id="${full.trainingPeriodId}" style="background-color: transparent; border: white;">
+                            <img class="image-button" src="../../assets/image/edit.svg" style="width: 15px;height: 15px;">
+                          </button>
+                          <button class="action-button" id="delete-button" data-element-id="${full.trainingPeriodId}" style="background-color: transparent; border: white;">
+                            <img class="image-button" src="../../assets/image/garbage.svg" style="width: 15px;height: 15px;">
+                          </button>`
+                  }
                 }
             ]
+        } );
+        var that = this;
+        $('#period-table').on('click', '#edit-button', function() {
+          let trainingId = $(this).data('element-id');
+          that.router.navigate(['/home/period/edit/', trainingId]);
+        } );
+    
+        // Delete a record
+        $('#period-table').on('click', '#delete-button', function () {
+          let trainingId = $(this).data('element-id'); 
+          that.openDialogDelete(trainingId);
         } );
       }));
     }
@@ -84,9 +86,9 @@ export class ListPeriodComponent {
       // });
     }
     
-    openDialogDelete() {
+    openDialogDelete(trainingId) {
       this.deletePeriod.open(DeletePeriodDialog, {
-        
+        data: { id: trainingId }
       });
     }
     

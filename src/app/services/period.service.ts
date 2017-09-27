@@ -6,30 +6,66 @@ import { AddPeriods } from "../home/period/add-period";
 import { UrlService } from './url.service';
 @Injectable()
 export class PeriodService {
-   constructor(private http: Http, private urlService: UrlService) {
-   }
- 
-   getPeriods(): Observable<Periods[]> {
-    let token = localStorage.getItem('token')
-    let headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    headers.append("Charset", "UTF-8");
-    headers.append('Authorization', token);
-    let opts:RequestOptionsArgs = { headers : headers };
+   token = localStorage.getItem('token')
+   headers = new Headers();
+   opts: RequestOptionsArgs;
 
-    return this.http.get(this.urlService.getUrlPeriod(), opts)
+//    dummy
+   headers2 = new Headers();
+   opts2: RequestOptionsArgs;
+      
+   constructor(private http: Http, private urlService: UrlService) {
+      this.token = localStorage.getItem('token')
+      this.headers.append("Content-Type", "application/json");
+      this.headers.append("Charset", "UTF-8");
+      this.headers.append('Authorization', this.token);
+      this.opts = { headers : this.headers };
+   }
+   
+   getPeriods(): Observable<Periods[]> {
+
+    return this.http.get(this.urlService.getUrlPeriod(), this.opts)
     // return this.http.get(this.urlUsers.getUrlPeriod())
          .map((res: Response) => res.json())
          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 
+   getPeriodById(id:number): Observable<Periods> {
+      return this.http.get(this.urlService.getUrlPeriod()+id, this.opts)
+      // return this.http.get(this.urlUsers.getUrlPeriod())
+           .map((res: Response) => res.json())
+           .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
    public createDataPeriod(periodData: AddPeriods): Observable<boolean>{
-      return this.http.post(this.urlService.postPeriodData(), periodData)
+      return this.http.post(this.urlService.postPeriodData(), periodData, this.opts)
       .map(this.extractData)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
-      
-      private extractData(res:Response) {
+
+   public editDataPeriod(id: number, periodData: AddPeriods): Observable<boolean>{
+      return this.http.post(this.urlService.postEditPeriod(id), periodData, this.opts)
+      .map(this.extractData)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   public deleteDataPeriod(id: number): Observable<boolean>{
+      return this.http.delete(this.urlService.deleteUrlPeriod(id), this.opts)
+      .map(this.extractData)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   getElligibleParticipants(id:number): Observable<Periods[]> {
+      this.headers2.append("Content-Type", "application/json");
+      this.headers2.append('Authorization', 'Basic '+btoa('bima' + ":" + 'bimateam'));
+      this.opts2 = { headers : this.headers2 };
+      return this.http.get(this.urlService.getUrlElligibleParticipants(id), this.opts2)
+      // return this.http.get(this.urlUsers.getUrlPeriod())
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   private extractData(res:Response) {
       let body = res.json();
       return body || [];
    } 

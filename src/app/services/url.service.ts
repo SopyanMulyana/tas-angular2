@@ -7,7 +7,7 @@ export class UrlService {
    }
  
    getUrlUsers(): string {
-      return "http://localhost:8080/api/all";
+      return "http://localhost:8080/api/all/";
    }
 
    getUrlEmployee(): string {
@@ -19,11 +19,28 @@ export class UrlService {
    }
 
    getUrlPeriod(): string {
-       return "http://mtpc583:8080/api/secure/period";
+       return "http://mtpc583:8080/api/secure/period/";
    }
 
    postPeriodData(): string {
-       return "http://mtpc659:8080/period/create"; //wimba
+    //    return "http://mtpc659:8080/period/create"; //wimba
+        return "http://mtpc583:8080/api/secure/period/create/"
+   }
+
+   postEditPeriod(id: number): string {
+       return "http://mtpc583:8080/api/secure/period/"+id+"/edit/";
+   }
+
+   deleteUrlPeriod(id:number): string {
+       return "http://mtpc583:8080/api/secure/period/"+id+"/delete/";
+   }
+
+   getUrlElligibleParticipants(id:number): string {
+       return "http://mtpc659:8080/eligibleparticipant/findByTraining/"+id; //wimba
+   }
+
+   postAddElligibleParticipants(): string {
+       return "http://mtpc659:8080/eligibleparticipant/add/"; //wimba
    }
 
    getUrlActiveTraining(): string {
