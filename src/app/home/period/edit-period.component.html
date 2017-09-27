@@ -1,18 +1,18 @@
-<md-tab-group>
+<router-outlet></router-outlet>
+<!-- <md-tab-group>
         <md-tab label="Eligible Participants" >
                 <table id="elligible-participants-table" class="mdl-data-table" cellspacing="0" width="100%">
                     </table>
-                    
+                <button md-raised-button color="accent"><md-icon>add</md-icon> Add Participants</button>
+              
         </md-tab>
     <md-tab label="Edit Period">
             
         <form class="form-edit">
-            <!-- <div md-dialog-content> -->
+         
                 <md-form-field color="accent">
                     <input mdInput placeholder="Training Name" [(ngModel)]='currentData.trainingName' name="trainingName">
                 </md-form-field>
-            <!-- </div> -->
-            <!-- <div md-dialog-content> -->
                 <md-form-field color="accent">
                     <input mdInput placeholder="Start Date" [(ngModel)]='currentData.startDate'  name="startDate" [mdDatepicker]="startDate" [max]='currentData.endDate'>
                     <md-datepicker-toggle mdSuffix [for]="startDate"></md-datepicker-toggle>
@@ -21,8 +21,6 @@
                             Start Date is <strong>required</strong>
                     </md-error>
                 </md-form-field>
-            <!-- </div> -->
-            <!-- <div md-dialog-content> -->
                 <md-form-field color="accent">
                     <input mdInput placeholder="End Date" [(ngModel)]='currentData.endDate' name="endDate" [mdDatepicker]="endDate" [min]='currentData.startDate'>
                     <md-datepicker-toggle mdSuffix [for]="endDate"></md-datepicker-toggle>
@@ -31,7 +29,6 @@
                             End Date is <strong>required</strong>
                     </md-error>
                 </md-form-field>
-            <!-- </div> -->
             <div class="checkbox-enrollment">
                 <div *ngIf="currentData.openEnrollment">
                     <md-checkbox name="openEnrollment" checked="true" >Is Enrollment Open?</md-checkbox>
@@ -54,4 +51,4 @@
     </md-tab>
     
     <md-tab label="Schedule List"></md-tab>
-</md-tab-group>
+</md-tab-group> -->

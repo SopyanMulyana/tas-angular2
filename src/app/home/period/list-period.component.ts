@@ -53,6 +53,12 @@ export class ListPeriodComponent {
                   return `<button class="action-button" id="edit-button" data-element-id="${full.trainingPeriodId}" style="background-color: transparent; border: white;">
                             <img class="image-button" src="../../assets/image/edit.svg" style="width: 15px;height: 15px;">
                           </button>
+                          <button class="action-button" id="participants-button" data-element-id="${full.trainingPeriodId}" style="background-color: transparent; border: white;">
+                            <img class="image-button" src="../../assets/image/participants.svg" style="width: 15px;height: 15px;">
+                          </button>
+                          <button class="action-button" id="schedules-button" data-element-id="${full.trainingPeriodId}" style="background-color: transparent; border: white;">
+                            <img class="image-button" src="../../assets/image/schedule.svg" style="width: 15px;height: 15px;">
+                          </button>
                           <button class="action-button" id="delete-button" data-element-id="${full.trainingPeriodId}" style="background-color: transparent; border: white;">
                             <img class="image-button" src="../../assets/image/garbage.svg" style="width: 15px;height: 15px;">
                           </button>`
@@ -64,6 +70,16 @@ export class ListPeriodComponent {
         $('#period-table').on('click', '#edit-button', function() {
           let trainingId = $(this).data('element-id');
           that.router.navigate(['/home/period/edit/', trainingId]);
+        } );
+
+        $('#period-table').on('click', '#participants-button', function() {
+          let trainingId = $(this).data('element-id');
+          that.router.navigate(['/home/period/edit', trainingId,'eligible']);
+        } );
+
+        $('#period-table').on('click', '#schedules-button', function() {
+          let trainingId = $(this).data('element-id');
+          that.router.navigate(['/home/period/edit', trainingId, 'schedule']);
         } );
     
         // Delete a record
