@@ -1,11 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
-
+import { Http, Headers, RequestOptions, Response, RequestOptionsArgs } from '@angular/http';
+import { ListUser } from "../home/user/list-user";
+import { UrlService } from './url.service';
+import { Observable } from 'rxjs/Rx';
 import { User } from '../user';
 
 @Injectable()
 export class UserService {
-    constructor(private http: Http) { }
+    token = localStorage.getItem('token')
+    headers = new Headers();
+    opts: RequestOptionsArgs;
+
+       
+    constructor(private http: Http, private urlService: UrlService) {
+       this.token = localStorage.getItem('token')
+       this.headers.append("Content-Type", "application/json");
+       this.headers.append("Charset", "UTF-8");
+       this.headers.append('Authorization', this.token);
+       this.opts = { headers : this.headers };
+    }
 
     getAll() {
         return this.http.get('/api/users', this.jwt()).subscribe((response: Response) => response.json());
@@ -25,4 +38,9 @@ export class UserService {
             return new RequestOptions({ headers: headers });
         }
     }
+    getTrainerList(): Observable<ListUser[]> {
+        return this.http.get(this.urlService.getUrlListTrainer(), this.opts)
+              .map((res: Response) => res.json())
+              .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+     }
 }

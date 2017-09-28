@@ -50,12 +50,32 @@ export class UrlService {
    }
 
    deleteUrlElligibleParticipant(id:number, participantsId): string {
-        return "http://mtpc583:8080/api/secure/period/"+id+"/eligible/"+participantsId+"/delete/";
+        return "http://mtpc583:8080/api/secure/period/"+id+"/eligible/delete/"+participantsId;
     }
 
    getUrlCourseList(id:number): string {
-       return "";
+       return "http://mtpc583:8080/api/secure/period/"+id+"/course";
+    }
+
+    deleteUrlCourseList(id:number, courseId:number): string {
+        return "http://mtpc583:8080/api/secure/period/"+id+"/course/delete/"+courseId;
+    }
+
+   postUrlAddCourse(id:number): string {
+       return "http://mtpc583:8080/api/secure/period/"+id+"/course/add";
    }
+
+   getUrlListTrainer(): string {
+    return "http://mtpc583:8080/api/secure/user/trainer";
+   }
+
+   getUrlListForAddCourse(): string {
+       return "http://mtpc583:8080/api/secure/period/course";
+   }
+
+   getUrlClassRoom(): string {
+        return "http://mtpc583:8080/api/secure/period/classroom";
+    }
 
    getUrlActiveTraining(): string {
        return null;

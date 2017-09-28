@@ -1,0 +1,36 @@
+<h1 md-dialog-title>Add Course</h1>
+<form class="form-edit">
+      <table class="example-full-width" cellspacing="0"><tr>
+        <td><md-select class="example-full-width" placeholder="Select Course" [(ngModel)]='temporaryData.courseName' [ngModelOptions]="{standalone: true}">
+            <md-option *ngFor="let course of courses" [value]="course.courseId">
+              {{ course.courseName }}
+            </md-option>
+          </md-select></td>
+        <td><md-select class="example-full-width" placeholder="Class Room" [(ngModel)]='temporaryData.classroom' [ngModelOptions]="{standalone: true}">
+            <md-option *ngFor="let classroom of classrooms" [value]="classroom.classroomId">
+              {{ classroom.classroomName }}
+            </md-option>
+          </md-select></td>
+      </tr>
+      <tr>
+        <td><md-select class="example-full-width" placeholder="Main Trainer" [(ngModel)]='temporaryData.mainTrainer' [ngModelOptions]="{standalone: true}">
+            <md-option *ngFor="let trainer of trainers" [value]="trainer.employeeId">
+              {{ trainer.fullName }}
+            </md-option>
+          </md-select></td>
+        <td><md-select class="example-full-width" placeholder="Backup Trainer" [(ngModel)]='temporaryData.backupTrainer' [ngModelOptions]="{standalone: true}">
+            <md-option *ngFor="let trainer of trainers" [value]="trainer.employeeId">
+              {{ trainer.fullName }}
+            </md-option>
+          </md-select></td>
+      </tr>
+    </table>
+    <md-form-field class="example-full-width">
+        <input mdInput  placeholder="Capacity" [(ngModel)]='temporaryData.capacity' [ngModelOptions]="{standalone: true}">
+        <md-error *ngIf="addPeriodFormControl.hasError('pattern')">
+          Input must be <strong>number</strong>
+      </md-error>
+      </md-form-field>
+       <button md-raised-button color="accent" (click)="addCourse()">Save</button>
+       <button md-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+   </form>

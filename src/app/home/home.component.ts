@@ -39,17 +39,17 @@ export class HomeComponent {
     console.log(userRole);
     window.location.reload();
   }
-  openDialog(): void {
-    let dialogRef = this.dialog.open(ChangeRoleDialog, {
-      width: '250px'
+  // openDialog(): void {
+  //   let dialogRef = this.dialog.open(ChangeRoleDialog, {
+  //     width: '250px'
       
-    });
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      //this.userRole = result;
-    });
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+  //     //this.userRole = result;
+  //   });
+  // }
 }
 
 @Component({

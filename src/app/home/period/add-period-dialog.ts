@@ -41,6 +41,7 @@ import { AddPeriods } from "./add-period";
           this.result = res;
           if(this.result == true){
             console.log(this.result);
+            window.location.reload();
           //this.notificationService.setNotificationInfo('Period success to created');
           }else{
           //this.notificationService.setNotificationError('Period failed to created !');
@@ -48,6 +49,7 @@ import { AddPeriods } from "./add-period";
           }
           })); 
           this.dialogRef.close();
+          
     }
     
   

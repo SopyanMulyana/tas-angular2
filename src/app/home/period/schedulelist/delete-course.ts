@@ -9,18 +9,18 @@ import { Observable } from 'rxjs/Observable';
 import { PeriodService } from "../../../services/period.service";
 
 @Component({
-    templateUrl: 'delete-eligible-participants.html',
+    templateUrl: 'delete-course.html',
     styleUrls: ['../period.component.css']
   })
-  export class DeleteEligibleDialog {
+  export class DeleteCourseDialog {
     result;
     trainingId;
     constructor(@Inject(MD_DIALOG_DATA) public data: any, private periodService: PeriodService) {
         this.trainingId = data.trainingId;
     }
 
-    deleteParticipants(participantsId){
-      this.periodService.deleteElligibleParticipants(this.trainingId, participantsId).subscribe(((res) => {
+    deleteCourse(courseId){
+      this.periodService.deleteCourse(this.trainingId, courseId).subscribe(((res) => {
         this.result = res;
         if(this.result == true){
           console.log(this.result);
@@ -31,6 +31,5 @@ import { PeriodService } from "../../../services/period.service";
         console.log(this.result);
         }
         })); 
-        window.location.reload();
     }
   }

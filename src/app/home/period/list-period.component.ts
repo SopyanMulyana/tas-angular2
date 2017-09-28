@@ -64,7 +64,15 @@ export class ListPeriodComponent {
                           </button>`
                   }
                 }
-            ]
+            ],
+            columnDefs: [
+              {
+                render: function (data, type, full, meta) {
+                    return "<div style='text-align:center;'>" + data + "</div>";
+                },
+                targets: '_all'
+              }
+           ]
         } );
         var that = this;
         $('#period-table').on('click', '#edit-button', function() {

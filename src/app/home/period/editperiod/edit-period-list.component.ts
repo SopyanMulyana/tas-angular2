@@ -59,6 +59,7 @@ export class EditPeriodListComponent implements OnInit{
         this.result = res;
         if(this.result == true){
           console.log(this.result);
+          window.location.reload();
         //this.notificationService.setNotificationInfo('Period success to created');
         }else{
         //this.notificationService.setNotificationError('Period failed to created !');
@@ -66,6 +67,5 @@ export class EditPeriodListComponent implements OnInit{
         }
         })); 
         this.router.navigate(['/home/period/']);
-        window.location.reload();
   }
 }

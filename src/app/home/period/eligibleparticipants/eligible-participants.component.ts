@@ -46,7 +46,15 @@ export class EligibleParticipantsComponent implements OnInit{
                           </button>`
                   }
                 }
-            ]
+            ],
+            columnDefs: [
+              {
+                render: function (data, type, full, meta) {
+                    return "<div style='text-align:left;'>" + data + "</div>";
+                },
+                targets: '_all'
+              }
+           ]
         }); //console.log(elligibleparticipants);
         var that = this;
         $('#elligible-participants-table').on('click', '#delete-button', function () {
