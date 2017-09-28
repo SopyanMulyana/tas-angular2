@@ -24,7 +24,7 @@ export class UrlService {
 
    postPeriodData(): string {
     //    return "http://mtpc659:8080/period/create"; //wimba
-        return "http://mtpc583:8080/api/secure/period/create/"
+        return "http://mtpc583:8080/api/secure/period/add/"
    }
 
    postEditPeriod(id: number): string {
