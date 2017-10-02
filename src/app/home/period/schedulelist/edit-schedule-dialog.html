@@ -1,0 +1,48 @@
+<h1 md-dialog-title>Edit: {{courseName}}</h1>
+<form class="example-full-width" >
+        <div *ngIf="!periodical">
+            <table class="example-full-width" cellspacing="0"><tr>
+                <td><md-form-field color="accent">
+                        <input mdInput placeholder="Start Date" [(ngModel)]='temporaryData.startDate' [ngModelOptions]="{standalone: true}" name="startDate" [mdDatepicker]="startDate" [max]=temporaryData.endDate>
+                        <md-datepicker-toggle mdSuffix [for]="startDate"></md-datepicker-toggle>
+                        <md-datepicker touchUi="true" #startDate></md-datepicker>
+                        
+                    </md-form-field></td>
+                <td><md-form-field color="accent">
+                        <input mdInput placeholder="End Date" [(ngModel)]='temporaryData.endDate' [ngModelOptions]="{standalone: true}" name="endDate" [mdDatepicker]="endDate" [min]='temporaryData.startDate'>
+                        <md-datepicker-toggle mdSuffix [for]="endDate"></md-datepicker-toggle>
+                        <md-datepicker touchUi="true" #endDate></md-datepicker>
+                        
+                    </md-form-field></td>
+                </tr>
+                </table>
+            </div>
+        
+        <div *ngIf="periodical">
+                <md-select placeholder="Day" color="accent" class="example-full-width" [(ngModel)]='temporaryData.day' [ngModelOptions]="{standalone: true}">
+                        <md-option *ngFor="let day of days" [value]="day.value">
+                        {{ day.viewValue }}
+                        </md-option>
+                    </md-select>
+                </div>
+         <div>
+            <table class="example-full-width" cellspacing="0">
+                    <tr>
+                    <td><md-select color="accent" class="example-full-width" placeholder="Start Time" [(ngModel)]='temporaryData.startTime' [ngModelOptions]="{standalone: true}">
+                            <md-option *ngFor="let time of times" [value]="time.value">
+                                {{ time.value }}
+                            </md-option>
+                        </md-select></td>
+                    <td><md-select color="accent" class="example-full-width" placeholder="End Time" [(ngModel)]='temporaryData.endTime' [ngModelOptions]="{standalone: true}">
+                            <md-option *ngFor="let time of times" [value]="time.value">
+                                {{ time.value }}
+                            </md-option>
+                        </md-select></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="buffer"></div>
+    <button md-raised-button color="accent" (click)="saveSchedule()">Save</button>
+    <button md-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+
+</form>

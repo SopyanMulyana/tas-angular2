@@ -1,12 +1,16 @@
-export interface AddUserForEligible {
-    
+export interface ListCourseSchedule {
+    coursePeriodId: number;
     courseName: string;
     mainTrainer: string;
     backupTrainer: string;
-    classRoom: string;
+    classroom: string;
     day: string;
     startTime: string;
     endTime: string;
     capacity: number;
-    aplist: number;
+    apList: number;
+    createdBy: string;
+    createdAt: string;
+    updatedBy: string;
+    updatedAt: string;
 }

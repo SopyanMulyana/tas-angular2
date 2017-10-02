@@ -4,7 +4,8 @@ export class AddPeriods {
         public startDate: string,
         public endDate: string,
         public openEnrollment: boolean,
-        public activeStatus: boolean
+        public activeStatus: boolean,
+        public periodical: boolean
         ){}
     }
 

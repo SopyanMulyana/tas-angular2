@@ -5,6 +5,9 @@
 md-form-field{
     width: 100%;
 }
+.example-full-width {
+    width: 100%;
+}
 .filter{
     width: 50%;
 }
@@ -19,4 +22,16 @@ md-form-field{
 }
 .form-edit {
     margin-top: 30px;
+}
+.buffer {
+    height: 40px;
+}
+.category {
+    display: inline-block;
+    width: 30%;
+    font-weight: bold;
+}
+.edit-period {
+    width: 60%;
+    margin: auto;
 }

@@ -12,6 +12,8 @@ import { UserComponent } from './home/user/user.component'
 import { EnrollmentComponent } from './home/enrollment/enrollment.component'
 import { AchievementComponent } from './home/achievement/achievement.component'
 import { MaintenanceComponent } from "./home/maintenance/maintenance.component";
+import { ScheduleListOutletComponent } from "./home/period/schedulelist/edit-schedule.component";
+import { UpdateScheduleComponent } from "./home/period/schedulelist/update-schedule.component";
 
 import { AuthGuard } from './services/authguard.service';
 
@@ -24,9 +26,14 @@ const routes: Routes = [
             {path: 'period',        component: PeriodComponent, children:[
                 {path: '',          component: ListPeriodComponent},
                 {path: 'edit',      component: EditPeriodComponent, children:[
-                    {path: ':trainingId',              component: EditPeriodListComponent},
-                    {path: ':trainingId/eligible',      component: EligibleParticipantsComponent},
-                    {path: ':trainingId/schedule',      component: ScheduleListComponent}
+                    {path: ':trainingId/:periodical',               component: EditPeriodListComponent},
+                    {path: ':trainingId/:periodical/eligible',      component: EligibleParticipantsComponent},
+                    {path: ':trainingId/:periodical/schedule',      component: ScheduleListComponent},
+                    {path: ':trainingId/:periodical/schedule/', component:UpdateScheduleComponent}
+                    // {path: ':trainingId/schedule',      component: ScheduleListOutletComponent, children:[
+                    //     {path:'',                               component: ScheduleListComponent},
+                    //     {path:':periodical',        component: UpdateScheduleComponent}
+                    // ]}
                 ]}
             ]},
             {path: 'user',          component: UserComponent},

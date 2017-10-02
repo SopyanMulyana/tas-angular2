@@ -7,7 +7,7 @@
 </span>
 <span><a class="title" routerLink="/home" (click)=sidenav.close()>Training Admin System</a></span>
 <span class="fill-remaining-space"></span>
-<span><md-select  [(ngModel)]="activeRole">
+<span><md-select  [(ngModel)]='activeRole'>
         <md-option *ngFor="let role of roles" [value]="role.idRole" (click)="changeRole(role.idRole)">
           {{ role.value }}
         </md-option>

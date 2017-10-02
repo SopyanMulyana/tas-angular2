@@ -35,12 +35,13 @@ import { AddPeriods } from "./add-period";
     addAperiod(): void {
       this.addPeriod = new AddPeriods(this.temporaryData.trainingName,
         this.temporaryData.startDate, this.temporaryData.endDate, 
-        this.temporaryData.openEnrollment, true);
+        this.temporaryData.openEnrollment, true, this.temporaryData.periodic);
       console.log(this.addPeriod);
         this.periodService.createDataPeriod(this.addPeriod).subscribe(((res) => {
           this.result = res;
           if(this.result == true){
             console.log(this.result);
+            window.location.reload();
           //this.notificationService.setNotificationInfo('Period success to created');
           }else{
           //this.notificationService.setNotificationError('Period failed to created !');
@@ -48,6 +49,7 @@ import { AddPeriods } from "./add-period";
           }
           })); 
           this.dialogRef.close();
+          
     }
     
   

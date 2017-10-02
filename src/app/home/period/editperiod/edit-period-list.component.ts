@@ -43,8 +43,8 @@ export class EditPeriodListComponent implements OnInit{
         this.currentData.endDate= new Date(+end[0], +end[1]-1, +end[2]);
         this.currentData.openEnrollment= res.openEnrollment;
         this.currentData.activeStatus= res.activeStatus;
+        this.currentData.periodical = res.periodical;
         })); 
-
     });
     //elligible participants
     
@@ -53,12 +53,13 @@ export class EditPeriodListComponent implements OnInit{
   savePeriod(id) {
     this.finalData = new AddPeriods(this.currentData.trainingName,
       this.currentData.startDate, this.currentData.endDate, 
-      this.currentData.openEnrollment,  this.currentData.activeStatus );
+      this.currentData.openEnrollment,  this.currentData.activeStatus, this.currentData.periodic );
     console.log(this.finalData);
       this.periodService.editDataPeriod(id,this.finalData).subscribe(((res) => {
         this.result = res;
         if(this.result == true){
           console.log(this.result);
+          window.location.reload();
         //this.notificationService.setNotificationInfo('Period success to created');
         }else{
         //this.notificationService.setNotificationError('Period failed to created !');
@@ -66,6 +67,5 @@ export class EditPeriodListComponent implements OnInit{
         }
         })); 
         this.router.navigate(['/home/period/']);
-        window.location.reload();
   }
 }

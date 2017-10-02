@@ -5,7 +5,13 @@ import { Periods } from "../home/period/period";
 import { AddPeriods } from "../home/period/add-period";
 import { ListForEligibleParticipants } from "../home/period/eligibleparticipants/user-for-eligible";
 import { AddUserForEligible } from "../home/period/eligibleparticipants/add-user-for-eligible";
+import { ListCourseSchedule } from "../home/period/schedulelist/schedule-list";
+import { ListForAddCourse } from "../home/period/schedulelist/course-list";
+import { ClassRoom } from "../home/period/schedulelist/class-room";
+import { AddCoursePeriod } from "../home/period/schedulelist/add-course-period";
+import { ListUpdateCourse } from "../home/period/schedulelist/update-schedule";
 import { UrlService } from './url.service';
+
 @Injectable()
 export class PeriodService {
    token = localStorage.getItem('token')
@@ -81,10 +87,59 @@ export class PeriodService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 
-   getCourseList(id:number): Observable<ListForEligibleParticipants[]> {
+   getCourseList(id:number): Observable<ListCourseSchedule[]> {
       return this.http.get(this.urlService.getUrlCourseList(id), this.opts)
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   getListForAddCourse(): Observable<ListForAddCourse[]> {
+      return this.http.get(this.urlService.getUrlListForAddCourse(), this.opts)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   getClassRoom(): Observable<ClassRoom[]> {
+      return this.http.get(this.urlService.getUrlClassRoom(), this.opts)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   public addCourse(idTraining:number, course:AddCoursePeriod): Observable<boolean>{
+      return this.http.post(this.urlService.postUrlAddCourse(idTraining), course, this.opts)
+      .map(this.extractData)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   public deleteCourse(id: number, courseId:number): Observable<boolean>{
+      return this.http.delete(this.urlService.deleteUrlCourseList(id, courseId) ,this.opts)
+      .map(this.extractData)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   getDetailCourse(idTraining:number, idCourse:number): Observable<ListCourseSchedule> {
+      return this.http.get(this.urlService.getUrlDetailCourse(idTraining,idCourse), this.opts)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   //dummy
+   public editDataCourse(idTraining:number, idCourse:number, courseData: ListUpdateCourse): Observable<boolean>{
+      return this.http.post(this.urlService.postEditCourse(idTraining, idCourse), courseData, this.opts)
+      .map(this.extractData)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   getListForEnrollParticipants(idTraining:number, idCourse:number): Observable<ListForEligibleParticipants[]> {
+      return this.http.get(this.urlService.getUrlListUserForEnrollParticipants(idTraining,idCourse), this.opts)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   public addEnrollParticipants(idTraining:number, idCourse:number, idUser:AddUserForEligible[]): Observable<boolean>{
+      return this.http.post(this.urlService.postEnrollParticipant(idTraining, idCourse), idUser, this.opts)
+      .map(this.extractData)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 
    private extractData(res:Response) {
