@@ -80,6 +80,7 @@ export class UserService {
      }
 
      public editDataActiveUser(employeeId:number, active: AddActive): Observable<boolean>{
+
         return this.http.post(this.urlService.postUrlEditActiveUser(employeeId),active, this.opts)
         .map(this.extractData)
         .catch((error: any) => Observable.throw(error.json().error || 'Server error'));

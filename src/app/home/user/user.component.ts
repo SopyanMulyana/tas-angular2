@@ -44,8 +44,37 @@ export class UserComponent{
               { title: "Job Family", data: "jobFamilyStream" },
               { title: "Grade", data: "grade" },
               { title: "Account Name", data: "accountName" },
-              { title: "Active", data: "active" },
-              { title: "Role", data: "role" },
+              // { title: "Active", data: "active" },
+              {
+                title: "Active",
+                data: function (data, type, full, meta) {
+                    if (data.active==true)
+                    { return '<div>Yes</div>'}
+                    else
+                    { return '<div>No</div>'}
+                  
+                }
+              },
+              { title: "Role",
+                data:  function (data, type, full, meta) {
+                  var show = "";
+                  for( var i = 0; i < data.role.length; i++) {
+                    if (show != "") {
+                      show = show + "<br>"
+                    }
+                    if(data.role[i] == 4) {
+                      show = show + "Participants";
+                    } else if (data.role[i] == 3) {
+                      show = show + "Manager";
+                    } else if (data.role[i] == 2) {
+                      show = show + "Trainer";
+                    } else if (data.role[i] == 1) {
+                      show = show + "Admin";
+                    }
+                  }
+                  return show;
+                }
+              },
               {
                 title: "action",
                 render: function (data, type, full, meta) {

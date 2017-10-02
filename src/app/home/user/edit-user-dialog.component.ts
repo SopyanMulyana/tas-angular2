@@ -40,7 +40,7 @@ import { AddActive } from "./edit-active";
     ngOnInit(){
       this.userService.getUserById(this.employeeId).subscribe(res => 
         {this.currentData.accountName = res.accountName;
-        this.currentData.active = res.active;
+        this.currentData.active = res.active.toString();
         for (let i = 0; i <= res.role.length; i++) { 
             console.log(res.role[i]);
             if (res.role[i].toString()== "1")

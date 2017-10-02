@@ -2,13 +2,9 @@
   <md-card>
     <md-card-title>Users</md-card-title>
     <md-card-content>
-      <div class="filter inline">
-        <md-form-field color="accent">
-          <input mdInput #filter placeholder="Search">
-        </md-form-field>
-      </div>
 
       <div class="add-user inline"><button md-raised-button color="accent" (click)="openDialogAdd()"><md-icon>add</md-icon> Add User</button></div>
+      <div class="buffer"></div>
       <table id="table-user" class="mdl-data-table" cellspacing="0" width="100%">
         <!-- <thead>
             <tr>
