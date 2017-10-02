@@ -46,6 +46,7 @@ import { UserService } from './services/user.service';
 import { AlertService } from './services/alert.service';
 import { ListUserService } from "./services/list-user.service";
 import { PeriodService } from "./services/period.service";
+import { EnrollmentService } from "./services/enrollment.service";
 import { UrlService } from './services/url.service';
 // used to create fake backend
 // import { fakeBackendProvider } from './fakebackend';
@@ -100,6 +101,7 @@ import { UrlService } from './services/url.service';
     AlertService,
     ListUserService,
     PeriodService,
+    EnrollmentService,
     UrlService
   ],
   bootstrap: [AppComponent],
