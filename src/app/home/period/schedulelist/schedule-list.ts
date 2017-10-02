@@ -9,4 +9,8 @@ export interface ListCourseSchedule {
     endTime: string;
     capacity: number;
     apList: number;
+    createdBy: string;
+    createdAt: string;
+    updatedBy: string;
+    updatedAt: string;
 }

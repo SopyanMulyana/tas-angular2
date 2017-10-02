@@ -9,6 +9,7 @@ import { ListCourseSchedule } from "../home/period/schedulelist/schedule-list";
 import { ListForAddCourse } from "../home/period/schedulelist/course-list";
 import { ClassRoom } from "../home/period/schedulelist/class-room";
 import { AddCoursePeriod } from "../home/period/schedulelist/add-course-period";
+import { ListUpdateCourse } from "../home/period/schedulelist/update-schedule";
 import { UrlService } from './url.service';
 
 @Injectable()
@@ -112,6 +113,31 @@ export class PeriodService {
 
    public deleteCourse(id: number, courseId:number): Observable<boolean>{
       return this.http.delete(this.urlService.deleteUrlCourseList(id, courseId) ,this.opts)
+      .map(this.extractData)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   getDetailCourse(idTraining:number, idCourse:number): Observable<ListCourseSchedule> {
+      return this.http.get(this.urlService.getUrlDetailCourse(idTraining,idCourse), this.opts)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   //dummy
+   public editDataCourse(idTraining:number, idCourse:number, courseData: ListUpdateCourse): Observable<boolean>{
+      return this.http.post(this.urlService.postEditCourse(idTraining, idCourse), courseData, this.opts)
+      .map(this.extractData)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   getListForEnrollParticipants(idTraining:number, idCourse:number): Observable<ListForEligibleParticipants[]> {
+      return this.http.get(this.urlService.getUrlListUserForEnrollParticipants(idTraining,idCourse), this.opts)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   public addEnrollParticipants(idTraining:number, idCourse:number, idUser:AddUserForEligible[]): Observable<boolean>{
+      return this.http.post(this.urlService.postEnrollParticipant(idTraining, idCourse), idUser, this.opts)
       .map(this.extractData)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }

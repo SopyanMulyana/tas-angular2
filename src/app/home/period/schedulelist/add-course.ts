@@ -29,12 +29,10 @@ import { AddCoursePeriod } from "./add-course-period";
     //periodService: PeriodService;
     result;
     idTraining;
-    constructor(
-      public dialogRef: MdDialogRef<AddCourseDialog>,
+    constructor(public dialogRef: MdDialogRef<AddCourseDialog>,
       @Inject(MD_DIALOG_DATA) public data: any, public periodService: PeriodService, public userService: UserService) {
             this.idTraining = data.id;
-
-       }
+    }
   
     onNoClick(): void {
       this.dialogRef.close();

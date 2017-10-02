@@ -8,6 +8,9 @@ import { Observable } from 'rxjs/Observable';
 import { PeriodService } from "../../../services/period.service";
 import { DeleteCourseDialog } from "./delete-course";
 import { AddCourseDialog } from "./add-course";
+import { DetailDialog } from "./detail-course";
+import { AddEnrollDialog } from "./enroll-participants";
+import { EditScheduleDialog } from "./edit-schedule-dialog";
 
 
 declare var $:any;
@@ -22,15 +25,17 @@ export class ScheduleListComponent implements OnInit{
   //   this.curentData = periodSerice.getPeriodById()
   //  }
   trainingId: number;
+  periodical: boolean;
   private sub: any;
 
-  constructor(public addCourse: MdDialog, public deleteCourse: MdDialog, private route: ActivatedRoute, private periodService: PeriodService, private router: Router) {
+  constructor(public addCourse: MdDialog, public deleteCourse: MdDialog, public detailCourse: MdDialog, public enrollParicipants: MdDialog, public editSchedule: MdDialog, private route: ActivatedRoute, private periodService: PeriodService, private router: Router) {
 
   }
   ngOnInit() {
     // edit period
     this.sub = this.route.params.subscribe(params => {
        this.trainingId = +params['trainingId']; // (+) converts string 'id' to a number
+       this.periodical = params['periodical'] == 'true';
        this.periodService.getCourseList(this.trainingId).subscribe((listCourseSchedule => {
         $('#schedule-list-table').DataTable( {
           
@@ -54,6 +59,9 @@ export class ScheduleListComponent implements OnInit{
                         <button class="action-button" id="participants-button" data-element-id="${full.coursePeriodId}" style="background-color: transparent; border: white;">
                           <img class="image-button" src="../../assets/image/participants.svg" style="width: 15px;height: 15px;">
                         </button><br>
+                        <button class="action-button" id="edit-button" data-element-id="${full.coursePeriodId}" data-element-name="${full.courseName}" style="background-color: transparent; border: white;">
+                          <img class="image-button" src="../../assets/image/edit.svg" style="width: 15px;height: 15px;">
+                        </button>
                         <button class="action-button" id="delete-button" data-element-id="${full.coursePeriodId}" style="background-color: transparent; border: white;">
                           <img class="image-button" src="../../assets/image/garbage.svg" style="width: 15px;height: 15px;">
                         </button>`
@@ -79,20 +87,25 @@ export class ScheduleListComponent implements OnInit{
 
       $('#schedule-list-table').on('click', '#participants-button', function() {
         let coursePeriodId = $(this).data('element-id');
-        alert(coursePeriodId);
+        that.openDialogEnroll(coursePeriodId)
+        //that.router.navigate(['/home/period/edit', trainingId,'eligible']);
+      } );
+
+      $('#schedule-list-table').on('click', '#edit-button', function() {
+        let coursePeriodId = $(this).data('element-id');
+        let courseName = $(this).data('element-name');
+        that.openDialogEdit(coursePeriodId, courseName)
         //that.router.navigate(['/home/period/edit', trainingId,'eligible']);
       } );
 
       $('#schedule-list-table').on('click', '#detail-button', function() {
         let coursePeriodId = $(this).data('element-id');
-        alert(coursePeriodId);
-        //that.router.navigate(['/home/period/edit', trainingId, 'schedule']);
+        that.openDialogDetail(coursePeriodId);
       } );
   
       // Delete a record
       $('#schedule-list-table').on('click', '#delete-button', function () {
         let coursePeriodId = $(this).data('element-id'); 
-        alert(coursePeriodId);
         that.openDialogDelete(coursePeriodId);
       } );
       }));
@@ -111,4 +124,26 @@ export class ScheduleListComponent implements OnInit{
       data: { id: this.trainingId}
     });
   }
+
+  openDialogDetail(idCourse) {
+    this.detailCourse.open(DetailDialog, {
+      width: '40%',
+      data: { idTraining: this.trainingId, idCourse: idCourse }
+    });
+  }
+
+  openDialogEnroll(idCourse) {
+    this.enrollParicipants.open(AddEnrollDialog, {
+      width: '60%',
+      data: { idTraining: this.trainingId, idCourse: idCourse }
+    });
+  }
+
+  openDialogEdit(idCourse, courseName) {
+    this.editSchedule.open(EditScheduleDialog, {
+      width: '45%',
+      data: { idTraining: this.trainingId, idCourse: idCourse, periodical: this.periodical, courseName: courseName}, 
+    });
+  }
+  
 }

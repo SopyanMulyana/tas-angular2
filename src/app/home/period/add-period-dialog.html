@@ -1,6 +1,10 @@
 <h1 md-dialog-title>Add Period</h1>
 
 <form>
+        <md-radio-group  [(ngModel)]='temporaryData.periodic' [ngModelOptions]="{standalone: true}">
+                <md-radio-button value='false'>Fixed</md-radio-button>
+                <md-radio-button value='true' >Periodic</md-radio-button>
+            </md-radio-group><br>
     <div md-dialog-content>
         <md-form-field color="accent">
             <input mdInput placeholder="Training Name" [(ngModel)]='temporaryData.trainingName' name="trainingName">

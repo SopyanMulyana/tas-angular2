@@ -50,13 +50,13 @@ export class ListPeriodComponent {
                 {
                   title: "action",
                   render: function (data, type, full, meta) {
-                  return `<button class="action-button" id="edit-button" data-element-id="${full.trainingPeriodId}" style="background-color: transparent; border: white;">
+                  return `<button class="action-button" id="edit-button" data-element-id="${full.trainingPeriodId}" data-element-id2="${full.periodical}" style="background-color: transparent; border: white;">
                             <img class="image-button" src="../../assets/image/edit.svg" style="width: 15px;height: 15px;">
                           </button>
-                          <button class="action-button" id="participants-button" data-element-id="${full.trainingPeriodId}" style="background-color: transparent; border: white;">
+                          <button class="action-button" id="participants-button" data-element-id="${full.trainingPeriodId}" data-element-id2="${full.periodical}" style="background-color: transparent; border: white;">
                             <img class="image-button" src="../../assets/image/participants.svg" style="width: 15px;height: 15px;">
                           </button>
-                          <button class="action-button" id="schedules-button" data-element-id="${full.trainingPeriodId}" style="background-color: transparent; border: white;">
+                          <button class="action-button" id="schedules-button" data-element-id="${full.trainingPeriodId}" data-element-id2="${full.periodical}" style="background-color: transparent; border: white;">
                             <img class="image-button" src="../../assets/image/schedule.svg" style="width: 15px;height: 15px;">
                           </button>
                           <button class="action-button" id="delete-button" data-element-id="${full.trainingPeriodId}" style="background-color: transparent; border: white;">
@@ -77,17 +77,20 @@ export class ListPeriodComponent {
         var that = this;
         $('#period-table').on('click', '#edit-button', function() {
           let trainingId = $(this).data('element-id');
-          that.router.navigate(['/home/period/edit/', trainingId]);
+          let periodical = $(this).data('element-id2');
+          that.router.navigate(['/home/period/edit/', trainingId, periodical]);
         } );
 
         $('#period-table').on('click', '#participants-button', function() {
           let trainingId = $(this).data('element-id');
-          that.router.navigate(['/home/period/edit', trainingId,'eligible']);
+          let periodical = $(this).data('element-id2');
+          that.router.navigate(['/home/period/edit', trainingId, periodical,'eligible']);
         } );
 
         $('#period-table').on('click', '#schedules-button', function() {
           let trainingId = $(this).data('element-id');
-          that.router.navigate(['/home/period/edit', trainingId, 'schedule']);
+          let periodical = $(this).data('element-id2');
+          that.router.navigate(['/home/period/edit', trainingId, periodical, 'schedule']);
         } );
     
         // Delete a record

@@ -7,4 +7,5 @@ export interface Periods{
         createdBy: string;
         editedBy: string;
         openEnrollment: boolean;
+        periodical: boolean;
 }

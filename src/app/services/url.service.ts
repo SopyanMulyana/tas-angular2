@@ -77,6 +77,24 @@ export class UrlService {
         return "http://mtpc583:8080/api/secure/period/classroom";
     }
 
+   getUrlDetailCourse(idTraining: number, idCourse: number): string {
+       return "http://mtpc583:8080/api/secure/period/"+idTraining+"/course/"+idCourse;
+   } 
+
+   postEditCourse(idTraining:number, idCourse:number): string {
+    return "http://mtpc583:8080/api/secure/period/"+idTraining+"/course/"+idCourse+"/edit"; //dummy
+    }
+
+   getUrlListUserForEnrollParticipants(idTraining:number, idCourse:number): string {
+        return "http://mtpc583:8080/api/secure/period/"+idTraining+"/course/"+idCourse+"/eligible/"; 
+    }
+
+    postEnrollParticipant(idTraining:number, idCourse:number): string {
+        return "http://mtpc583:8080/api/secure/period/"+idTraining+"/course/"+idCourse+"/eligible/add"; 
+    }
+
+    
+
    getUrlActiveTraining(): string {
        return null;
    }
