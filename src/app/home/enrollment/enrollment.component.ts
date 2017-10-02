@@ -1,7 +1,7 @@
 import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 // import { Router } from '@angular/router';
-import { MdPaginator, MdSort } from '@angular/material';
+import { MdPaginator, MdSort, MdDialog } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -13,6 +13,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 import { ListEnrollment } from "./enrollment";
+import { DetailEnrollmentDialog } from "./detail-enrollment";
 import { EnrollmentService } from "../../services/enrollment.service";
 
 @Component({
@@ -34,7 +35,7 @@ export class EnrollmentComponent {
   enrollmentDatabase;
   dataSource: EnrollmentDataSource | null;
   enrollmentDatas:ListEnrollment[];
-  constructor(private authenticationService: AuthenticationService, private periodService:EnrollmentService) {
+  constructor(public detailEnrollment: MdDialog, private authenticationService: AuthenticationService, private periodService:EnrollmentService) {
    // this.enrollmentDatabase = new EnrollmentDatabase();
    var user = JSON.parse(localStorage.getItem('currentUser'));
    this.fullName = user.fullName;
@@ -73,7 +74,12 @@ export class EnrollmentComponent {
 
   }));
   }
-
+  viewDetail(selectedObject){
+    this.detailEnrollment.open(DetailEnrollmentDialog, {
+      width: '40%',
+      data: {selectedObject: selectedObject, fullName: this.fullName}
+    });
+  }
 
   ngOnInit() {
     

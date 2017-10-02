@@ -17,7 +17,7 @@
   
           <ng-container mdColumnDef="courseName">
             <md-header-cell *mdHeaderCellDef md-sort-header> Course Name </md-header-cell>
-            <md-cell *mdCellDef="let enrollment"> {{enrollment.courseName}} </md-cell>
+            <md-cell *mdCellDef="let enrollment" ><a (click)="viewDetail(enrollment)" class="link-text">{{enrollment.courseName}}</a>  </md-cell>
           </ng-container>
   
           <ng-container mdColumnDef="trainer">

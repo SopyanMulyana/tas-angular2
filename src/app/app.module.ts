@@ -36,6 +36,7 @@ import { UserComponent } from './home/user/user.component';
 import { AddUserDialog } from './home/user/add-user-dialog.component';
 import { EditUserDialog } from "./home/user/edit-user-dialog.component";
 import { EnrollmentComponent } from './home/enrollment/enrollment.component';
+import { DetailEnrollmentDialog } from './home/enrollment/detail-enrollment';
 import { AchievementComponent } from './home/achievement/achievement.component';
 import { MaintenanceComponent } from './home/maintenance/maintenance.component';
 import { AlertComponent } from './alert.component';
@@ -76,6 +77,7 @@ import { UrlService } from './services/url.service';
     AddUserDialog,
     EditUserDialog,
     EnrollmentComponent,
+    DetailEnrollmentDialog,
     AchievementComponent,
     MaintenanceComponent,
     AlertComponent,
@@ -109,7 +111,7 @@ import { UrlService } from './services/url.service';
     AddPeriodDialog, DeletePeriodDialog,
     AddUserDialog, EditUserDialog, ChangeRoleDialog, AddEligibleDialog,
     DeleteEligibleDialog, DeleteCourseDialog, AddCourseDialog, DetailDialog, AddEnrollDialog,
-    EditScheduleDialog
+    EditScheduleDialog, DetailEnrollmentDialog
   ]
 })
 export class AppModule { }
