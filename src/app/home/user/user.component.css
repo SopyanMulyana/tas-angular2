@@ -17,3 +17,19 @@ md-form-field{
     width: 10px;
     height: 10px;
 }
+.example-full-width {
+    width: 100%;
+}
+.buffer {
+    height: 40px;
+}
+.dialog-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+.dialog-margin {
+    margin: 0 10px;
+}

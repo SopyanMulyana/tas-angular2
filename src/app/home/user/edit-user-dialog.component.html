@@ -1,0 +1,21 @@
+<h1 md-dialog-title>Edit User: {{currentData.accountName}}</h1>
+
+<form>
+            <section class="dialog-section">
+                <label class="dialog-margin">Active Status:</label>
+                <md-radio-group [(ngModel)]="currentData.active" [ngModelOptions]="{standalone: true}">
+                    <md-radio-button class="dialog-margin" checked="true" value="true">Active</md-radio-button>
+                    <md-radio-button class="dialog-margin" value="false">Inactive</md-radio-button>
+                </md-radio-group>
+            </section>
+
+            <section class="dialog-section">
+                    <md-checkbox class="dialog-margin" [(ngModel)]="roles[0]" [ngModelOptions]="{standalone: true}">Admininstrator</md-checkbox>
+                    <md-checkbox class="dialog-margin" [(ngModel)]="roles[1]" [ngModelOptions]="{standalone: true}">Trainer</md-checkbox><br>
+                    <md-checkbox class="dialog-margin" [(ngModel)]="roles[2]" [ngModelOptions]="{standalone: true}">Manager</md-checkbox>
+                    <md-checkbox class="dialog-margin" [(ngModel)]="roles[3]" [ngModelOptions]="{standalone: true}" disabled="true" checked="true">Participants</md-checkbox>
+                </section>
+                <div class="buffer"></div>
+    <button md-raised-button color="accent" (click)="saveUser()">Save</button>
+    <button md-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+</form>

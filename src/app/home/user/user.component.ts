@@ -10,9 +10,10 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
-import { ListUserService } from "../../services/list-user.service";
+import { UserService } from "../../services/user.service";
 import { ListUser } from "./list-user";
 import { AddUserDialog } from "./add-user-dialog.component";
+import { EditUserDialog } from "./edit-user-dialog.component";
 
 declare var $:any;
 
@@ -25,56 +26,72 @@ declare var $:any;
 export class UserComponent{
   userRole;
   users;
-  constructor(public addUser: MdDialog, public listUserService: ListUserService) { }
+  constructor(public addUser: MdDialog, public editUser: MdDialog, public userService: UserService) { }
   
 
-  ngOnInit(listUserService: ListUserService) {
+  ngOnInit(listUserService: UserService) {
         var user = JSON.parse(localStorage.getItem('currentUser'));
         this.userRole = user.role;
         var dataSet = [];
-        this.listUserService.getUsers().subscribe((users => {
-          $.each(users, (i, item) => {
-            dataSet[i] = $.map(item, function(el) { return el; })
-          });
-          $('#example').on('click', 'a.editor_edit', function (e) {
-            e.preventDefault();
-        } );
-     
-        // Delete a record
-        $('#example').on('click', 'a.editor_remove', function (e) {
-            e.preventDefault();
-        } );
-
-        $('#example').DataTable( {
+        this.userService.getUsers().subscribe((users => {
+        $('#table-user').DataTable( {
          
-          data: dataSet,
+          data: users,
           columns: [
-              { title: "Employee Id" },
-              { title: "Full Name" },
-              { title: "Email" },
-              { title: "Job Family" },
-              { title: "Grade" },
-              { title: "Account Name" },
-              { title: "Active" },
-              { title: "Role" },
+              { title: "Employee Id", data: "employeeId" },
+              { title: "Full Name", data: "fullName" },
+              { title: "Email", data: "email" },
+              { title: "Job Family", data: "jobFamilyStream" },
+              { title: "Grade", data: "grade" },
+              { title: "Account Name", data: "accountName" },
+              { title: "Active", data: "active" },
+              { title: "Role", data: "role" },
               {
                 title: "action",
-                defaultContent: '<a href="" class="editor_edit"><button class="action-button" style="background-color: transparent; border: white;"><img class="image-button" src="../../assets/image/edit.svg" style="width: 15px;height: 15px; color:#009688"></button></a> <a href="" ><button class="action-button" style="background-color: transparent; border: white;"><img class="image-button" src="../../assets/image/garbage.svg" style="width: 15px;height: 15px;"></button></a>'
+                render: function (data, type, full, meta) {
+                  return `<button class="action-button" id="edit-button" data-element-id="${full.employeeId}" style="background-color: transparent; border: white;">
+                            <img class="image-button" src="../../assets/image/edit.svg" style="width: 15px;height: 15px;">
+                          </button>`
               }
-          ]
+            }
+          ],
+          columnDefs: [
+            {
+              render: function (data, type, full, meta) {
+                  return "<div style='text-align:center;'>" + data + "</div>";
+              },
+              targets: '_all'
+            },
+            {
+              render: function (data, type, full, meta) {
+                  return "<div style='white-space:normal; width:70px; text-align:left;'>" + data + "</div>";
+              },
+              targets: [0]
+            }
+         ]
+      } );
+      var that = this;
+      $('#table-user').on('click', '#edit-button', function() {
+        let employeeId = $(this).data('element-id');
+        that.openDialogEdit(employeeId);
       } );
     }));
   }
   
 
-  // openDialogAdd(): void {
-  //   let dialogRef = this.addUser.open(AddUserDialog, {
-  //     width: '80%',
-  //     data: {  }
-  //   });
+  openDialogEdit(employeeId: number): void {
+    //alert("open dialog");
+    let dialogRef = this.editUser.open(EditUserDialog, {
+      width: '45%',
+      data: { employeeId:  employeeId}
+    });
+  }
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //   });
-  // }
+  openDialogAdd(): void {
+    //alert("open dialog");
+    let dialogRef = this.addUser.open(AddUserDialog, {
+      width: '50%'
+    });
+  }
 
 }
