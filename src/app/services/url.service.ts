@@ -7,11 +7,31 @@ export class UrlService {
    }
  
    getUrlUsers(): string {
-      return "http://localhost:8080/api/all/";
+      return "http://mtpc583:8080/api/secure/user/";
    }
 
-   getUrlEmployee(): string {
-        return null;
+   getUrlUserById(id: number): string {
+       return "http://mtpc583:8080/api/secure/user/"+id;
+   }
+
+   postUrlAddUser(): string {
+       return "http://mtpc583:8080/api/secure/user/add/";
+   }
+
+   getUrlGrade(): string {
+       return "http://mtpc583:8080/api/secure/user/grade/";
+   }
+
+   getUrlLocation(): string {
+       return "http://mtpc583:8080/api/secure/user/location/";
+   }
+
+   postUrlEditActiveUser(idUser: number): string {
+       return "http://mtpc583:8080/api/secure/user/"+idUser+"/edit/active/";
+   }
+
+   postUrlEditRolesUser(idUser: number): string {
+       return "http://mtpc583:8080/api/secure/user/"+idUser+"/edit/roles/";
    }
 
    getUrlAuth(): string {
@@ -93,7 +113,9 @@ export class UrlService {
         return "http://mtpc583:8080/api/secure/period/"+idTraining+"/course/"+idCourse+"/eligible/add"; 
     }
 
-    
+    getUrlEnrollment(): string {
+        return "http://mtpc583:8080/api/secure/enrollment";
+    }
 
    getUrlActiveTraining(): string {
        return null;
@@ -103,9 +125,7 @@ export class UrlService {
        return null;
    }
 
-   getUrlEnrollment(): string {
-       return null;
-   }
+   
 
    getUrlAchievement(): string {
        return null;

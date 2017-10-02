@@ -34,6 +34,7 @@ import { UpdateScheduleComponent } from "./home/period/schedulelist/update-sched
 // import { UserComponent, AddUserDialog } from './home/user/user.component';
 import { UserComponent } from './home/user/user.component';
 import { AddUserDialog } from './home/user/add-user-dialog.component';
+import { EditUserDialog } from "./home/user/edit-user-dialog.component";
 import { EnrollmentComponent } from './home/enrollment/enrollment.component';
 import { AchievementComponent } from './home/achievement/achievement.component';
 import { MaintenanceComponent } from './home/maintenance/maintenance.component';
@@ -45,6 +46,7 @@ import { UserService } from './services/user.service';
 import { AlertService } from './services/alert.service';
 import { ListUserService } from "./services/list-user.service";
 import { PeriodService } from "./services/period.service";
+import { EnrollmentService } from "./services/enrollment.service";
 import { UrlService } from './services/url.service';
 // used to create fake backend
 // import { fakeBackendProvider } from './fakebackend';
@@ -72,6 +74,7 @@ import { UrlService } from './services/url.service';
     AddCourseDialog,
     UserComponent,
     AddUserDialog,
+    EditUserDialog,
     EnrollmentComponent,
     AchievementComponent,
     MaintenanceComponent,
@@ -98,12 +101,13 @@ import { UrlService } from './services/url.service';
     AlertService,
     ListUserService,
     PeriodService,
+    EnrollmentService,
     UrlService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
     AddPeriodDialog, DeletePeriodDialog,
-    AddUserDialog, ChangeRoleDialog, AddEligibleDialog,
+    AddUserDialog, EditUserDialog, ChangeRoleDialog, AddEligibleDialog,
     DeleteEligibleDialog, DeleteCourseDialog, AddCourseDialog, DetailDialog, AddEnrollDialog,
     EditScheduleDialog
   ]

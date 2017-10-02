@@ -4,6 +4,11 @@ import { ListUser } from "../home/user/list-user";
 import { UrlService } from './url.service';
 import { Observable } from 'rxjs/Rx';
 import { User } from '../user';
+import { AddUsers } from "../home/user/add-user";
+import { ListGrade } from "../home/user/grade";
+import { ListLocation } from "../home/user/location";
+import { AddActive } from "../home/user/edit-active";
+import { AddRole } from "../home/user/edit-roles";
 
 @Injectable()
 export class UserService {
@@ -43,4 +48,50 @@ export class UserService {
               .map((res: Response) => res.json())
               .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
      }
+
+     getUsers(): Observable<ListUser[]> {
+        return this.http.get(this.urlService.getUrlUsers(), this.opts)
+           .map((res: Response) => res.json())
+           .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+     }
+
+     getUserById(id: number): Observable<ListUser> {
+        return this.http.get(this.urlService.getUrlUserById(id), this.opts)
+           .map((res: Response) => res.json())
+           .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+     }
+
+     public createDataUser(userData: AddUsers): Observable<boolean>{
+        return this.http.post(this.urlService.postUrlAddUser(),userData, this.opts)
+        .map(this.extractData)
+        .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+     }
+
+     getGrades(): Observable<ListGrade[]> {
+        return this.http.get(this.urlService.getUrlGrade(), this.opts)
+           .map((res: Response) => res.json())
+           .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+     }
+
+     getLocations(): Observable<ListLocation[]> {
+        return this.http.get(this.urlService.getUrlLocation(), this.opts)
+           .map((res: Response) => res.json())
+           .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+     }
+
+     public editDataActiveUser(employeeId:number, active: AddActive): Observable<boolean>{
+
+        return this.http.post(this.urlService.postUrlEditActiveUser(employeeId),active, this.opts)
+        .map(this.extractData)
+        .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+     }
+     public editDataRolesUser(employeeId:number, roles: AddRole[]): Observable<boolean>{
+        return this.http.post(this.urlService.postUrlEditRolesUser(employeeId),roles, this.opts)
+        .map(this.extractData)
+        .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+     }
+     private extractData(res:Response) {
+        let body = res.json();
+        return body || [];
+     } 
 }

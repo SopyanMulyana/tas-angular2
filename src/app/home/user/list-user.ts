@@ -2,9 +2,10 @@ export interface ListUser {
     employeeId: number,
     fullName: string,
     email: string,
-    jobFamily: string,
+    jobFamilyStream: string,
     grade: string,
     accountName: string,
-    active: string,
-    role: string
+    active: boolean,
+    role: number[],
+    location: string
 }
