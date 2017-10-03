@@ -19,6 +19,7 @@ export class EditPeriodListComponent implements OnInit{
   finalData;
   currentData: any={};
   result;
+  activeRole;
   addPeriodFormControl = new FormControl('', [
     Validators.required
   ]);
@@ -29,7 +30,9 @@ export class EditPeriodListComponent implements OnInit{
   private sub: any;
 
   constructor(private route: ActivatedRoute, private periodService: PeriodService, private router: Router) {
-
+    this.activeRole = localStorage.getItem('activeRole');
+    if (this.activeRole!=1)
+    { router.navigate(['/home']);}
   }
   ngOnInit() {
     // edit period

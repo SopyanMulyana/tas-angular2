@@ -23,9 +23,12 @@ export class EligibleParticipantsComponent implements OnInit{
   //  }
   trainingId: number;
   private sub: any;
+  activeRole;
 
   constructor(public addEligible: MdDialog, public deleteEligible: MdDialog, private route: ActivatedRoute, private periodService: PeriodService, private router: Router) {
-
+    this.activeRole = localStorage.getItem('activeRole');
+    if (this.activeRole!=1)
+    { router.navigate(['/home']);}
   }
   ngOnInit() {
     // edit period

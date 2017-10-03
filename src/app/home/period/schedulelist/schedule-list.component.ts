@@ -27,9 +27,12 @@ export class ScheduleListComponent implements OnInit{
   trainingId: number;
   periodical: boolean;
   private sub: any;
+  activeRole;
 
   constructor(public addCourse: MdDialog, public deleteCourse: MdDialog, public detailCourse: MdDialog, public enrollParicipants: MdDialog, public editSchedule: MdDialog, private route: ActivatedRoute, private periodService: PeriodService, private router: Router) {
-
+    this.activeRole = localStorage.getItem('activeRole');
+    if (this.activeRole!=1)
+    { router.navigate(['/home']);}
   }
   ngOnInit() {
     // edit period

@@ -8,9 +8,9 @@ export class EmployeeService {
    constructor(private http: Http, private urlUsers: UrlService) {
    }
  
-   getEmployees(): Observable<Employee[]> {
-      return this.http.get(this.urlUsers.getUrlEmployee())
-         .map((res: Response) => res.json())
-         .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-   }
+//    getEmployees(): Observable<Employee[]> {
+//       return this.http.get(this.urlUsers.getUrlEmployee())
+//          .map((res: Response) => res.json())
+//          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+//    }
 }

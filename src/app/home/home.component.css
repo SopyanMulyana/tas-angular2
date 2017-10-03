@@ -42,3 +42,14 @@ md-sidenav-container {
   width: 150px;
   text-align: left;
 }
+.white {
+  color: white;
+  
+}
+.button-roles {
+  width: 150px;
+  text-align: left;
+}
+/deep/ .mat-menu-content {
+  width:150px;
+}
