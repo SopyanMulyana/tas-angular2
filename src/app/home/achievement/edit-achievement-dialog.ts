@@ -33,7 +33,7 @@ import { Observable } from 'rxjs/Observable';
     }
     saveAchievement(){
       //code here
-      alert();
+      alert("test");
     }
 
   }
