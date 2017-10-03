@@ -51,6 +51,7 @@ import { ListUserService } from "./services/list-user.service";
 import { PeriodService } from "./services/period.service";
 import { EnrollmentService } from "./services/enrollment.service";
 import { AchievementService } from "./services/achievement.service";
+import { MaintenanceService } from "./services/maintenance.service";
 import { UrlService } from './services/url.service';
 // used to create fake backend
 // import { fakeBackendProvider } from './fakebackend';
@@ -110,6 +111,7 @@ import { UrlService } from './services/url.service';
     PeriodService,
     EnrollmentService,
     AchievementService,
+    MaintenanceService,
     UrlService
   ],
   bootstrap: [AppComponent],

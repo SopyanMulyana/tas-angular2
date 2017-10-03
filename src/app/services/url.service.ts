@@ -121,6 +121,10 @@ export class UrlService {
         return "http://mtpc583:8080/api/secure/achievement";
     }
 
+    getUrlMaintenancetList(id: number): string {
+        return "http://mtpc583:8080/api/secure/maintenance/"+id; //bener belum ya?
+    }
+
    getUrlActiveTraining(): string {
        return null;
    }
