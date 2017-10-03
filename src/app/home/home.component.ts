@@ -12,6 +12,7 @@ export class HomeComponent {
   fullName;
   userRole;
   activeRole;
+  currentRole:string;
   roles: Role[] = [];
   constructor (private authenticationService: AuthenticationService,
                 private router: Router, public dialog: MdDialog){ 
@@ -19,6 +20,16 @@ export class HomeComponent {
                   this.fullName = user.fullName;
                   this.userRole = user.role;
                   this.activeRole = localStorage.getItem('activeRole');
+                  
+                  if (this.activeRole==1)
+                  { this.currentRole="Administrator";}
+                  else if (this.activeRole==2)
+                  { this.currentRole="Trainer";}
+                  else if (this.activeRole==3)
+                  { this.currentRole="Manager";}
+                  else if (this.activeRole==4)
+                  { this.currentRole="Participants";}
+                  console.log(this.currentRole);
 
                   for (let i = 0; i <= this.userRole.length; i++) { 
                    if (this.userRole[i]==1)

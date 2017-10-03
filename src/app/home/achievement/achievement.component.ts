@@ -9,8 +9,8 @@ import { ListUserService } from "../../services/list-user.service";
 export class AchievementComponent implements OnInit {
   users;
   constructor(private listUserService: ListUserService) {
-    console.log(listUserService.getUsers());
-    this.users = listUserService.getUsers();
+    // console.log(listUserService.getUsers());
+    // this.users = listUserService.getUsers();
   }
 
   ngOnInit() {

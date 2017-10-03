@@ -4,6 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
@@ -26,7 +27,12 @@ declare var $:any;
 export class UserComponent{
   userRole;
   users;
-  constructor(public addUser: MdDialog, public editUser: MdDialog, public userService: UserService) { }
+  activeRole;
+  constructor(public addUser: MdDialog, public editUser: MdDialog, public userService: UserService, private router: Router) {
+    this.activeRole = localStorage.getItem('activeRole');
+    if (this.activeRole!=1)
+    { router.navigate(['/home']);}
+   }
   
 
   ngOnInit(listUserService: UserService) {
