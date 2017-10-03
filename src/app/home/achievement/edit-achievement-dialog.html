@@ -1,0 +1,82 @@
+<h1 md-dialog-title>Class Assesment Result - Detail</h1>
+<div>
+  <form>
+    <span class="category">Begining</span><span><md-select [(ngModel)]='currentAchievement.begining' [ngModelOptions]="{standalone: true}">
+            <md-option *ngFor="let thing of things" [value]="thing.value">
+              {{ thing.viewValue }}
+            </md-option>
+          </md-select></span><br>
+    <span class="category">LI 1</span><span><md-select [(ngModel)]='currentAchievement.li1' [ngModelOptions]="{standalone: true}">
+      <md-option *ngFor="let thing of things" [value]="thing.value">
+        {{ thing.viewValue }}
+      </md-option>
+    </md-select></span><br>
+    <span class="category"></span><span><md-select>
+      <md-option *ngFor="let thing of things" [value]="thing.value">
+        {{ thing.viewValue }}
+      </md-option>
+    </md-select></span><br>
+    <span class="category">LI 2</span><span><md-select [(ngModel)]='currentAchievement.li2' [ngModelOptions]="{standalone: true}">
+    <md-option *ngFor="let thing of things" [value]="thing.value">
+      {{ thing.viewValue }}
+    </md-option>
+    </md-select></span><br>
+    <span class="category"></span><span><md-select>
+      <md-option *ngFor="let thing of things" [value]="thing.value">
+        {{ thing.viewValue }}
+      </md-option>
+    </md-select></span><br>
+    <span class="category">Int 1</span><span><md-select [(ngModel)]='currentAchievement.int1' [ngModelOptions]="{standalone: true}">
+    <md-option *ngFor="let thing of things" [value]="thing.value">
+    {{ thing.viewValue }}
+    </md-option>
+    </md-select></span><br>
+    <span class="category"></span><span><md-select>
+      <md-option *ngFor="let thing of things" [value]="thing.value">
+        {{ thing.viewValue }}
+      </md-option>
+    </md-select></span><br>
+    <span class="category">Int 2</span><span><md-select [(ngModel)]='currentAchievement.int2' [ngModelOptions]="{standalone: true}">
+    <md-option *ngFor="let thing of things" [value]="thing.value">
+    {{ thing.viewValue }}
+    </md-option>
+    </md-select></span><br>
+    <span class="category"></span><span><md-select>
+      <md-option *ngFor="let thing of things" [value]="thing.value">
+        {{ thing.viewValue }}
+      </md-option>
+    </md-select></span><br>
+    <span class="category">BW 1</span><span><md-select [(ngModel)]='currentAchievement.bw1' [ngModelOptions]="{standalone: true}">
+    <md-option *ngFor="let thing of things" [value]="thing.value">
+    {{ thing.viewValue }}
+    </md-option>
+    </md-select></span><br>
+    <span class="category">CE 1</span><span><md-select [(ngModel)]='currentAchievement.ce1' [ngModelOptions]="{standalone: true}">
+      <md-option *ngFor="let thing of things" [value]="thing.value">
+        {{ thing.viewValue }}
+      </md-option>
+    </md-select></span><br>
+    <span class="category">BW 2</span><span><md-select [(ngModel)]='currentAchievement.bw2' [ngModelOptions]="{standalone: true}">
+    <md-option *ngFor="let thing of things" [value]="thing.value">
+    {{ thing.viewValue }}
+    </md-option>
+    </md-select></span><br>
+    <span class="category">CE 2</span><span><md-select [(ngModel)]='currentAchievement.ce2' [ngModelOptions]="{standalone: true}">
+      <md-option *ngFor="let thing of things" [value]="thing.value">
+        {{ thing.viewValue }}
+      </md-option>
+    </md-select></span><br>
+    <span class="category">Presentation Skill</span><span><md-select [(ngModel)]='currentAchievement.presentationSkill' [ngModelOptions]="{standalone: true}">
+    <md-option *ngFor="let thing of things" [value]="thing.value">
+    {{ thing.viewValue }}
+    </md-option>
+    </md-select></span><br>
+    <!-- <span class="category">Training Name</span><span>{{currentAchievement.trainingName}}</span><br>
+    <span class="category">Course Name</span><span>{{currentAchievement.courseName}}</span><br>
+    <span class="category">Trainer</span><span>{{currentAchievement.trainerName}}</span><br>
+    <span class="category">Start at</span><span>{{currentAchievement.startAt}}</span><br>
+    <span class="category">End at</span><span>{{currentAchievement.endAt}}</span><br> -->
+    <button md-raised-button color="accent" (click)="saveSchedule()">Save</button>
+    <button md-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+  </form>
+</div>
