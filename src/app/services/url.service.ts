@@ -117,10 +117,6 @@ export class UrlService {
         return "http://mtpc583:8080/api/secure/enrollment";
     }
 
-    getUrlAchievementList(): string {
-        return "http://mtpc583:8080/api/secure/achievement";
-    }
-
    getUrlActiveTraining(): string {
        return null;
    }
@@ -129,5 +125,9 @@ export class UrlService {
        return null;
    }
 
+   
 
+   getUrlAchievement(): string {
+       return null;
+   }
 }

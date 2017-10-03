@@ -38,8 +38,6 @@ import { EditUserDialog } from "./home/user/edit-user-dialog.component";
 import { EnrollmentComponent } from './home/enrollment/enrollment.component';
 import { DetailEnrollmentDialog } from './home/enrollment/detail-enrollment';
 import { AchievementComponent } from './home/achievement/achievement.component';
-import { EditAchievementDialog } from "./home/achievement/edit-achievement-dialog";
-import { DetailAchievementDialog } from "./home/achievement/detail-achievement-dialog";
 import { MaintenanceComponent } from './home/maintenance/maintenance.component';
 import { AlertComponent } from './alert.component';
 
@@ -50,7 +48,6 @@ import { AlertService } from './services/alert.service';
 import { ListUserService } from "./services/list-user.service";
 import { PeriodService } from "./services/period.service";
 import { EnrollmentService } from "./services/enrollment.service";
-import { AchievementService } from "./services/achievement.service";
 import { UrlService } from './services/url.service';
 // used to create fake backend
 // import { fakeBackendProvider } from './fakebackend';
@@ -82,8 +79,6 @@ import { UrlService } from './services/url.service';
     EnrollmentComponent,
     DetailEnrollmentDialog,
     AchievementComponent,
-    EditAchievementDialog,
-    DetailAchievementDialog,
     MaintenanceComponent,
     AlertComponent,
     DetailDialog,
@@ -109,7 +104,6 @@ import { UrlService } from './services/url.service';
     ListUserService,
     PeriodService,
     EnrollmentService,
-    AchievementService,
     UrlService
   ],
   bootstrap: [AppComponent],
@@ -117,7 +111,7 @@ import { UrlService } from './services/url.service';
     AddPeriodDialog, DeletePeriodDialog,
     AddUserDialog, EditUserDialog, ChangeRoleDialog, AddEligibleDialog,
     DeleteEligibleDialog, DeleteCourseDialog, AddCourseDialog, DetailDialog, AddEnrollDialog,
-    EditScheduleDialog, DetailEnrollmentDialog, EditAchievementDialog, DetailAchievementDialog
+    EditScheduleDialog, DetailEnrollmentDialog
   ]
 })
 export class AppModule { }
