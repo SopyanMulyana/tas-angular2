@@ -1,0 +1,106 @@
+<h1 md-dialog-title>Attendance: {{courseName}}<br>{{courseDate}}</h1>
+
+
+<div *ngIf="isAssessment==false">
+
+        <md-table  #table [dataSource]="dataSource" >
+            
+  
+          <ng-container mdColumnDef="employeeName">
+            <md-header-cell *mdHeaderCellDef > Full Name </md-header-cell>
+            <md-cell *mdCellDef="let row"> {{row.employeeName}} </md-cell>
+          </ng-container>
+  
+          <ng-container mdColumnDef="status">
+            <md-header-cell *mdHeaderCellDef > Account Name </md-header-cell>
+            <md-cell *mdCellDef="let row">
+                <!-- <md-select  [(ngModel)]="statusAttendance[row.id]" >
+              <md-option *ngFor="let status of statuss"  [value]="status.value">
+                  {{ status.viewValue }}
+                </md-option>
+              </md-select> -->
+              <button *ngIf="statusAttendanceText[row.id]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole">Select </button>
+              <button *ngIf="statusAttendanceText[row.id]=='Present'" md-raised-button color="accent" class="white" [mdMenuTriggerFor]="menuRole">{{statusAttendanceText[row.id]}}</button>
+              <button *ngIf="statusAttendanceText[row.id]=='Drop Out'" md-raised-button color="warn" class="white" [mdMenuTriggerFor]="menuRole">{{statusAttendanceText[row.id]}}</button>
+              <button *ngIf="statusAttendanceText[row.id]!='Present' && statusAttendanceText[row.id]!='Drop Out'" md-raised-button class="white" [mdMenuTriggerFor]="menuRole">{{statusAttendanceText[row.id]}}</button>
+              
+              <md-menu #menuRole="mdMenu" >
+                      <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                      <button md-button *ngFor="let status of statuss" class="button-roles " (click)="changeStatus(row.id,status.value)" > {{ status.viewValue }}</button>
+                  </md-menu>
+            </md-cell>
+          </ng-container>
+          <!-- | date:'M/d/yyyy' -->
+          
+          <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+          <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+        </md-table>
+
+</div>
+<div *ngIf="isAssessment==true">
+    <md-table  #table [dataSource]="assessmentdataSource" >
+        <!-- <ng-container mdColumnDef="action">
+            <md-header-cell *mdHeaderCellDef></md-header-cell>
+            <md-cell *mdCellDef="let row">
+            <md-checkbox (click)="$event.stopPropagation()"
+            (change)="$event ? selection.toggle(row.id) : null"
+            [checked]="selection.isSelected(row.id)"></md-checkbox>
+            </md-cell>
+    </ng-container>  -->
+
+      <ng-container mdColumnDef="employeeName">
+        <md-header-cell *mdHeaderCellDef > Full Name </md-header-cell>
+        <md-cell *mdCellDef="let row"> {{row.employeeName}} </md-cell>
+      </ng-container>
+
+      <ng-container mdColumnDef="status">
+        <md-header-cell *mdHeaderCellDef > Account Name </md-header-cell>
+        <md-cell *mdCellDef="let row">
+            <!-- <md-select  [(ngModel)]="statusAttendance[row.id]" >
+          <md-option *ngFor="let status of statuss"  [value]="status.value">
+              {{ status.viewValue }}
+            </md-option>
+          </md-select> -->
+          <button *ngIf="statusAssessmentText[row.id]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole">Select </button>
+          <button *ngIf="statusAssessmentText[row.id]=='Passed'" md-raised-button color="accent" class="white" [mdMenuTriggerFor]="menuRole">{{statusAssessmentText[row.id]}}</button>
+          <button *ngIf="statusAssessmentText[row.id]=='Failed'" md-raised-button color="warn" class="white" [mdMenuTriggerFor]="menuRole">{{statusAssessmentText[row.id]}}</button>
+          
+          
+          <md-menu #menuRole="mdMenu" >
+                  <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                  <button md-button *ngFor="let status of statuss" class="button-roles " (click)="changeStatus(row.id,status.value)" > {{ status.viewValue }}</button>
+              </md-menu>
+        </md-cell>
+      </ng-container>
+      <!-- | date:'M/d/yyyy' -->
+      
+      <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+      <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+    </md-table>
+</div>
+        
+  
+<div class="buffer"></div>
+<button md-raised-button color="accent" (click)="saveValue()">Save</button>
+<button md-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+
+  
+
+<!-- <h2 md-dialog-title>{{courseDate}}</h2> -->
+<!-- <div>
+    <form >
+    <table class="example-full-width">
+        <thead><td class="category">Employee Name</td><td>Status</td></thead>
+        <tr *ngFor="let element of currentData">
+            <td>{{element.employeeName}}</td><td><md-select #select="mdSelect" [(ngModel)]="statusAttendance" [ngModelOptions]="{standalone: true}">
+                <md-select-trigger>You have selected: {{ select.selected?.viewValue }}</md-select-trigger>
+                <md-option *ngFor="let status of statuss" [value]="status.value">
+                  {{ status.viewValue }}
+                </md-option>
+              </md-select></td>
+        </tr>
+    </table>
+    <button md-raised-button color="accent" (click)="saveAttendance()">Save Attendance</button>
+    <button md-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+</form>
+</div> -->

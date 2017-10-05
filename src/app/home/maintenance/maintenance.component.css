@@ -1,0 +1,21 @@
+.buffer {
+    height: 15px;
+}
+.center {
+    text-align: center;
+}
+.button-for-element {
+    width: 100%
+}
+.example-full-width {
+    width: 100%;
+}
+.category {
+    display: inline-block;
+    width: 30%;
+    font-weight: bold;
+}
+.button-roles {
+    width: 160px;
+    text-align: left;
+}

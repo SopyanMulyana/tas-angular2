@@ -1,0 +1,4 @@
+<h1 md-dialog-title>Attendance: {{courseName}}</h1>
+<div *ngFor="let element of currentData" class="center">
+    <button md-button  color="accent" class="button-for-element" [md-dialog-close]="element.scheduleId">{{element.dateAndTime}}</button>
+</div>

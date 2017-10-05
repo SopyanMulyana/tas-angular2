@@ -47,9 +47,9 @@ md-sidenav-container {
   
 }
 .button-roles {
-  width: 150px;
+  width: 160px;
   text-align: left;
 }
 /deep/ .mat-menu-content {
-  width:150px;
+  width:160px;
 }

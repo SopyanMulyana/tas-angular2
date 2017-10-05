@@ -121,6 +121,30 @@ export class UrlService {
         return "http://mtpc583:8080/api/secure/achievement";
     }
 
+    getUrlMaintenancetList(activeRole: number): string {
+        return "http://mtpc583:8080/api/secure/maintenance/"+activeRole; 
+    }
+
+    getUrlAttendanceList(id:number): string {
+        return "http://mtpc583:8080/api/secure/maintenance/"+id+"/attendance/";
+    }
+
+    getUrlListPersonForAttendance(coursePeriodId:number, scheduleId: number): string {
+        return "http://mtpc583:8080/api/secure/maintenance/"+coursePeriodId+"/attendance/"+scheduleId;
+    }
+
+    postUrlEditAttendance(coursePeriodId:number, scheduleId: number): string {
+        return "http://mtpc583:8080/api/secure/maintenance/"+coursePeriodId+"/attendance/"+scheduleId+"/edit";
+    }
+
+    getUrlListPersonForAssessment(coursePeriodId:number): string {
+        return "http://mtpc583:8080/api/secure/maintenance/"+coursePeriodId+"/assessment/";
+    }
+
+    postUrlEditAssessment(coursePeriodId:number): string {
+        return "http://mtpc583:8080/api/secure/maintenance/"+coursePeriodId+"/assessment/edit";
+    }
+    
    getUrlActiveTraining(): string {
        return null;
    }
