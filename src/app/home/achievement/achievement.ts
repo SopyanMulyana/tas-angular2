@@ -13,5 +13,15 @@ export interface ListAchievement {
     ce1: string;
     bw2: string;
     ce2: string;
-    presentationSkill: string;
+    presentationSkill: number;
+    beginingId: number;
+    li1Id: number;
+    li2Id: number;
+    int1Id: number;
+    int2Id: number;
+    bw1Id: number;
+    ce1Id: number;
+    bw2Id: number;
+    ce2Id: number;
+    presentationSkillId: number;
 }

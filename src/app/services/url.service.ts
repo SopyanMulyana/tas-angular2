@@ -102,7 +102,7 @@ export class UrlService {
    } 
 
    postEditCourse(idTraining:number, idCourse:number): string {
-    return "http://mtpc583:8080/api/secure/period/"+idTraining+"/course/"+idCourse+"/edit"; //dummy
+    return "http://mtpc583:8080/api/secure/period/"+idTraining+"/course/"+idCourse+"/edit"; 
     }
 
    getUrlListUserForEnrollParticipants(idTraining:number, idCourse:number): string {
@@ -117,8 +117,12 @@ export class UrlService {
         return "http://mtpc583:8080/api/secure/enrollment";
     }
 
-    getUrlAchievementList(): string {
-        return "http://mtpc583:8080/api/secure/achievement";
+    getUrlAchievementList(idRole:number): string {
+        return "http://mtpc583:8080/api/secure/achievement/"+idRole;
+    }
+
+    postUrlEditAchievement(idUser:number): string {
+        return "http://mtpc583:8080/api/secure/achievement/"+idUser+"/edit";
     }
 
     getUrlMaintenancetList(activeRole: number): string {
@@ -146,12 +150,13 @@ export class UrlService {
     }
     
    getUrlActiveTraining(): string {
-       return null;
+        return "http://mtpc583:8080/api/secure/dashboard/active";
    }
 
    getUrlBCCShedule(): string {
-       return null;
+        return "http://mtpc583:8080/api/secure/dashboard/bcc";
    }
+   
 
 
 }

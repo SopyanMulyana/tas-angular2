@@ -144,6 +144,7 @@ export class EditAttendanceDialog implements OnInit{
 
   }
  changeStatus(id:number,statusValue:number){
+   
    if (this.isAssessment==true) {
         if (statusValue==1) {
           this.statusAssessmentId[id]=true;

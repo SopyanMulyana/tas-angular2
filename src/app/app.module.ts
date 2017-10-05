@@ -54,6 +54,7 @@ import { PeriodService } from "./services/period.service";
 import { EnrollmentService } from "./services/enrollment.service";
 import { AchievementService } from "./services/achievement.service";
 import { MaintenanceService } from "./services/maintenance.service";
+import { DashboardService } from "./services/dashboard.service";
 import { UrlService } from './services/url.service';
 // used to create fake backend
 // import { fakeBackendProvider } from './fakebackend';
@@ -116,6 +117,7 @@ import { UrlService } from './services/url.service';
     EnrollmentService,
     AchievementService,
     MaintenanceService,
+    DashboardService,
     UrlService
   ],
   bootstrap: [AppComponent],

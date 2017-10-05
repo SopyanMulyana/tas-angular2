@@ -2,12 +2,11 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response, RequestOptionsArgs } from '@angular/http';
 import { UrlService } from './url.service';
 import { Observable } from 'rxjs/Rx';
-import { ListAchievement } from "../home/achievement/achievement";
-import { PostAchievement } from "../home/achievement/achievement-post";
-
+import { ActiveTraining } from "../home/dashboard/active-training";
+import { BCCSchedule } from "../home/dashboard/bcc-schedule";
 
 @Injectable()
-export class AchievementService {
+export class DashboardService {
     token = localStorage.getItem('token')
     headers = new Headers();
     opts: RequestOptionsArgs;
@@ -21,17 +20,17 @@ export class AchievementService {
        this.opts = { headers : this.headers };
     }
 
-    getAchievementList(idRole:number): Observable<ListAchievement[]> {
-        return this.http.get(this.urlService.getUrlAchievementList(idRole), this.opts)
+    getActiveTrainingList(): Observable<ActiveTraining[]> {
+        return this.http.get(this.urlService.getUrlActiveTraining(), this.opts)
               .map((res: Response) => res.json())
               .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
      }
 
-     public editAchievement(id: number, achievement: PostAchievement[]): Observable<boolean>{
-        return this.http.post(this.urlService.postUrlEditAchievement(id),achievement, this.opts)
-        .map(this.extractData)
-        .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-     }
+    getBCCScheduleList(): Observable<BCCSchedule[]> {
+    return this.http.get(this.urlService.getUrlBCCShedule(), this.opts)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
     
      private extractData(res:Response) {
         let body = res.json();

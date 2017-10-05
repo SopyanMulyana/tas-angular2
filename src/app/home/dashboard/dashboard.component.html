@@ -31,7 +31,7 @@
 
                 <ng-container mdColumnDef="trainingLocation">
                     <md-header-cell *mdHeaderCellDef> Training Location </md-header-cell>
-                    <md-cell *mdCellDef="let activeTraining"> {{activeTraining.trainingLocation}} </md-cell>
+                    <md-cell *mdCellDef="let activeTraining"> {{activeTraining.location}} </md-cell>
                 </ng-container>
             
                 <md-header-row *mdHeaderRowDef="activeTrainingColumns"></md-header-row>
@@ -46,7 +46,7 @@
     <md-card>
         <md-card-title>BCC Schedule</md-card-title>
         <md-card-content>
-            <md-table [dataSource]="BCCDataSource">
+            <md-table [dataSource]="bccdataSource">
                 
                 <ng-container mdColumnDef="trainerName">
                     <md-header-cell *mdHeaderCellDef> Trainer Name </md-header-cell>

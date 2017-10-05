@@ -1,82 +1,186 @@
 <h1 md-dialog-title>Class Assesment Result - Detail</h1>
 <div>
-  <form>
-    <span class="category">Begining</span><span><md-select [(ngModel)]='currentAchievement.begining' [ngModelOptions]="{standalone: true}">
-            <md-option *ngFor="let thing of things" [value]="thing.value">
-              {{ thing.viewValue }}
-            </md-option>
-          </md-select></span><br>
-    <span class="category">LI 1</span><span><md-select [(ngModel)]='currentAchievement.li1' [ngModelOptions]="{standalone: true}">
-      <md-option *ngFor="let thing of things" [value]="thing.value">
-        {{ thing.viewValue }}
-      </md-option>
-    </md-select></span><br>
-    <span class="category"></span><span><md-select>
-      <md-option *ngFor="let thing of things" [value]="thing.value">
-        {{ thing.viewValue }}
-      </md-option>
-    </md-select></span><br>
-    <span class="category">LI 2</span><span><md-select [(ngModel)]='currentAchievement.li2' [ngModelOptions]="{standalone: true}">
-    <md-option *ngFor="let thing of things" [value]="thing.value">
-      {{ thing.viewValue }}
-    </md-option>
-    </md-select></span><br>
-    <span class="category"></span><span><md-select>
-      <md-option *ngFor="let thing of things" [value]="thing.value">
-        {{ thing.viewValue }}
-      </md-option>
-    </md-select></span><br>
-    <span class="category">Int 1</span><span><md-select [(ngModel)]='currentAchievement.int1' [ngModelOptions]="{standalone: true}">
-    <md-option *ngFor="let thing of things" [value]="thing.value">
-    {{ thing.viewValue }}
-    </md-option>
-    </md-select></span><br>
-    <span class="category"></span><span><md-select>
-      <md-option *ngFor="let thing of things" [value]="thing.value">
-        {{ thing.viewValue }}
-      </md-option>
-    </md-select></span><br>
-    <span class="category">Int 2</span><span><md-select [(ngModel)]='currentAchievement.int2' [ngModelOptions]="{standalone: true}">
-    <md-option *ngFor="let thing of things" [value]="thing.value">
-    {{ thing.viewValue }}
-    </md-option>
-    </md-select></span><br>
-    <span class="category"></span><span><md-select>
-      <md-option *ngFor="let thing of things" [value]="thing.value">
-        {{ thing.viewValue }}
-      </md-option>
-    </md-select></span><br>
-    <span class="category">BW 1</span><span><md-select [(ngModel)]='currentAchievement.bw1' [ngModelOptions]="{standalone: true}">
-    <md-option *ngFor="let thing of things" [value]="thing.value">
-    {{ thing.viewValue }}
-    </md-option>
-    </md-select></span><br>
-    <span class="category">CE 1</span><span><md-select [(ngModel)]='currentAchievement.ce1' [ngModelOptions]="{standalone: true}">
-      <md-option *ngFor="let thing of things" [value]="thing.value">
-        {{ thing.viewValue }}
-      </md-option>
-    </md-select></span><br>
-    <span class="category">BW 2</span><span><md-select [(ngModel)]='currentAchievement.bw2' [ngModelOptions]="{standalone: true}">
-    <md-option *ngFor="let thing of things" [value]="thing.value">
-    {{ thing.viewValue }}
-    </md-option>
-    </md-select></span><br>
-    <span class="category">CE 2</span><span><md-select [(ngModel)]='currentAchievement.ce2' [ngModelOptions]="{standalone: true}">
-      <md-option *ngFor="let thing of things" [value]="thing.value">
-        {{ thing.viewValue }}
-      </md-option>
-    </md-select></span><br>
-    <span class="category">Presentation Skill</span><span><md-select [(ngModel)]='currentAchievement.presentationSkill' [ngModelOptions]="{standalone: true}">
-    <md-option *ngFor="let thing of things" [value]="thing.value">
-    {{ thing.viewValue }}
-    </md-option>
-    </md-select></span><br>
-    <!-- <span class="category">Training Name</span><span>{{currentAchievement.trainingName}}</span><br>
-    <span class="category">Course Name</span><span>{{currentAchievement.courseName}}</span><br>
-    <span class="category">Trainer</span><span>{{currentAchievement.trainerName}}</span><br>
-    <span class="category">Start at</span><span>{{currentAchievement.startAt}}</span><br>
-    <span class="category">End at</span><span>{{currentAchievement.endAt}}</span><br> -->
-    <button md-raised-button color="accent" (click)="saveSchedule()">Save</button>
+    <span class="category">Begining</span>
+    <span class="category2">
+          <button *ngIf="termText[1]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole1">Select </button>
+          <button *ngIf="termText[1]!=null" color="primary" md-raised-button class="white" [mdMenuTriggerFor]="menuRole1">{{termText[1]}} </button>
+          <md-menu #menuRole1="mdMenu" >
+                  <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                  <button md-button *ngFor="let thing of things" class="button-roles " (click)="changeValue(1,thing.value,thing.viewValue)" >{{ thing.viewValue }}</button>
+              </md-menu>
+    </span>
+    <span *ngIf="termText[1]=='Term'">
+        <button *ngIf="periodText[1]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole1">Select </button>
+        <button *ngIf="periodText[1]!=null" color="accent" md-raised-button class="white" [mdMenuTriggerFor]="menuRole1">{{periodText[1]}} </button>
+        <md-menu #menuRole1="mdMenu" >
+                <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                <button md-button *ngFor="let thing of periods" class="button-roles " (click)="changeValuePeriod(1,thing.trainingPeriodId,thing.trainingName)" >{{ thing.trainingName }}</button>
+         </md-menu>
+    </span>
+    <br>
+    <span class="category">LI 1</span>
+    <span class="category2">
+        <button *ngIf="termText[2]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole2">Select </button>
+        <button *ngIf="termText[2]!=null" color="primary" md-raised-button class="white" [mdMenuTriggerFor]="menuRole2">{{termText[2]}} </button>
+        <md-menu #menuRole2="mdMenu" >
+                <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                <button md-button *ngFor="let thing of things" class="button-roles " (click)="changeValue(2,thing.value,thing.viewValue)" >{{ thing.viewValue }}</button>
+            </md-menu>
+    </span>
+    <span *ngIf="termText[2]=='Term'">
+        <button *ngIf="periodText[2]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole1">Select </button>
+        <button *ngIf="periodText[2]!=null" color="accent" md-raised-button class="white" [mdMenuTriggerFor]="menuRole2">{{periodText[2]}} </button>
+        <md-menu #menuRole2="mdMenu" >
+                <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                <button md-button *ngFor="let thing of periods" class="button-roles " (click)="changeValuePeriod(2,thing.trainingPeriodId,thing.trainingName)" >{{ thing.trainingName }}</button>
+         </md-menu>
+    </span>
+    <br>
+    <span class="category">LI 2</span>
+    <span class="category2">
+          <button *ngIf="termText[3]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole3">Select </button>
+          <button *ngIf="termText[3]!=null" color="primary" md-raised-button class="white" [mdMenuTriggerFor]="menuRole3">{{termText[3]}} </button>
+          <md-menu #menuRole3="mdMenu" >
+                  <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                  <button md-button *ngFor="let thing of things" class="button-roles " (click)="changeValue(3,thing.value,thing.viewValue)" >{{ thing.viewValue }}</button>
+              </md-menu>
+    </span>
+    <span *ngIf="termText[3]=='Term'">
+        <button *ngIf="periodText[3]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole3">Select </button>
+        <button *ngIf="periodText[3]!=null" color="accent" md-raised-button class="white" [mdMenuTriggerFor]="menuRole3">{{periodText[3]}} </button>
+        <md-menu #menuRole3="mdMenu" >
+                <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                <button md-button *ngFor="let thing of periods" class="button-roles " (click)="changeValuePeriod(3,thing.trainingPeriodId,thing.trainingName)" >{{ thing.trainingName }}</button>
+         </md-menu>
+    </span>
+    <br>
+    <span class="category">Int 1</span>
+    <span class="category2">
+    <button *ngIf="termText[4]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole4">Select </button>
+    <button *ngIf="termText[4]!=null" color="primary" md-raised-button class="white" [mdMenuTriggerFor]="menuRole4">{{termText[4]}} </button>
+    <md-menu #menuRole4="mdMenu" >
+            <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+            <button md-button *ngFor="let thing of things" class="button-roles " (click)="changeValue(4,thing.value,thing.viewValue)" >{{ thing.viewValue }}</button>
+        </md-menu>
+    </span>
+    <span *ngIf="termText[4]=='Term'">
+        <button *ngIf="periodText[4]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole4">Select </button>
+        <button *ngIf="periodText[4]!=null" color="accent" md-raised-button class="white" [mdMenuTriggerFor]="menuRole4">{{periodText[4]}} </button>
+        <md-menu #menuRole4="mdMenu" >
+                <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                <button md-button *ngFor="let thing of periods" class="button-roles " (click)="changeValuePeriod(4,thing.trainingPeriodId,thing.trainingName)" >{{ thing.trainingName }}</button>
+         </md-menu>
+    </span>
+    <br>
+    <span class="category">Int 2</span>
+    <span class="category2">
+          <button *ngIf="termText[5]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole5">Select </button>
+          <button *ngIf="termText[5]!=null" color="primary" md-raised-button class="white" [mdMenuTriggerFor]="menuRole5">{{termText[5]}} </button>
+          <md-menu #menuRole5="mdMenu" >
+                  <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                  <button md-button *ngFor="let thing of things" class="button-roles " (click)="changeValue(5,thing.value,thing.viewValue)" >{{ thing.viewValue }}</button>
+              </md-menu>
+    </span>
+    <span *ngIf="termText[5]=='Term'">
+        <button *ngIf="periodText[5]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole5">Select </button>
+        <button *ngIf="periodText[5]!=null" color="accent" md-raised-button class="white" [mdMenuTriggerFor]="menuRole5">{{periodText[5]}} </button>
+        <md-menu #menuRole5="mdMenu" >
+                <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                <button md-button *ngFor="let thing of periods" class="button-roles " (click)="changeValuePeriod(5,thing.trainingPeriodId,thing.trainingName)" >{{ thing.trainingName }}</button>
+         </md-menu>
+    </span>
+    <br>
+    <span class="category">BW 1</span>
+    <span class="category2">
+    <button *ngIf="termText[6]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole6">Select </button>
+    <button *ngIf="termText[6]!=null" color="primary" md-raised-button class="white" [mdMenuTriggerFor]="menuRole6">{{termText[6]}} </button>
+    <md-menu #menuRole6="mdMenu" >
+            <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+            <button md-button *ngFor="let thing of things"  class="button-roles " (click)="changeValue(6,thing.value,thing.viewValue)" >{{ thing.viewValue }}</button>
+        </md-menu>
+    </span>
+    <span *ngIf="termText[6]=='Term'">
+        <button *ngIf="periodText[6]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole6">Select </button>
+        <button *ngIf="periodText[6]!=null" color="accent" md-raised-button class="white" [mdMenuTriggerFor]="menuRole6">{{periodText[6]}} </button>
+        <md-menu #menuRole6="mdMenu" >
+                <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                <button md-button *ngFor="let thing of periods" class="button-roles " (click)="changeValuePeriod(6,thing.trainingPeriodId,thing.trainingName)" >{{ thing.trainingName }}</button>
+         </md-menu>
+    </span>
+    <br>
+    <span class="category">CE 1</span>
+    <span class="category2">
+          <button *ngIf="termText[7]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole7">Select </button>
+          <button *ngIf="termText[7]!=null" color="primary" md-raised-button class="white" [mdMenuTriggerFor]="menuRole7">{{termText[7]}} </button>
+          <md-menu #menuRole7="mdMenu" >
+                  <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                  <button md-button *ngFor="let thing of things" class="button-roles " (click)="changeValue(7,thing.value,thing.viewValue)" >{{ thing.viewValue }}</button>
+              </md-menu>
+    </span>
+    <span *ngIf="termText[7]=='Term'">
+        <button *ngIf="periodText[7]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole7">Select </button>
+        <button *ngIf="periodText[7]!=null" color="accent" md-raised-button class="white" [mdMenuTriggerFor]="menuRole7">{{periodText[7]}} </button>
+        <md-menu #menuRole7="mdMenu" >
+                <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                <button md-button *ngFor="let thing of periods" class="button-roles " (click)="changeValuePeriod(7,thing.trainingPeriodId,thing.trainingName)" >{{ thing.trainingName }}</button>
+         </md-menu>
+    </span>
+    <br>
+    <span class="category">BW 2</span>
+    <span class="category2">
+    <button *ngIf="termText[8]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole8">Select </button>
+    <button *ngIf="termText[8]!=null" color="primary" md-raised-button class="white" [mdMenuTriggerFor]="menuRole8">{{termText[8]}} </button>
+    <md-menu #menuRole8="mdMenu" >
+            <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+            <button md-button *ngFor="let thing of things" class="button-roles " (click)="changeValue(8,thing.value,thing.viewValue)" >{{ thing.viewValue }}</button>
+        </md-menu>
+    </span>
+    <span *ngIf="termText[8]=='Term'">
+        <button *ngIf="periodText[8]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole8">Select </button>
+        <button *ngIf="periodText[8]!=null" color="accent" md-raised-button class="white" [mdMenuTriggerFor]="menuRole8">{{periodText[8]}} </button>
+        <md-menu #menuRole8="mdMenu" >
+                <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                <button md-button *ngFor="let thing of periods" class="button-roles " (click)="changeValuePeriod(8,thing.trainingPeriodId,thing.trainingName)" >{{ thing.trainingName }}</button>
+         </md-menu>
+    </span>
+    <br>
+    <span class="category">CE 2</span>
+    <span class="category2">
+          <button *ngIf="termText[9]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole9">Select </button>
+          <button *ngIf="termText[9]!=null" color="primary" md-raised-button class="white" [mdMenuTriggerFor]="menuRole9">{{termText[9]}} </button>
+          <md-menu #menuRole9="mdMenu" >
+                  <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                  <button md-button *ngFor="let thing of things" class="button-roles " (click)="changeValue(9,thing.value,thing.viewValue)" >{{ thing.viewValue }}</button>
+              </md-menu>
+    </span>
+    <span *ngIf="termText[9]=='Term'">
+        <button *ngIf="periodText[9]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole9">Select </button>
+        <button *ngIf="periodText[9]!=null" color="accent" md-raised-button class="white" [mdMenuTriggerFor]="menuRole9">{{periodText[9]}} </button>
+        <md-menu #menuRole9="mdMenu" >
+                <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                <button md-button *ngFor="let thing of periods" class="button-roles " (click)="changeValuePeriod(9,thing.trainingPeriodId,thing.trainingName)" >{{ thing.trainingName }}</button>
+         </md-menu>
+    </span>
+    <br>
+    <span class="category">Presentation Skill</span>
+    <span class="category2">
+      <button *ngIf="termText[10]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole0">Select </button>
+      <button *ngIf="termText[10]!=null" color="primary" md-raised-button class="white" [mdMenuTriggerFor]="menuRole0">{{termText[10]}} </button>
+      <md-menu #menuRole0="mdMenu" >
+              <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+              <button md-button *ngFor="let thing of things" class="button-roles " (click)="changeValue(10,thing.value,thing.viewValue)" >{{ thing.viewValue }}</button>
+          </md-menu>
+    </span>
+    <span *ngIf="termText[10]=='Term'">
+        <button *ngIf="periodText[10]==null" md-raised-button class="white" [mdMenuTriggerFor]="menuRole10">Select </button>
+        <button *ngIf="periodText[10]!=null" color="accent" md-raised-button class="white" [mdMenuTriggerFor]="menuRole10">{{periodText[10]}} </button>
+        <md-menu #menuRole10="mdMenu" >
+                <!-- <button md-button class="user-menu-button" color="accent" (click)=openDialog()><md-icon>cached</md-icon> Change Role</button><br> -->
+                <button md-button *ngFor="let thing of periods" class="button-roles " (click)="changeValuePeriod(10,thing.trainingPeriodId,thing.trainingName)" >{{ thing.trainingName }}</button>
+         </md-menu>
+    </span>
+    <br>
+    <div class="buffer"></div>
+    <button md-raised-button color="accent" (click)="saveAchievement()">Save</button>
     <button md-raised-button color="warn" (click)="onNoClick()">Cancel</button>
-  </form>
 </div>

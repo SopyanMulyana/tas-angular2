@@ -23,6 +23,7 @@ import { DetailAchievementDialog } from "./detail-achievement-dialog";
 })
 export class AchievementComponent {
   fullName;
+  idRole;
 
   
 
@@ -39,8 +40,9 @@ export class AchievementComponent {
   constructor(public editAchievementDialog: MdDialog, public detailAchievementDialog: MdDialog, private authenticationService: AuthenticationService, private achievementService:AchievementService) {
    // this.achievementDatabase = new AchievementDatabase();
    var user = JSON.parse(localStorage.getItem('currentUser'));
+   this.idRole = localStorage.getItem('activeRole');
    this.fullName = user.fullName;
-   this.achievementService.getAchievementList().subscribe(((achievementDatas) => {
+   this.achievementService.getAchievementList(this.idRole).subscribe(((achievementDatas) => {
     this.achievementDatas = achievementDatas;
 
     this.achievementDatabase = new AchievementDatabase(this.achievementDatas); 
@@ -67,8 +69,10 @@ export class AchievementComponent {
   }));
   }
   editAchievement(selectedObject){
+    // console.log(selectedObject);
     this.editAchievementDialog.open(EditAchievementDialog, {
       width: '40%',
+      height: '70%',
       data: {selectedObject: selectedObject, fullName: this.fullName}
     });
   }
