@@ -1,8 +1,9 @@
 export interface ListMaintenance {
-    period: string;
+    coursePeriodId: number;
+    periodName: string;
     courseName: string;
     trainer: string;
-    room: string;
+    classroom: string;
     scheduleType: string;
     startDate: string;
     endDate: string;

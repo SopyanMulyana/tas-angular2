@@ -12,7 +12,12 @@
           
           <ng-container mdColumnDef="period">
             <md-header-cell *mdHeaderCellDef md-sort-header> Period </md-header-cell>
-            <md-cell *mdCellDef="let maintenance"> {{maintenance.period}} </md-cell>
+            <md-cell *mdCellDef="let maintenance"> {{maintenance.periodName}} </md-cell>
+          </ng-container>
+
+          <ng-container mdColumnDef="courseName">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Course Name </md-header-cell>
+            <md-cell *mdCellDef="let maintenance"> {{maintenance.courseName}} </md-cell>
           </ng-container>
 
           <ng-container mdColumnDef="trainer">
@@ -22,14 +27,14 @@
   
           <ng-container mdColumnDef="room">
             <md-header-cell *mdHeaderCellDef md-sort-header> Room </md-header-cell>
-            <md-cell *mdCellDef="let maintenance"> {{maintenance.room}} </md-cell>
+            <md-cell *mdCellDef="let maintenance"> {{maintenance.classroom}} </md-cell>
           </ng-container>
   
           <ng-container mdColumnDef="scheduleType">
             <md-header-cell *mdHeaderCellDef md-sort-header> Schedule Type </md-header-cell>
             <md-cell *mdCellDef="let maintenance"> {{maintenance.scheduleType}} </md-cell>
           </ng-container>
-  
+
           <ng-container mdColumnDef="startDate">
             <md-header-cell *mdHeaderCellDef md-sort-header> Start Date </md-header-cell>
             <md-cell *mdCellDef="let maintenance"> {{maintenance.startDate}} </md-cell>
@@ -47,11 +52,14 @@
   
           <ng-container mdColumnDef="action">
             <md-header-cell *mdHeaderCellDef md-sort-header> Action </md-header-cell>
-            <md-cell *mdCellDef="let maintenance"><button md-icon-button [mdMenuTriggerFor]="menu"><md-icon>more_horiz</md-icon></button></md-cell>
-            <md-menu #menu="mdMenu">
-                <button md-icon-button class="md-small" color="accent" mdTooltip="Edit" (click)="editAssesment(maintenance)"><md-icon>border_color</md-icon></button>
-                <button md-icon-button class="md-small" color="accent" mdTooltip="Detail" (click)="editAttendence(maintenance)"><md-icon>info</md-icon></button>
+            <md-cell *mdCellDef="let maintenance"><button md-icon-button [mdMenuTriggerFor]="menu"><md-icon>more_horiz</md-icon></button>
+              <md-menu #menu="mdMenu">
+                <button md-icon-button class="md-small" color="accent" mdTooltip="Attendance" (click)="openListDialog(maintenance)"><md-icon>collections_bookmark</md-icon></button>
+                <button md-icon-button class="md-small" color="accent" mdTooltip="Assesment" (click)="editAssesment(maintenance)"><md-icon>school</md-icon></button>
+                
             </md-menu>
+          </md-cell>
+            
           </ng-container>
       
           <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>

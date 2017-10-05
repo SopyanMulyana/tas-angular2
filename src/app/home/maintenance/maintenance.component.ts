@@ -1,7 +1,7 @@
 import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
-import { MdPaginator, MdSort, MdDialog } from '@angular/material';
+import { MdPaginator, MdSort, MdDialog, MdMenuTrigger } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -13,13 +13,16 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 import { ListMaintenance } from "./maintenance";
+import { ListAttendance } from "./attendance";
+// import { ListEditAttendance } from "./edit-attendance-get";
+
 import { MaintenanceService } from "../../services/maintenance.service";
-// import { EditAchievementDialog } from "./edit-achievement-dialog";
-// import { DetailAchievementDialog } from "./detail-achievement-dialog";
+import { AttendanceListDialog } from "./attendance-list-dialog";
+import { EditAttendanceDialog } from "./edit-attendance-dialog";
 
 @Component({
-  templateUrl: './achievement.component.html',
-  styleUrls: ['./achievement.component.css']
+  templateUrl: 'maintenance.component.html',
+  styleUrls: ['./maintenance.component.css']
 })
 export class MaintenanceComponent {
   fullName;
@@ -32,23 +35,36 @@ export class MaintenanceComponent {
   @ViewChild(MdSort) sort: MdSort;
   @ViewChild(MdPaginator) paginator: MdPaginator;
 
+  @ViewChild(MdMenuTrigger) trigger: MdMenuTrigger;
+
   displayedColumns = ['period', 'courseName', 'trainer', 'room', 'scheduleType', 'startDate', 'endDate', 'numberOfParticipants', 'action'];
   maintenanceDatabase;
   activeRole;
+  scheduleId;
+  dateAndTime;
+  elements:ListAttendance[]=[];
+  // listUserToEdit: ListEditAttendance[]=[];
   dataSource: MaintenanceDataSource | null;
   maintenanceDatas:ListMaintenance[];
-  constructor(public editAchievementDialog: MdDialog, public detailAchievementDialog: MdDialog, private authenticationService: AuthenticationService, private router: Router, private maintenanceService:MaintenanceService) {
-   // this.maintenanceDatabase = new AchievementDatabase();
+  constructor(public attendanceListDialog: MdDialog,public editAttendanceDialog: MdDialog, public detailAchievementDialog: MdDialog, private authenticationService: AuthenticationService, private router: Router, private maintenanceService:MaintenanceService) {
+   // this.maintenanceDatabase = new MaintenanceDatabase();
    var user = JSON.parse(localStorage.getItem('currentUser'));
    this.activeRole = localStorage.getItem('activeRole');
-   if (this.activeRole!=1 || this.activeRole!=2)
-   { router.navigate(['/home']);}
+   if (this.activeRole!=1 && this.activeRole!=2)
+   { 
+     router.navigate(['/home']);}
    
    this.fullName = user.fullName;
    this.maintenanceService.getMaintenanceList(this.activeRole).subscribe(((maintenanceDatas) => {
     this.maintenanceDatas = maintenanceDatas;
 
-    this.maintenanceDatabase = new AchievementDatabase(this.maintenanceDatas); 
+    for (var i = 0; i  < maintenanceDatas.length; i++) {
+      this.maintenanceService.getAttendanceList(maintenanceDatas[i].coursePeriodId).subscribe(((attendanceDatas) => {
+          this.elements = attendanceDatas;
+        }));
+    }
+
+    this.maintenanceDatabase = new MaintenanceDatabase(this.maintenanceDatas); 
 
     this.paginator._length = this.maintenanceDatabase.data.length;
     this.paginator.pageSize = 10;
@@ -71,18 +87,52 @@ export class MaintenanceComponent {
 
   }));
   }
-  // editAchievement(selectedObject){
-  //   this.editAchievementDialog.open(EditAchievementDialog, {
-  //     width: '40%',
-  //     data: {selectedObject: selectedObject, fullName: this.fullName}
-  //   });
-  // }
-  // viewDetail(selectedObject){
-  //   this.detailAchievementDialog.open(DetailAchievementDialog, {
-  //     width: '40%',
-  //     data: {selectedObject: selectedObject, fullName: this.fullName}
-  //   });
-  // }
+
+  openListDialog(maintenance) {
+    var that =this;
+   
+    let dialog1 = this.attendanceListDialog.open(AttendanceListDialog, {
+          width: '30%',
+          data: {coursePeriodId: maintenance.coursePeriodId, courseName: maintenance.periodName+"/"+maintenance.courseName}
+    });
+
+    dialog1.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.scheduleId = result;
+      if(this.scheduleId){
+        // this.maintenanceService.getListPersonForAttendance(maintenance.coursePeriodId, that.scheduleId).subscribe(((listUserToEdit) => {}));
+          // that.listUserToEdit = listUserToEdit;
+          that.getTimeAndDate(this.scheduleId);
+          // console.log(listUserToEdit);
+          let isAssessment=false;
+          that.openNew(maintenance.coursePeriodId, that.scheduleId, maintenance, that.dateAndTime, isAssessment);
+          
+      }
+    });
+      
+  }
+  editAssesment(maintenance){
+    let isAssessment = true;
+    this.openNew(maintenance.coursePeriodId, 0, maintenance, 0, isAssessment);
+  }
+  openNew(coursePeriodId,scheduleId,maintenance,dateAndTime, isAssessment) {
+    this.editAttendanceDialog.open(EditAttendanceDialog, {
+      width: '40%',
+      disableClose:true,
+      data: { periodId: coursePeriodId, scheduleId: scheduleId, courseName: maintenance.periodName+"/"+maintenance.courseName, courseDate: dateAndTime, isAssessment: isAssessment}
+});
+  }
+  getTimeAndDate(id) {
+    this.elements.forEach( e => {
+      if(e.scheduleId === id) {
+        console.log(e.dateAndTime);
+        this.dateAndTime= e.dateAndTime;
+      }
+    })
+  }
+
+  
+  
 
   ngOnInit() {
     
@@ -92,7 +142,7 @@ export class MaintenanceComponent {
 
 
 
-export class AchievementDatabase {
+export class MaintenanceDatabase {
   dataChange: BehaviorSubject<ListMaintenance[]> = new BehaviorSubject<ListMaintenance[]>([]);
   get data(): ListMaintenance[] { return this.dataChange.value; }
 
@@ -119,7 +169,7 @@ export class MaintenanceDataSource extends DataSource<any> {
   filteredData: ListMaintenance[] = [];
   renderedData: ListMaintenance[] = [];
   //sortedData: Period[] = [];
-  constructor(private _achievementDatabase: AchievementDatabase,  private _paginator: MdPaginator,private _sort: MdSort) {
+  constructor(private _achievementDatabase: MaintenanceDatabase,  private _paginator: MdPaginator,private _sort: MdSort) {
     super();
     this.type = "1";
   }

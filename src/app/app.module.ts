@@ -41,6 +41,8 @@ import { AchievementComponent } from './home/achievement/achievement.component';
 import { EditAchievementDialog } from "./home/achievement/edit-achievement-dialog";
 import { DetailAchievementDialog } from "./home/achievement/detail-achievement-dialog";
 import { MaintenanceComponent } from './home/maintenance/maintenance.component';
+import { AttendanceListDialog } from "./home/maintenance/attendance-list-dialog";
+import { EditAttendanceDialog } from "./home/maintenance/edit-attendance-dialog";
 import { AlertComponent } from './alert.component';
 
 import { AuthGuard } from './services/authguard.service';
@@ -86,6 +88,8 @@ import { UrlService } from './services/url.service';
     EditAchievementDialog,
     DetailAchievementDialog,
     MaintenanceComponent,
+    AttendanceListDialog,
+    EditAttendanceDialog,
     AlertComponent,
     DetailDialog,
     AddEnrollDialog,
@@ -119,7 +123,8 @@ import { UrlService } from './services/url.service';
     AddPeriodDialog, DeletePeriodDialog,
     AddUserDialog, EditUserDialog, ChangeRoleDialog, AddEligibleDialog,
     DeleteEligibleDialog, DeleteCourseDialog, AddCourseDialog, DetailDialog, AddEnrollDialog,
-    EditScheduleDialog, DetailEnrollmentDialog, EditAchievementDialog, DetailAchievementDialog
+    EditScheduleDialog, DetailEnrollmentDialog, EditAchievementDialog, DetailAchievementDialog, AttendanceListDialog,
+    EditAttendanceDialog
   ]
 })
 export class AppModule { }
