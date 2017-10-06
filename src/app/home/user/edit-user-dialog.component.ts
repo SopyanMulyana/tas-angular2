@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, ViewChild, OnInit } from '@angular/core';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdPaginator } from '@angular/material';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdPaginator, MdSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { DataSource } from '@angular/cdk/collections';
@@ -28,7 +28,7 @@ import { AddActive } from "./edit-active";
     finalActive: AddActive;
     result;
     roles: any[]=[false, false, false, false];
-    constructor(
+    constructor(public snackbar : MdSnackBar, 
       public dialogRef: MdDialogRef<EditUserDialog>,
       @Inject(MD_DIALOG_DATA) public data: any, public userService: UserService) {
           this.employeeId=data.employeeId;
@@ -56,7 +56,7 @@ import { AddActive } from "./edit-active";
     );
     }
     saveUser(): void {
-        alert(this.roles)
+        // alert(this.roles)
         for (let i = 0; i <= this.roles.length; i++) { 
             if (this.roles[i]==true)
             { 
@@ -80,7 +80,10 @@ import { AddActive } from "./edit-active";
             this.result = res;
             if(this.result == true){
                 console.log(this.result);
-                window.location.reload();  
+                let snackBarRef = this.snackbar.open("Success","close", { duration: 1500 });
+                snackBarRef.afterDismissed().subscribe(() => {
+                  window.location.reload();
+                });
             //this.notificationService.setNotificationInfo('Period success to created');
             }else{
             //this.notificationService.setNotificationError('Period failed to created !');

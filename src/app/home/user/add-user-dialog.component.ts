@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, ViewChild, OnInit } from '@angular/core';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdPaginator } from '@angular/material';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdPaginator, MdSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { DataSource } from '@angular/cdk/collections';
@@ -22,7 +22,7 @@ import { ListLocation } from "./location";
     grades: ListGrade[];
     temporaryData: any={} ;
     result;
-    constructor(
+    constructor(public snackbar : MdSnackBar, 
       public dialogRef: MdDialogRef<AddUserDialog>,
       @Inject(MD_DIALOG_DATA) public data: any, public userService: UserService) { }
   
@@ -44,7 +44,10 @@ import { ListLocation } from "./location";
           this.result = res;
           if(this.result == true){
             console.log(this.result);
-            window.location.reload();
+            let snackBarRef = this.snackbar.open("Success","close", { duration: 1500 });
+            snackBarRef.afterDismissed().subscribe(() => {
+              window.location.reload();
+            });
           //this.notificationService.setNotificationInfo('Period success to created');
           }else{
           //this.notificationService.setNotificationError('Period failed to created !');

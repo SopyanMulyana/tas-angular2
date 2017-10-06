@@ -1,6 +1,6 @@
 /////////////////////////////////
 import { Component, ElementRef, Inject, ViewChild, OnInit } from '@angular/core';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdPaginator,MdSort, SelectionModel } from '@angular/material';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdPaginator,MdSort, SelectionModel, MdSnackBar } from '@angular/material';
 import { DatePipe } from '@angular/common';
 
 import { FormControl, Validators } from '@angular/forms';
@@ -69,7 +69,7 @@ export class EditAttendanceDialog implements OnInit{
 
   a:any;
 
-  constructor(public dialogRef: MdDialogRef<EditAttendanceDialog>,
+  constructor(public dialogRef: MdDialogRef<EditAttendanceDialog>, public snackbar : MdSnackBar,
     @Inject(MD_DIALOG_DATA) public data: any, private maintenanceService:MaintenanceService) {
    // this.eligibleDatabase = new EligibleDatabase();
   //  console.log(data);
@@ -195,7 +195,10 @@ export class EditAttendanceDialog implements OnInit{
         this.result = res;
         if(this.result == true){
           console.log(this.result);
-          window.location.reload();
+          let snackBarRef = this.snackbar.open("Success","close", { duration: 1500 });
+          snackBarRef.afterDismissed().subscribe(() => {
+            window.location.reload();
+          });
         //this.notificationService.setNotificationInfo('Period success to created');
         }else{
         //this.notificationService.setNotificationError('Period failed to created !');
@@ -216,7 +219,10 @@ export class EditAttendanceDialog implements OnInit{
         this.result = res;
         if(this.result == true){
           console.log(this.result);
-          window.location.reload();
+          let snackBarRef = this.snackbar.open("Success","close", { duration: 1500 });
+          snackBarRef.afterDismissed().subscribe(() => {
+            window.location.reload();
+          });
         //this.notificationService.setNotificationInfo('Period success to created');
         }else{
         //this.notificationService.setNotificationError('Period failed to created !');

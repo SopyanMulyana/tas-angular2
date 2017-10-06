@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, ViewChild, OnInit, OnChanges } from '@angular/core';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdPaginator } from '@angular/material';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdPaginator, MdSnackBar } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { DataSource } from '@angular/cdk/collections';
@@ -29,7 +29,7 @@ export class EditPeriodListComponent implements OnInit{
   trainingId: number;
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private periodService: PeriodService, private router: Router) {
+  constructor(public snackbar : MdSnackBar, private route: ActivatedRoute, private periodService: PeriodService, private router: Router) {
     this.activeRole = localStorage.getItem('activeRole');
     if (this.activeRole!=1)
     { router.navigate(['/home']);}
@@ -52,7 +52,9 @@ export class EditPeriodListComponent implements OnInit{
     //elligible participants
     
   }
-
+  cancelEdit(){
+    this.router.navigate(['/home/period/']);
+  }
   savePeriod(id) {
     this.finalData = new AddPeriods(this.currentData.trainingName,
       this.currentData.startDate, this.currentData.endDate, 
@@ -62,7 +64,10 @@ export class EditPeriodListComponent implements OnInit{
         this.result = res;
         if(this.result == true){
           console.log(this.result);
-          window.location.reload();
+          let snackBarRef = this.snackbar.open("Success","close", { duration: 1500 });
+          snackBarRef.afterDismissed().subscribe(() => {
+            window.location.reload();
+          });
         //this.notificationService.setNotificationInfo('Period success to created');
         }else{
         //this.notificationService.setNotificationError('Period failed to created !');
