@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, ViewChild, OnInit } from '@angular/core';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdPaginator } from '@angular/material';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdPaginator, MdSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { DataSource } from '@angular/cdk/collections';
@@ -17,11 +17,12 @@ import { AddPeriods } from "./add-period";
     ]);
     addPeriod: AddPeriods;
     temporaryData: any={} ;
+    
     //periodService: PeriodService;
     result;
     constructor(
       public dialogRef: MdDialogRef<AddPeriodDialog>,
-      @Inject(MD_DIALOG_DATA) public data: any, public periodService: PeriodService) { }
+      @Inject(MD_DIALOG_DATA) public data: any, public periodService: PeriodService, public snackbar : MdSnackBar) { }
   
     onNoClick(): void {
       this.dialogRef.close();
@@ -41,10 +42,15 @@ import { AddPeriods } from "./add-period";
           this.result = res;
           if(this.result == true){
             console.log(this.result);
-            window.location.reload();
+            let snackBarRef = this.snackbar.open("Success","close", { duration: 1500 });
+            snackBarRef.afterDismissed().subscribe(() => {
+              window.location.reload();
+            });
+            //window.location.reload();
           //this.notificationService.setNotificationInfo('Period success to created');
           }else{
           //this.notificationService.setNotificationError('Period failed to created !');
+          this.snackbar.open("ERROR","close", { duration: 1500 });
           console.log(this.result);
           }
           })); 

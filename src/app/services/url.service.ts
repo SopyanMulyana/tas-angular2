@@ -5,156 +5,154 @@ import { Observable } from 'rxjs/Rx';
 export class UrlService {
    constructor() {
    }
- 
+   serverUrl: string ="http://mtpc583:8080/api";
    getUrlUsers(): string {
-      return "http://mtpc583:8080/api/secure/user/";
+      return this.serverUrl + "/secure/user/";
    }
 
    getUrlUserById(id: number): string {
-       return "http://mtpc583:8080/api/secure/user/"+id;
+       return this.serverUrl + "/secure/user/"+id;
    }
 
    postUrlAddUser(): string {
-       return "http://mtpc583:8080/api/secure/user/add/";
+       return this.serverUrl + "/secure/user/add/";
    }
 
    getUrlGrade(): string {
-       return "http://mtpc583:8080/api/secure/user/grade/";
+       return this.serverUrl + "/secure/user/grade/";
    }
 
    getUrlLocation(): string {
-       return "http://mtpc583:8080/api/secure/user/location/";
+       return this.serverUrl + "/secure/user/location/";
    }
 
    postUrlEditActiveUser(idUser: number): string {
-       return "http://mtpc583:8080/api/secure/user/"+idUser+"/edit/active/";
+       return this.serverUrl + "/secure/user/"+idUser+"/edit/active/";
    }
 
    postUrlEditRolesUser(idUser: number): string {
-       return "http://mtpc583:8080/api/secure/user/"+idUser+"/edit/roles/";
+       return this.serverUrl + "/secure/user/"+idUser+"/edit/roles/";
    }
 
    getUrlAuth(): string {
-       return "http://mtpc583:8080/api/auth/";
+       return this.serverUrl + "/auth/";
    }
 
    getUrlPeriod(): string {
-       return "http://mtpc583:8080/api/secure/period/";
+       return this.serverUrl + "/secure/period/";
    }
 
    postPeriodData(): string {
-    //    return "http://mtpc659:8080/period/create"; //wimba
-        return "http://mtpc583:8080/api/secure/period/add/"
+        return this.serverUrl + "/secure/period/add/"
    }
 
    postEditPeriod(id: number): string {
-       return "http://mtpc583:8080/api/secure/period/"+id+"/edit/";
+       return this.serverUrl + "/secure/period/"+id+"/edit/";
    }
 
    deleteUrlPeriod(id:number): string {
-       return "http://mtpc583:8080/api/secure/period/"+id+"/delete/";
+       return this.serverUrl + "/secure/period/"+id+"/delete/";
    }
 
    getUrlElligibleParticipants(id:number): string {
-    //    return "http://mtpc659:8080/eligibleparticipant/findByTraining/"+id; //wimba
-        return "http://mtpc583:8080/api/secure/period/"+id+"/eligible/";
+        return this.serverUrl + "/secure/period/"+id+"/eligible/";
 
    }
 
    getUrlListUserForElligibleParticipants(id:number): string {
-       return "http://mtpc583:8080/api/secure/user/eligible/"+id;
+       return this.serverUrl + "/secure/user/eligible/"+id;
    }
 
    postElligibleParticipant(id:number): string {
-       return "http://mtpc583:8080/api/secure/period/"+id+"/eligible/add/";
+       return this.serverUrl + "/secure/period/"+id+"/eligible/add/";
    }
 
    deleteUrlElligibleParticipant(id:number, participantsId): string {
-        return "http://mtpc583:8080/api/secure/period/"+id+"/eligible/delete/"+participantsId;
+        return this.serverUrl + "/secure/period/"+id+"/eligible/delete/"+participantsId;
     }
 
    getUrlCourseList(id:number): string {
-       return "http://mtpc583:8080/api/secure/period/"+id+"/course";
+       return this.serverUrl + "/secure/period/"+id+"/course";
     }
 
     deleteUrlCourseList(id:number, courseId:number): string {
-        return "http://mtpc583:8080/api/secure/period/"+id+"/course/delete/"+courseId;
+        return this.serverUrl + "/secure/period/"+id+"/course/delete/"+courseId;
     }
 
    postUrlAddCourse(id:number): string {
-       return "http://mtpc583:8080/api/secure/period/"+id+"/course/add";
+       return this.serverUrl + "/secure/period/"+id+"/course/add";
    }
 
    getUrlListTrainer(): string {
-    return "http://mtpc583:8080/api/secure/user/trainer";
+    return this.serverUrl + "/secure/user/trainer";
    }
 
    getUrlListForAddCourse(): string {
-       return "http://mtpc583:8080/api/secure/period/course";
+       return this.serverUrl + "/secure/period/course";
    }
 
    getUrlClassRoom(): string {
-        return "http://mtpc583:8080/api/secure/period/classroom";
+        return this.serverUrl + "/secure/period/classroom";
     }
 
    getUrlDetailCourse(idTraining: number, idCourse: number): string {
-       return "http://mtpc583:8080/api/secure/period/"+idTraining+"/course/"+idCourse;
+       return this.serverUrl + "/secure/period/"+idTraining+"/course/"+idCourse;
    } 
 
    postEditCourse(idTraining:number, idCourse:number): string {
-    return "http://mtpc583:8080/api/secure/period/"+idTraining+"/course/"+idCourse+"/edit"; 
+    return this.serverUrl + "/secure/period/"+idTraining+"/course/"+idCourse+"/edit"; 
     }
 
    getUrlListUserForEnrollParticipants(idTraining:number, idCourse:number): string {
-        return "http://mtpc583:8080/api/secure/period/"+idTraining+"/course/"+idCourse+"/eligible/"; 
+        return this.serverUrl + "/secure/period/"+idTraining+"/course/"+idCourse+"/eligible/"; 
     }
 
     postEnrollParticipant(idTraining:number, idCourse:number): string {
-        return "http://mtpc583:8080/api/secure/period/"+idTraining+"/course/"+idCourse+"/eligible/add"; 
+        return this.serverUrl + "/secure/period/"+idTraining+"/course/"+idCourse+"/eligible/add"; 
     }
 
     getUrlEnrollment(): string {
-        return "http://mtpc583:8080/api/secure/enrollment";
+        return this.serverUrl + "/secure/enrollment";
     }
 
     getUrlAchievementList(idRole:number): string {
-        return "http://mtpc583:8080/api/secure/achievement/"+idRole;
+        return this.serverUrl + "/secure/achievement/"+idRole;
     }
 
     postUrlEditAchievement(idUser:number): string {
-        return "http://mtpc583:8080/api/secure/achievement/"+idUser+"/edit";
+        return this.serverUrl + "/secure/achievement/"+idUser+"/edit";
     }
 
     getUrlMaintenancetList(activeRole: number): string {
-        return "http://mtpc583:8080/api/secure/maintenance/"+activeRole; 
+        return this.serverUrl + "/secure/maintenance/"+activeRole; 
     }
 
     getUrlAttendanceList(id:number): string {
-        return "http://mtpc583:8080/api/secure/maintenance/"+id+"/attendance/";
+        return this.serverUrl + "/secure/maintenance/"+id+"/attendance/";
     }
 
     getUrlListPersonForAttendance(coursePeriodId:number, scheduleId: number): string {
-        return "http://mtpc583:8080/api/secure/maintenance/"+coursePeriodId+"/attendance/"+scheduleId;
+        return this.serverUrl + "/secure/maintenance/"+coursePeriodId+"/attendance/"+scheduleId;
     }
 
     postUrlEditAttendance(coursePeriodId:number, scheduleId: number): string {
-        return "http://mtpc583:8080/api/secure/maintenance/"+coursePeriodId+"/attendance/"+scheduleId+"/edit";
+        return this.serverUrl + "/secure/maintenance/"+coursePeriodId+"/attendance/"+scheduleId+"/edit";
     }
 
     getUrlListPersonForAssessment(coursePeriodId:number): string {
-        return "http://mtpc583:8080/api/secure/maintenance/"+coursePeriodId+"/assessment/";
+        return this.serverUrl + "/secure/maintenance/"+coursePeriodId+"/assessment/";
     }
 
     postUrlEditAssessment(coursePeriodId:number): string {
-        return "http://mtpc583:8080/api/secure/maintenance/"+coursePeriodId+"/assessment/edit";
+        return this.serverUrl + "/secure/maintenance/"+coursePeriodId+"/assessment/edit";
     }
     
    getUrlActiveTraining(): string {
-        return "http://mtpc583:8080/api/secure/dashboard/active";
+        return this.serverUrl + "/secure/dashboard/active";
    }
 
    getUrlBCCShedule(): string {
-        return "http://mtpc583:8080/api/secure/dashboard/bcc";
+        return this.serverUrl + "/secure/dashboard/bcc";
    }
    
 

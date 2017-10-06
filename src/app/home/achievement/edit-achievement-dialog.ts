@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, ViewChild, OnInit } from '@angular/core';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdPaginator } from '@angular/material';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdPaginator, MdSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { DataSource } from '@angular/cdk/collections';
@@ -32,7 +32,7 @@ import { PostAchievement } from "./achievement-post";
       {value: '2', viewValue: 'Term'}
     ];
     periods: Periods[]=[];
-    constructor(
+    constructor(public snackbar : MdSnackBar,
       public dialogRef: MdDialogRef<EditAchievementDialog>,
       @Inject(MD_DIALOG_DATA) public data: any, private periodService: PeriodService, private achievementService: AchievementService) {
         this.currentAchievement=data.selectedObject;
@@ -154,7 +154,10 @@ import { PostAchievement } from "./achievement-post";
         this.result = res;
         if(this.result == true){
           console.log(this.result);
-          window.location.reload();
+          let snackBarRef = this.snackbar.open("Success","close", { duration: 1500 });
+          snackBarRef.afterDismissed().subscribe(() => {
+            window.location.reload();
+          });
         //this.notificationService.setNotificationInfo('Period success to created');
         }else{
         //this.notificationService.setNotificationError('Period failed to created !');
