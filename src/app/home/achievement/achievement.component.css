@@ -3,3 +3,17 @@
     width: 30%;
     font-weight: bold;
 }
+.category2 {
+    display: inline-block;
+    width: 30%;
+}
+.button-roles {
+    width: 160px;
+    text-align: left;
+}
+.buffer {
+    height: 15px;
+}
+.full-width {
+    width: 90%;
+}

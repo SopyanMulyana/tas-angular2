@@ -1,7 +1,25 @@
-import {Component} from '@angular/core';
-import {DataSource} from '@angular/cdk/collections';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+/////////////////////////////////
+import { Component, ElementRef, Inject, ViewChild, OnInit } from '@angular/core';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdPaginator,MdSort, SelectionModel } from '@angular/material';
+import { DatePipe } from '@angular/common';
+
+import { FormControl, Validators } from '@angular/forms';
+import { DataSource } from '@angular/cdk/collections';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/observable/merge';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/observable/fromEvent';
+
+import { Router } from '@angular/router';
+import { DashboardService } from "../../services/dashboard.service";
+import { ActiveTraining } from "./active-training";
+import { BCCSchedule } from "./bcc-schedule";
+
+
 
 @Component({
   templateUrl: './dashboard.component.html',
@@ -10,60 +28,162 @@ import 'rxjs/add/observable/of';
 export class DashboardComponent {
   // Active Training DataStream
   activeTrainingColumns = ['courseName', 'mainTrainer', 'backupTrainer', 'startDate', 'endDate', 'trainingLocation'];
-  activeTrainingDataSource = new ActiveTrainingDataSource();
-  
   //BCC Schedule DataStream
   BCCColumns = ['trainerName', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
-  BCCDataSource = new BCCDataSource();
 
+  activeTrainingData: ActiveTraining[];
+  BCCScheduleData: BCCSchedule[];
+  
+  activeTrainingDataBase;
+  activeTrainingDataSource: ActiveTrainingDataSource | null;
+
+  bccDatabase; 
+  bccdataSource: BCCScheduleDataSource | null;
+
+
+  @ViewChild(MdSort) sort: MdSort;
+  ngOnInit() {
+    
+  }
+  constructor( private dashboardService:DashboardService) {
+   // this.eligibleDatabase = new ActiveTrainingDataBase();
+  //  console.log(data);
+  var that =this;
+  this.dashboardService.getActiveTrainingList().subscribe(((activeTrainingData) => {
+        console.log(activeTrainingData);
+          that.activeTrainingData = activeTrainingData;
+          that.activeTrainingDataBase = new ActiveTrainingDataBase(this.activeTrainingData); 
+          that.activeTrainingDataSource = new ActiveTrainingDataSource(this.activeTrainingDataBase, this.sort);
+          
+      }));
+      this.dashboardService.getBCCScheduleList().subscribe(((BCCScheduleData) => {
+        console.log(BCCScheduleData);
+          that.BCCScheduleData = BCCScheduleData;
+          that.bccDatabase = new BBCScheduleDataBase(this.BCCScheduleData); 
+          that.bccdataSource = new BCCScheduleDataSource(this.bccDatabase, this.sort);
+          
+      }));
+    } 
+    
+
+ 
 }
+  
 
-//Active Training Interface and Data Stream Controller
-export interface activeTraining {
-  courseName: string;
-  mainTrainer: string;
-  backupTrainer: string;
-  startDate: string;
-  endDate: string;
-  trainingLocation: string;
+
+
+//table
+
+export class ActiveTrainingDataBase {
+  dataChange: BehaviorSubject<ActiveTraining[]> = new BehaviorSubject<ActiveTraining[]>([]);
+  get data(): ActiveTraining[] { return this.dataChange.value; }
+
+    constructor(private periodDatas: ActiveTraining[]) {
+  
+      this.dataChange.next(periodDatas);
+   
+  }
 }
-
-const activeTrainingData: activeTraining[] = [
-  {courseName: 'Angular 2', mainTrainer: 'Carmen', backupTrainer:'-', startDate:'21-08-2017', endDate: '20-09-2017', trainingLocation: "Bali"},
-  {courseName: 'Full Stack', mainTrainer: 'Agus', backupTrainer:'Budi', startDate:'10-08-2017', endDate: '09-09-2017', trainingLocation: "Yogyakarta"},
-  {courseName: 'Database', mainTrainer: 'Budi Wasweswos', backupTrainer:'Sudyatmiko', startDate:'11-08-2017', endDate: '11-09-2017', trainingLocation: "Yogyakarta"}
-]
 
 export class ActiveTrainingDataSource extends DataSource<any> {
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<activeTraining[]> {
-    return Observable.of(activeTrainingData);
+  _filterChange = new BehaviorSubject('');
+  public type:string;
+  public created:string = "";
+  public name:string = "";
+  get filter(): string { return this._filterChange.value; }
+  set filter(filter: string) {
+    this._filterChange.next(filter);
+  }
+
+  filter123(filter:string,type:string)
+  {
+    this.type = type;
+    this._filterChange.next(filter);
+  }
+  filteredData: ActiveTraining[] = [];
+  renderedData: ActiveTraining[] = [];
+  constructor(private _activeTrainingDatabase: ActiveTrainingDataBase, private _sort: MdSort) {
+    super();
+    this.type = "1";
+  }
+
+  connect(): Observable<ActiveTraining[]> {
+    const displayDataChanges = [
+      this._activeTrainingDatabase.dataChange,
+      this._filterChange
+    ];
+
+    return Observable.merge(...displayDataChanges).map(() => {
+
+       const sortedData = this.getSortedData(this._activeTrainingDatabase.data.slice());
+  
+        return sortedData;
+
+    });
   }
 
   disconnect() {}
+
+  
+  getSortedData(data: ActiveTraining[]): ActiveTraining[] {
+
+    return data;
+  }
 }
 
-//BCC Schedule Interface and Data Stream Controller
+export class BBCScheduleDataBase {
+  dataChange: BehaviorSubject<BCCSchedule[]> = new BehaviorSubject<BCCSchedule[]>([]);
+  get data(): BCCSchedule[] { return this.dataChange.value; }
 
-export interface BCCSchedule {
-  trainerName: string;
-  monday: string;
-  tuesday: string;
-  wednesday: string;
-  thursday: string;
-  friday: string;
+    constructor(private periodDatas: BCCSchedule[]) {
+  
+      this.dataChange.next(periodDatas);
+   
+  }
 }
 
-const BCCScheduleData: BCCSchedule[] = [
-  {trainerName: "Denny", monday:'Bali office (10.00 - 12.00)', tuesday:"-", wednesday:'-',thursday: '-', friday:'-'},
-  {trainerName: "Dimas", monday:'-', tuesday:"-", wednesday:'-',thursday: 'Yogyakarta office (15.00 - 17.00)', friday:'-'},
-]
+export class BCCScheduleDataSource extends DataSource<any> {
+  _filterChange = new BehaviorSubject('');
+  public type:string;
+ 
+  get filter(): string { return this._filterChange.value; }
+  set filter(filter: string) {
+    this._filterChange.next(filter);
+  }
 
-export class BCCDataSource extends DataSource<any> {
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
+  filter123(filter:string,type:string)
+  {
+    this.type = type;
+    this._filterChange.next(filter);
+  }
+  filteredData: BCCSchedule[] = [];
+  renderedData: BCCSchedule[] = [];
+  constructor(private _assessmentDatabase: BBCScheduleDataBase, private _sort: MdSort) {
+    super();
+    this.type = "1";
+  }
+
   connect(): Observable<BCCSchedule[]> {
-    return Observable.of(BCCScheduleData);
+    const displayDataChanges = [
+      this._assessmentDatabase.dataChange,
+      this._filterChange
+    ];
+
+    return Observable.merge(...displayDataChanges).map(() => {
+
+       const sortedData = this.getSortedData(this._assessmentDatabase.data.slice());
+  
+        return sortedData;
+
+    });
   }
 
   disconnect() {}
+
+  
+  getSortedData(data: BCCSchedule[]): BCCSchedule[] {
+
+    return data;
+  }
 }
+

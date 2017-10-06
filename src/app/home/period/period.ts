@@ -1,4 +1,5 @@
 export interface Periods{
+        trainingPeriodId: number;
         trainingName: string;
         activeStatus: boolean;
         coursesCount: number;
